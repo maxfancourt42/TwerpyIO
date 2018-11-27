@@ -34,48 +34,43 @@ class MainApplication:
         # Create a frame to hold the control panel on the left hand side
         self.controlpanel = tk.Frame(self.mainframe, background="#636363")
         self.controlpanel.grid(row=1, column=0, sticky=tk.NSEW, rowspan=4)
-        self.controlpanel.grid_propagate(False)
+        self.controlpanel.grid_rowconfigure(0, weight=1)
+        self.controlpanel.grid_columnconfigure(0, weight=1)
 
         # within this create a canvas that will scroll
         self.canvas = tk.Canvas(self.controlpanel, background="#636363")
         self.canvas.config(background="#636363", highlightthickness=0)
         self.canvas.grid(row=0, column=0, sticky=tk.NSEW)
 
-        # create a frame within the canvas to structure
-        #self.canvasframe = tk.Frame(self.canvas, background="#636363")
-        self.canvasframe = tk.Frame(self.canvas, background="#ffffff")
-        self.canvasframe.grid(row=0, column=0, sticky=tk.EW)
-
-        # add the control panel buttons to the canvas
-        self.power = tk.Label(self.canvasframe, text="Power", background="#7a7a7a", font=(None, 12))
-        self.power.grid(row=0, column=0, sticky=tk.EW)
-
-        self.Controls = tk.Label(self.canvasframe, text="Controls", background="#7a7a7a", font=(None, 12))
-        self.Controls.grid(row=1, column=0, sticky=tk.EW)
-
-        self.Siren = tk.Label(self.canvasframe, text="Siren", background="#7a7a7a", font=(None, 12))
-        self.Siren.grid(row=2, column=0, sticky=tk.EW)
-
-        self.greet_button = tk.Button(self.canvasframe, text="Power On", command=self.greet, background="#636363")
-        self.greet_button.grid(row=3, column=0, sticky=tk.EW)
-
-        self.close_button = tk.Button(self.canvasframe, text="Quit Program", command=master.quit, background="#ff5e32")
-        self.close_button.grid(row=4, column=0, sticky=tk.EW)
-
         # add a scroll bar to the canvvas
         self.vsb = ttk.Scrollbar(self.controlpanel, orient="vertical", command=self.canvas.yview)
         self.vsb.grid(row=0, column=1, sticky="NSE")
         self.canvas.configure(yscrollcommand=self.vsb.set)
 
+        # create a frame within the canvas to structure
+        #self.canvasframe = tk.Frame(self.canvas, background="#636363")
+        self.canvasframe = tk.Frame(self.canvas, background="#ffffff")
+        self.canvasframe.grid(row=0, column=0, sticky=tk.NSEW)
+
         # create the canvas having filled it
         self.canvas.create_window((0, 0), window=self.canvasframe, anchor=tk.NW)
 
+        # create a blank dictionary to track the buttons
+        numberofbuttons = 100
+        buttons = [[ttk.Button()] for x in range(numberofbuttons)]
+
+        # iterate over dictionary creating the required buttons
+
+        for i in range(numberofbuttons):
+            buttons[i] = ttk.Button(self.canvasframe, text="Temp text")
+            buttons[i].grid(row=i, column=0, sticky=tk.NSEW)
+
+        # set the scrolling region
+        self.canvas.config(scrollregion=self.canvas.bbox("all"))
+
         # if the window is resized then adjust the bounding box of the canvas to prevent being able to scroll off screen
         self.canvasframe.bind("<Configure>", self.OnFrameConfigure)
-        self.canvas.bind("<Configure>", self.OnCavasConfigure)
-
-        self.controlpanel.grid_columnconfigure(0, weight=1)
-        self.controlpanel.grid_rowconfigure(0, weight=1)
+        self.canvas.bind("<Configure>", self.FrameWidth)
 
         # create the grid of labels in the middle which represent the subsystems
         self.powersubsystem = tk.Label(self.mainframe, text="Power", background="#7a7a7a")
@@ -138,12 +133,10 @@ class MainApplication:
     def OnFrameConfigure(self, event):
         self.canvas.configure(scrollregion=self.canvas.bbox("all"))
 
-    def OnCavasConfigure(self, event):
-        width = 0
-        for child in self.canvasframe.grid_slaves():
-            width += child.winfo_reqwidth()
+    def FrameWidth(self, event):
+        self.canvas.itemconfig(self.canvas, width=event.width)
 
-        self.canvasframe.config(width=width, height=event.height)
+
 
 if __name__ == '__main__':
     root = tk.Tk()
