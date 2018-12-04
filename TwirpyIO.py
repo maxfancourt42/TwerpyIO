@@ -1,9 +1,65 @@
 # import libaries
 import tkinter as tk
 from tkinter import ttk
+from tkinter import PhotoImage
+from tkinter import Toplevel
 import os
-from PIL import Image
-from PIL import ImageTk
+
+class Debugger:
+    def __init__(self):
+        # create toplevel
+        self.debugger = tk.Toplevel()
+        self.debugger.config(background="#DFE8F6")
+        self.debugger.geometry('%dx%d+%d+%d' % (600, 600, 0, 0))
+        self.debugger.minsize(width=600, height=600)
+
+        # weight the columns
+        self.debugger.columnconfigure(0, weight=1)
+        self.debugger.rowconfigure(1, weight=1)
+
+        # create the header
+        self.header = tk.Label(self.debugger, text="Twirpy IO Debugger", background="#ffc532", font=(None, 18), anchor="w")
+        self.header.grid(row=0, column=0, sticky=tk.NSEW, columnspan=2)
+
+        # create a scrolling canvas to add debugger lines to
+        self.debuggercanvas = tk.Canvas(self.debugger, background="#efefef")
+        self.debuggercanvas.grid(row=1, column=0, sticky=tk.NSEW)
+        # add frame to canvas to allow organised stacking
+        self.canvasframe = tk.Frame(self.debuggercanvas)
+        self.canvasframe.pack(fill=tk.BOTH, expand=1)
+
+        # create vertical toolbar
+        self.vsb = ttk.Scrollbar(self.debugger, orient="vertical", command=self.debuggercanvas.yview)
+        self.vsb.grid(row=1, column=1, sticky=tk.NS)
+        self.debuggercanvas.configure(yscrollcommand=self.vsb.set)
+
+        # create horizontal toolbar
+        self.hsb = ttk.Scrollbar(self.debugger, orient="horizontal", command=self.debuggercanvas.xview)
+        self.hsb.grid(row=2, column=0, sticky=tk.EW)
+        self.debuggercanvas.configure(xscrollcommand=self.hsb.set)
+
+        # create a button at the top to clear the window
+        self.clearbutton = ttk.Button(self.debugger, text="Clear", command=lambda: self.cleardebuggerscreen())
+        self.clearbutton.grid(row=0, column=0, sticky=tk.E)
+
+        self.debuggercanvas.create_window((0, 0), window=self.canvasframe, anchor=tk.NW)
+
+    def addtoscreen(self, text):
+        # create a new label to add to the canvas
+        tk.Label(self.canvasframe, text=text, font=(None, 18), anchor="w", background="#efefef").pack(fill=tk.BOTH)
+        # update canvas to show the new label being added
+        self.debuggercanvas.update()
+        # update the scrollbars so that they scroll the entire bounding box
+        self.debuggercanvas.config(scrollregion=self.debuggercanvas.bbox("all"))
+
+    def cleardebuggerscreen(self):
+        # loop through and delete all children
+        for x in self.canvasframe.winfo_children():
+            x.destroy()
+        # update canvas to show the new label being added
+        self.debuggercanvas.update()
+        # update the scrollbars so that they scroll the entire bounding box
+        self.debuggercanvas.config(scrollregion=self.debuggercanvas.bbox("all"))
 
 class MainApplication:
     def __init__(self, master):
@@ -23,25 +79,21 @@ class MainApplication:
         # create the mainframe
         self.mainframe = tk.Frame(master, background="#FFFFFF")
 
+        # create debugger
+        self.debugger = Debugger()
+
         # set mainframe parameteres
         self.mainframe.grid(column=0, row=0, sticky=tk.NSEW)
-        self.mainframe.master.minsize(width=600, height=510)
+        self.mainframe.master.minsize(width=600, height=600)
 
         self.label = tk.Label(self.mainframe, text="Twirpy IO", background="#ffc532", font=(None, 18), anchor="w")
         self.label.grid(row=0, column=1, sticky=tk.NSEW, columnspan=3)
 
-        root.update()
-
         # get logo from file
-        self.logoactualorignal = Image.open("%s\\logo.png" % os.path.dirname(__file__))
-        self.logoactual = self.logoactualorignal.resize((self.label.winfo_height(), self.label.winfo_height()), Image.ANTIALIAS)
-        self.photoimage = ImageTk.PhotoImage(self.logoactual)
+        self.photoimage = PhotoImage(file="%s\\logo.png" % os.path.dirname(__file__))
         self.logo = tk.Label(self.mainframe, image=self.photoimage, borderwidth=0)
-        self.logo.grid(row=0, column=2, columnspan=2, sticky=tk.E)
+        self.logo.grid(row=0, column=3)
         root.update_idletasks()
-
-        # on frame resize
-        self.mainframe.bind("<Configure>", self.resizeimage)
 
         self.controlpaneltext = tk.Label(self.mainframe, text="Control Panel v1.0", background="#636363", font=(None, 15))
         self.controlpaneltext.grid(row=0, column=0, sticky=tk.NSEW)
@@ -53,9 +105,9 @@ class MainApplication:
         self.controlpanel.grid_columnconfigure(0, weight=1)
 
         # create the buttons on the left hand side
-        self.button1 = ttk.Button(self.controlpanel, text="Kill James")
+        self.button1 = ttk.Button(self.controlpanel, text="Kill James", command=lambda: self.debugger.addtoscreen("James Smells"))
         self.button1.grid(row=0, column=0, sticky=tk.NSEW)
-        self.button2 = ttk.Button(self.controlpanel, text="Touch James")
+        self.button2 = ttk.Button(self.controlpanel, text="Touch James", command=lambda: self.debugger.addtoscreen("James Smells James Smells James Smells James Smells James Smells James Smells James Smells James Smells  "))
         self.button2.grid(row=1, column=0, sticky=tk.NSEW)
         self.button3 = ttk.Button(self.controlpanel, text="Lick James")
         self.button3.grid(row=2, column=0, sticky=tk.NSEW)
@@ -63,7 +115,7 @@ class MainApplication:
         self.button4.grid(row=3, column=0, sticky=tk.NSEW)
         self.button5 = ttk.Button(self.controlpanel, text="Poke James")
         self.button5.grid(row=4, column=0, sticky=tk.NSEW)
-        self.button6 = ttk.Button(self.controlpanel, text="Quit Program")
+        self.button6 = ttk.Button(self.controlpanel, text="Quit Program", command=lambda: root.quit())
         self.button6.grid(row=5, column=0, sticky=tk.NSEW)
 
         # create the grid of labels in the middle which represent the subsystems
@@ -123,21 +175,6 @@ class MainApplication:
     def greet(self):
         print("James Touched Me Inappropriately")
 
-    """Resize the bounding box of the control panel on dynamic resize"""
-    def resizeimage(self, event):
-        # get height of top bar
-        self.height = self.label.winfo_height()
-        print(self.height)
-
-        if self.height > 200:
-            self.logoactual = self.logoactualorignal.resize((200, 200), Image.ANTIALIAS)
-        else:
-            self.logoactual = self.logoactualorignal.resize((self.height, self.height), Image.ANTIALIAS)
-
-        self.photoimage = ImageTk.PhotoImage(self.logoactual)
-        self.logo.configure(image=self.photoimage)
-
-        root.update_idletasks()
 
 if __name__ == '__main__':
     root = tk.Tk()
