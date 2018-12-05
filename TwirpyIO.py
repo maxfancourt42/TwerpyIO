@@ -92,7 +92,7 @@ class MainApplication:
         self.mainframe.master.minsize(width=600, height=600)
 
         self.label = tk.Label(self.mainframe, text="Twirpy IO", background="#ffc532", font=(None, 18), anchor="w")
-        self.label.grid(row=0, column=1, sticky=tk.NSEW, columnspan=6)
+        self.label.grid(row=0, column=1, sticky=tk.NSEW, columnspan=3)
 
         self.controlpaneltext = tk.Label(self.mainframe, text="Control Panel v1.0", background="#636363", font=(None, 15))
         self.controlpaneltext.grid(row=0, column=0, sticky=tk.NSEW)
@@ -100,11 +100,11 @@ class MainApplication:
         # get logo from file
         self.photoimage = tk.PhotoImage(file="%s\\logo.png" % os.path.dirname(__file__))
         self.logo = tk.Label(self.mainframe, image=self.photoimage, borderwidth=0, background="#ffc532")
-        self.logo.grid(row=0, column=2, columnspan=2, sticky=tk.E)
+        self.logo.grid(row=0, column=1, columnspan=3, sticky=tk.E)
 
         # Create a frame to hold the control panel on the left hand side
         self.controlpanel = tk.Frame(self.mainframe, background="#636363")
-        self.controlpanel.grid(row=1, column=0, sticky=tk.NSEW, rowspan=5)
+        self.controlpanel.grid(row=1, column=0, sticky=tk.NSEW, rowspan=6)
         self.controlpanel.grid_rowconfigure((0, 1, 2, 3, 4, 5), weight=1)
         self.controlpanel.grid_columnconfigure(0, weight=1)
 
@@ -125,6 +125,12 @@ class MainApplication:
         # power subsystem
         self.powersubsystembackground = tk.Label(self.mainframe, text="Power", background="#555555")
         self.powersubsystembackground.grid(row=1, column=1, sticky=tk.NSEW, rowspan=2)
+
+        self.powersubsystemstatus = tk.Label(self.mainframe, text="Power", background="#ffffff")
+        self.powersubsystemstatus.grid(row=1, column=1)
+
+        self.powersubstatusbuttons = tk.Label(self.mainframe, text="Power", background="#ffffff")
+        self.powersubstatusbuttons.grid(row=2, column=1)
 
         self.controlsubsystem = tk.Label(self.mainframe, text="Controls", background="#7a7a7a")
         self.controlsubsystem.grid(row=1, column=2, sticky=tk.NSEW, rowspan=2)
@@ -158,7 +164,7 @@ class MainApplication:
         # give weight to rows and column to permit dynamic redraw
         self.mainframe.columnconfigure(0, weight=1)
         self.mainframe.columnconfigure((1, 2, 3), weight=2)
-        self.mainframe.rowconfigure((1, 2, 3, 4, 5), weight=1)
+        self.mainframe.rowconfigure((1, 2, 3, 4, 5, 6), weight=1)
 
         # Buff and pad all children of mainframe
         for child in self.mainframe.winfo_children():
