@@ -1,12 +1,13 @@
 # import libaries
 import tkinter as tk
 from tkinter import ttk
-from tkinter import PhotoImage
-from tkinter import Toplevel
 import os
 
 class Debugger:
     def __init__(self):
+        # local variables
+        self.debuggercounter = 0
+
         # create toplevel
         self.debugger = tk.Toplevel()
         self.debugger.config(background="#DFE8F6")
@@ -46,11 +47,13 @@ class Debugger:
 
     def addtoscreen(self, text):
         # create a new label to add to the canvas
-        tk.Label(self.canvasframe, text=text, font=(None, 18), anchor="w", background="#efefef").pack(fill=tk.BOTH)
+        tk.Label(self.canvasframe, text="{} | {}".format(str(self.debuggercounter).zfill(3), text), font=(None, 18), anchor="w", background="#efefef").pack(fill=tk.BOTH)
         # update canvas to show the new label being added
         self.debuggercanvas.update()
         # update the scrollbars so that they scroll the entire bounding box
         self.debuggercanvas.config(scrollregion=self.debuggercanvas.bbox("all"))
+        # update the debuggercounter
+        self.debuggercounter = self.debuggercounter + 1
 
     def cleardebuggerscreen(self):
         # loop through and delete all children
@@ -60,6 +63,8 @@ class Debugger:
         self.debuggercanvas.update()
         # update the scrollbars so that they scroll the entire bounding box
         self.debuggercanvas.config(scrollregion=self.debuggercanvas.bbox("all"))
+        # set the debuggercounter to 0
+        self.debuggercounter = 0
 
 class MainApplication:
     def __init__(self, master):
@@ -87,25 +92,24 @@ class MainApplication:
         self.mainframe.master.minsize(width=600, height=600)
 
         self.label = tk.Label(self.mainframe, text="Twirpy IO", background="#ffc532", font=(None, 18), anchor="w")
-        self.label.grid(row=0, column=1, sticky=tk.NSEW, columnspan=3)
-
-        # get logo from file
-        self.photoimage = PhotoImage(file="%s\\logo.png" % os.path.dirname(__file__))
-        self.logo = tk.Label(self.mainframe, image=self.photoimage, borderwidth=0)
-        self.logo.grid(row=0, column=3)
-        root.update_idletasks()
+        self.label.grid(row=0, column=1, sticky=tk.NSEW, columnspan=6)
 
         self.controlpaneltext = tk.Label(self.mainframe, text="Control Panel v1.0", background="#636363", font=(None, 15))
         self.controlpaneltext.grid(row=0, column=0, sticky=tk.NSEW)
 
+        # get logo from file
+        self.photoimage = tk.PhotoImage(file="%s\\logo.png" % os.path.dirname(__file__))
+        self.logo = tk.Label(self.mainframe, image=self.photoimage, borderwidth=0, background="#ffc532")
+        self.logo.grid(row=0, column=2, columnspan=2, sticky=tk.E)
+
         # Create a frame to hold the control panel on the left hand side
         self.controlpanel = tk.Frame(self.mainframe, background="#636363")
-        self.controlpanel.grid(row=1, column=0, sticky=tk.NSEW, rowspan=3)
+        self.controlpanel.grid(row=1, column=0, sticky=tk.NSEW, rowspan=5)
         self.controlpanel.grid_rowconfigure((0, 1, 2, 3, 4, 5), weight=1)
         self.controlpanel.grid_columnconfigure(0, weight=1)
 
         # create the buttons on the left hand side
-        self.button1 = ttk.Button(self.controlpanel, text="Kill James", command=lambda: self.debugger.addtoscreen("James Smells"))
+        self.button1 = ttk.Button(self.controlpanel, text="Activate Debugger", command=lambda: self.debugger.addtoscreen("James Smells"))
         self.button1.grid(row=0, column=0, sticky=tk.NSEW)
         self.button2 = ttk.Button(self.controlpanel, text="Touch James", command=lambda: self.debugger.addtoscreen("James Smells James Smells James Smells James Smells James Smells James Smells James Smells James Smells  "))
         self.button2.grid(row=1, column=0, sticky=tk.NSEW)
@@ -118,42 +122,34 @@ class MainApplication:
         self.button6 = ttk.Button(self.controlpanel, text="Quit Program", command=lambda: root.quit())
         self.button6.grid(row=5, column=0, sticky=tk.NSEW)
 
-        # create the grid of labels in the middle which represent the subsystems
-        self.powersubsystem = tk.Label(self.mainframe, text="Power", background="#7a7a7a")
-        self.powersubsystem.grid(row=1, column=1, sticky=tk.NSEW)
-        self.powersubsystem.grid_configure(padx=5, pady=5)
+        # power subsystem
+        self.powersubsystembackground = tk.Label(self.mainframe, text="Power", background="#555555")
+        self.powersubsystembackground.grid(row=1, column=1, sticky=tk.NSEW, rowspan=2)
 
         self.controlsubsystem = tk.Label(self.mainframe, text="Controls", background="#7a7a7a")
-        self.controlsubsystem.grid(row=1, column=2, sticky=tk.NSEW)
-        self.controlsubsystem.grid_configure(padx=5, pady=5)
+        self.controlsubsystem.grid(row=1, column=2, sticky=tk.NSEW, rowspan=2)
 
         self.sirensubsystem = tk.Label(self.mainframe, text="Siren", background="#7a7a7a")
-        self.sirensubsystem.grid(row=1, column=3, sticky=tk.NSEW)
-        self.sirensubsystem.grid_configure(padx=5, pady=5)
+        self.sirensubsystem.grid(row=1, column=3, sticky=tk.NSEW, rowspan=2)
 
         self.motorsubsystem = tk.Label(self.mainframe, text="Motor", background="#7a7a7a")
-        self.motorsubsystem.grid(row=2, column=1, sticky=tk.NSEW)
-        self.motorsubsystem.grid_configure(padx=5, pady=5)
+        self.motorsubsystem.grid(row=3, column=1, sticky=tk.NSEW, rowspan=2)
 
         self.AIsubsystem = tk.Label(self.mainframe, text="AI", background="#7a7a7a")
-        self.AIsubsystem.grid(row=2, column=2, sticky=tk.NSEW)
-        self.AIsubsystem.grid_configure(padx=5, pady=5)
+        self.AIsubsystem.grid(row=3, column=2, sticky=tk.NSEW, rowspan=2)
 
         self.bluetoothsubsystem = tk.Label(self.mainframe, text="Bluetooth", background="#7a7a7a")
-        self.bluetoothsubsystem.grid(row=2, column=3, sticky=tk.NSEW)
-        self.bluetoothsubsystem.grid_configure(padx=5, pady=5)
+        self.bluetoothsubsystem.grid(row=3, column=3, sticky=tk.NSEW, rowspan=2)
 
         self.hoseintergrationsubsystem = tk.Label(self.mainframe, text="Water Hose", background="#7a7a7a")
-        self.hoseintergrationsubsystem.grid(row=3, column=1, sticky=tk.NSEW)
-        self.hoseintergrationsubsystem.grid_configure(padx=5, pady=5)
+        self.hoseintergrationsubsystem.grid(row=5, column=1, sticky=tk.NSEW, rowspan=2)
 
         self.fluxcapacitorsubsystem = tk.Label(self.mainframe, text="Flux Capacitor", background="#7a7a7a")
-        self.fluxcapacitorsubsystem.grid(row=3, column=2, sticky=tk.NSEW)
-        self.fluxcapacitorsubsystem.grid_configure(padx=5, pady=5)
+        self.fluxcapacitorsubsystem.grid(row=5, column=2, sticky=tk.NSEW, rowspan=2)
 
         self.selfdestructsubsystem = tk.Label(self.mainframe, text="Self Destruct", background="#7a7a7a")
-        self.selfdestructsubsystem.grid(row=3, column=3, sticky=tk.NSEW)
-        self.selfdestructsubsystem.grid_configure(padx=5, pady=5)
+        self.selfdestructsubsystem.grid(row=5, column=3, sticky=tk.NSEW, rowspan=2)
+
 
         # give weight to root rows and column to permit all children to fill the frame
         self.master.columnconfigure(0, weight=1)
@@ -162,7 +158,7 @@ class MainApplication:
         # give weight to rows and column to permit dynamic redraw
         self.mainframe.columnconfigure(0, weight=1)
         self.mainframe.columnconfigure((1, 2, 3), weight=2)
-        self.mainframe.rowconfigure((0, 1, 2, 3), weight=1)
+        self.mainframe.rowconfigure((1, 2, 3, 4, 5), weight=1)
 
         # Buff and pad all children of mainframe
         for child in self.mainframe.winfo_children():
@@ -171,6 +167,8 @@ class MainApplication:
         # canvas frame pad
         for child in self.controlpanel.winfo_children():
             child.grid_configure(padx=5, pady=5)
+
+        self.logo.grid_configure(padx=20, pady=20)
 
     def greet(self):
         print("James Touched Me Inappropriately")
