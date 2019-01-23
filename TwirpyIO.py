@@ -56,6 +56,7 @@ class ScrollingWindow:
         self.swcanvas.config(scrollregion=self.swcanvas.bbox("all"))
         # update the linecounter
         self.linecounter = self.linecounter + 1
+        self.swcanvas.yview_moveto(1)
 
     def cleardebuggerscreen(self):
         # loop through and delete all children
