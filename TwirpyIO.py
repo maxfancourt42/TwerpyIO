@@ -332,7 +332,24 @@ class subsystemwindow:
         gui.debugger.addtoscreen("Input 1: Function call: detect power returns TRUE")
         gui.debugger.addtoscreen("Input 2: Function call: detect battery returns TRUE")
         gui.debugger.addtoscreen("Boolean operator injection required")
-        testing = BooleanChoiceWindow(gui.debugger.swtl.winfo_width(), gui.debugger.swtl.winfo_height(), "Return TRUE only if both power systems and battery are active")
+        question1 = BooleanChoiceWindow("Return TRUE only if both power systems and battery are active", "AND")
+        if question1 == 1:
+            gui.debugger.addtoscreen("Test case 1: power TRUE, battery FALSE, outcome: FALSE", colour="green")
+            gui.debugger.addtoscreen("Test case 2: power FALSE, battery TRUE outcome: FALSE", colour="green")
+            gui.debugger.addtoscreen("Test case 3: power TRUE, battery TRUE outcome: TRUE", colour="green")
+            gui.debugger.addtoscreen("Boolean operator injection successful")
+        elif question1 == "OR":
+            gui.debugger.addtoscreen("Test case 1: power TRUE, battery FALSE, outcome: TRUE", colour="red")
+            gui.debugger.addtoscreen("Test case 2: power FALSE, battery TRUE outcome: TRUE", colour="red")
+            gui.debugger.addtoscreen("Test case 3: power TRUE, battery TRUE outcome: TRUE", colour="green")
+            gui.debugger.addtoscreen("Boolean operator injection unsuccessful")
+        else:
+            gui.debugger.addtoscreen("Test case 1: power TRUE, battery FALSE, outcome: ERROR", colour="red")
+            gui.debugger.addtoscreen("Test case 2: power FALSE, battery TRUE outcome: ERROR", colour="red")
+            gui.debugger.addtoscreen("Test case 3: power TRUE, battery TRUE outcome: ERROR", colour="red")
+            gui.debugger.addtoscreen("Boolean operator injection unsuccessful")
+
+
 
     def createmotorproblemcore(self):
         motorproblemcore = ScrollingWindow()
@@ -353,25 +370,35 @@ class subsystemwindow:
 
 
 class BooleanChoiceWindow:
-    def __init__(self, width, height, question):
+    def __init__(self, question, correctanswer):
+        self.correctanswer = correctanswer
+        self.isanswercorrect = None
         # create toplevel to house the choices
         self.choicewindow = Toplevel()
         self.choicewindow.config(background="#FFFFFF")
         # get size and position of the problemcore window
-        self.choicewindow.geometry('%dx%d+%d+%d' % (width/2, height/5, (root.winfo_screenwidth()/2 - width/4), root.winfo_screenheight()/2 - (height/3)/2))
-        self.choicewindow.resizable(0, 0)
+        self.choicewindow.geometry('%dx%d+%d+%d' % (root.winfo_screenwidth()/4, root.winfo_screenheight()/5, (root.winfo_screenwidth()/2 - root.winfo_screenwidth()/8), root.winfo_screenheight()/2 - root.winfo_screenheight()/16))
         # add questions label
         question = ttk.Label(self.choicewindow, text=question, font=(None, 14))
-        question.config(wraplength=500)
+        question.config(wraplength=root.winfo_screenwidth()/4)
         question.grid(row=0, column=0, sticky=tk.EW, columnspan=3)
         # add text explaining what to do
         text = ttk.Label(self.choicewindow, text="Choose the appropriate boolean operator to match the conditions as specified in the debugger", font=(None, 14))
-        text.config(wraplength=500)
+        text.config(wraplength=root.winfo_screenwidth()/4)
         text.grid(row=1, column=0, sticky=tk.EW, columnspan=3)
         # add choices
-        ttk.Button(self.choicewindow, text="AND").grid(row=2, column=0, sticky=tk.NSEW)
-        ttk.Button(self.choicewindow, text="OR").grid(row=2, column=1, sticky=tk.NSEW)
-        ttk.Button(self.choicewindow, text="NOT").grid(row=2, column=2, sticky=tk.NSEW)
+        self.andbutton = ttk.Button(self.choicewindow, text="AND")
+        self.andbutton.grid(row=2, column=0, sticky=tk.NSEW)
+        self.andbutton.config(command=lambda: self.setandcheckanswer("AND"))
+
+        self.orbutton = ttk.Button(self.choicewindow, text="OR")
+        self.orbutton.grid(row=2, column=1, sticky=tk.NSEW)
+        self.orbutton.config(command=lambda: self.setandcheckanswer("OR"))
+
+        self.notbutton = ttk.Button(self.choicewindow, text="NOT")
+        self.notbutton.grid(row=2, column=2, sticky=tk.NSEW)
+        self.notbutton.config(command=lambda: self.setandcheckanswer("NOT"))
+
         # add quite button
         ttk.Button(self.choicewindow, text="Quit").grid(row=3, column=2, sticky=tk.NSEW)
 
@@ -384,6 +411,19 @@ class BooleanChoiceWindow:
             child.grid_configure(padx=5, pady=5)
 
         self.choicewindow.wait_window()
+
+
+    def setandcheckanswer(self, providedanswer):
+        gui.debugger.addtoscreen("User submitted {}".format(providedanswer))
+        gui.debugger.addtoscreen("Testing...")
+        if providedanswer == self.correctanswer:
+            self.choicewindow.destroy()
+            self.isanswercorrect = 1
+            return 1
+        else:
+            self.choicewindow.destroy()
+            self.isanswercorrect = providedanswer
+            return providedanswer
 
 
 if __name__ == '__main__':
