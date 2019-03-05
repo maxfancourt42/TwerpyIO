@@ -424,8 +424,7 @@ class subsystemwindow:
                     gui.debugger.addtoscreen("Compiling Successful", colour="green")
                     gui.debugger.addtoscreen("Training Complete", colour="green")
                     progresstracker.set(progresstracker.get() + 1)
-                    #progresstracker.set(choice(progressarray))
-                    progresstracker.set(9)
+                    progresstracker.set(choice(progressarray))
 
         # Actual problem set
         if progresstracker.get() > 2:
@@ -457,7 +456,7 @@ class subsystemwindow:
                         gui.debugger.addtoscreen("Attempting to compile...")
                         gui.debugger.addtoscreen("Compilation successful", colour="green")
                         progressarray.remove(3)
-                        if len(progressarray) > 0:
+                        if len(progressarray) > 12:
                             progresstracker.set(choice(progressarray))
                             gui.debugger.addtoscreen("Continuing to next error")
                         else:
@@ -493,7 +492,7 @@ class subsystemwindow:
                         gui.debugger.addtoscreen("Attempting to compile...")
                         gui.debugger.addtoscreen("Compilation successful", colour="green")
                         progressarray.remove(4)
-                        if len(progressarray) > 0:
+                        if len(progressarray) > 12:
                             progresstracker.set(choice(progressarray))
                             gui.debugger.addtoscreen("Continuing to next error")
                         else:
@@ -534,7 +533,7 @@ class subsystemwindow:
                         gui.debugger.addtoscreen("Attempting to compile...")
                         gui.debugger.addtoscreen("Compilation successful", colour="green")
                         progressarray.remove(5)
-                        if len(progressarray) > 0:
+                        if len(progressarray) > 12:
                             progresstracker.set(choice(progressarray))
                             gui.debugger.addtoscreen("Continuing to next error")
                         else:
@@ -572,7 +571,7 @@ class subsystemwindow:
                         gui.debugger.addtoscreen("Attempting to compile...")
                         gui.debugger.addtoscreen("Compilation successful", colour="green")
                         progressarray.remove(6)
-                        if len(progressarray) > 0:
+                        if len(progressarray) > 12:
                             progresstracker.set(choice(progressarray))
                             gui.debugger.addtoscreen("Continuing to next error")
                         else:
@@ -611,7 +610,7 @@ class subsystemwindow:
                         gui.debugger.addtoscreen("Attempting to compile...")
                         gui.debugger.addtoscreen("Compilation successful", colour="green")
                         progressarray.remove(7)
-                        if len(progressarray) > 0:
+                        if len(progressarray) > 12:
                             progresstracker.set(choice(progressarray))
                             gui.debugger.addtoscreen("Continuing to next error")
                         else:
@@ -639,14 +638,14 @@ class subsystemwindow:
                     gui.debugger.addtoscreen("}", colour="red")
 
                     # ask the question
-                    BooleanChoiceWindow(gui.debugger.swtl.winfo_width(), gui.debugger.swtl.winfo_height(),"Given the inputs, what is the value of emergency_buffer?","Select From Below", option1="System Ready", option2="Motors Ready", option3="System Error")
+                    BooleanChoiceWindow(gui.debugger.swtl.winfo_width(), gui.debugger.swtl.winfo_height(),"Given the inputs, what will this code output?","Select From Below", option1="System Ready", option2="Motors Ready", option3="System Error")
                     if answer.get() == "QUIT":
                         return 1
                     if answer.get() == "Motors Ready":
                         gui.debugger.addtoscreen("Attempting to compile...")
                         gui.debugger.addtoscreen("Compilation successful", colour="green")
                         progressarray.remove(8)
-                        if len(progressarray) > 0:
+                        if len(progressarray) > 12:
                             progresstracker.set(choice(progressarray))
                             gui.debugger.addtoscreen("Continuing to next error")
                         else:
@@ -675,7 +674,7 @@ class subsystemwindow:
                     gui.debugger.addtoscreen("}", colour="red")
 
                     # ask the question
-                    BooleanChoiceWindow(gui.debugger.swtl.winfo_width(), gui.debugger.swtl.winfo_height(),"Given the inputs, what is the value of emergency_buffer?","Select From Below", option1="System State 1", option2="System State 2", option3="System State 3")
+                    BooleanChoiceWindow(gui.debugger.swtl.winfo_width(), gui.debugger.swtl.winfo_height(),"Given the inputs, what will this code output?","Select From Below", option1="System State 1", option2="System State 2", option3="System State 3")
 
                     if answer.get() == "QUIT":
                         return 1
@@ -683,7 +682,7 @@ class subsystemwindow:
                         gui.debugger.addtoscreen("Attempting to compile...")
                         gui.debugger.addtoscreen("Compilation successful", colour="green")
                         progressarray.remove(9)
-                        if len(progressarray) > 0:
+                        if len(progressarray) > 12:
                             progresstracker.set(choice(progressarray))
                             gui.debugger.addtoscreen("Continuing to next error")
                         else:
@@ -695,14 +694,30 @@ class subsystemwindow:
                         progresstracker.set(choice(progressarray))
 
                 elif progresstracker.get() == 10:
-                    print(10)
+                    gui.debugger.addtoscreen("bool switched_on = True")
+                    gui.debugger.addtoscreen("bool circuit_breaker_on = False")
+                    gui.debugger.addtoscreen("if (switched_on AND NOT(circuit_breaker_on))", colour="red")
+                    gui.debugger.addtoscreen("{", colour="red")
+                    gui.debugger.addtoscreen("  return \"System Online\"", colour="red")
+                    gui.debugger.addtoscreen("}", colour="red")
+                    gui.debugger.addtoscreen("else if (switched_on AND circuit_breaker_on)", colour="red")
+                    gui.debugger.addtoscreen("{", colour="red")
+                    gui.debugger.addtoscreen("  return \"System Offline\"", colour="red")
+                    gui.debugger.addtoscreen("}", colour="red")
+                    gui.debugger.addtoscreen("else", colour="red")
+                    gui.debugger.addtoscreen("{", colour="red")
+                    gui.debugger.addtoscreen("  return \"System Error\"", colour="red")
+                    gui.debugger.addtoscreen("}", colour="red")
+
+                    BooleanChoiceWindow(gui.debugger.swtl.winfo_width(), gui.debugger.swtl.winfo_height(),"Given the inputs, what will this code output?","Select From Below", option1="System Online", option2="System Offline", option3="System Error")
+
                     if answer.get() == "QUIT":
                         return 1
-                    if answer.get() == "Motors Ready":
+                    if answer.get() == "System Online":
                         gui.debugger.addtoscreen("Attempting to compile...")
                         gui.debugger.addtoscreen("Compilation successful", colour="green")
                         progressarray.remove(10)
-                        if len(progressarray) > 0:
+                        if len(progressarray) > 12:
                             progresstracker.set(choice(progressarray))
                             gui.debugger.addtoscreen("Continuing to next error")
                         else:
@@ -713,15 +728,30 @@ class subsystemwindow:
                         gui.debugger.addtoscreen("Continuing to next error")
                         progresstracker.set(choice(progressarray))
 
+
                 elif progresstracker.get() == 11:
-                    print(11)
+                    gui.debugger.addtoscreen("bool power_error = False")
+                    gui.debugger.addtoscreen("bool circuit_error = False")
+                    gui.debugger.addtoscreen("bool blue_tooth_error = False")
+                    gui.debugger.addtoscreen("bool battery error = True")
+                    gui.debugger.addtoscreen("if (NOT(circuit_error OR circuit_error) AND (blue_tooth_error OR battery error))", colour="red")
+                    gui.debugger.addtoscreen("{", colour="red")
+                    gui.debugger.addtoscreen("  return \"Systems Functional\"", colour="red")
+                    gui.debugger.addtoscreen("}", colour="red")
+                    gui.debugger.addtoscreen("else", colour="red")
+                    gui.debugger.addtoscreen("{", colour="red")
+                    gui.debugger.addtoscreen("  return \"Systems Offline\"", colour="red")
+                    gui.debugger.addtoscreen("}", colour="red")
+
+                    BooleanChoiceWindow(gui.debugger.swtl.winfo_width(), gui.debugger.swtl.winfo_height(),"Given the inputs, what will this code output?","Select From Below", option1="Systems Functional", option2="Systems Offline", option3="System Error")
+
                     if answer.get() == "QUIT":
                         return 1
-                    if answer.get() == "Motors Ready":
+                    if answer.get() == "Systems Offline":
                         gui.debugger.addtoscreen("Attempting to compile...")
                         gui.debugger.addtoscreen("Compilation successful", colour="green")
                         progressarray.remove(11)
-                        if len(progressarray) > 0:
+                        if len(progressarray) > 12:
                             progresstracker.set(choice(progressarray))
                             gui.debugger.addtoscreen("Continuing to next error")
                         else:
@@ -733,14 +763,37 @@ class subsystemwindow:
                         progresstracker.set(choice(progressarray))
 
                 elif progresstracker.get() == 12:
-                    print(12)
+                    gui.debugger.addtoscreen("int internal_temp = 32")
+                    gui.debugger.addtoscreen("int temp_threshold  = 60")
+                    gui.debugger.addtoscreen("int internal_activity = 87")
+                    gui.debugger.addtoscreen("bool priority_level = False")
+                    gui.debugger.addtoscreen("bool warning = False")
+                    gui.debugger.addtoscreen("if (internal_temp > temp_threshold))", colour="red")
+                    gui.debugger.addtoscreen("{", colour="red")
+                    gui.debugger.addtoscreen("  warning = True", colour="red")
+                    gui.debugger.addtoscreen("}", colour="red")
+                    gui.debugger.addtoscreen("if (warning AND NOT(priority))", colour="red")
+                    gui.debugger.addtoscreen("{", colour="red")
+                    gui.debugger.addtoscreen("  return \"Temperature Warning\"", colour="red")
+                    gui.debugger.addtoscreen("}", colour="red")
+                    gui.debugger.addtoscreen("else if (warning AND NOT(priority))", colour="red")
+                    gui.debugger.addtoscreen("{", colour="red")
+                    gui.debugger.addtoscreen("  return \"Online Temperature Warning\"", colour="red")
+                    gui.debugger.addtoscreen("}", colour="red")
+                    gui.debugger.addtoscreen("else", colour="red")
+                    gui.debugger.addtoscreen("{", colour="red")
+                    gui.debugger.addtoscreen("  return \"System Error\"", colour="red")
+                    gui.debugger.addtoscreen("}", colour="red")
+
+                    BooleanChoiceWindow(gui.debugger.swtl.winfo_width(), gui.debugger.swtl.winfo_height(),"Given the inputs, what will this code output?", "Select From Below", option1="Temperature Warning", option2="Online Temperature Warning", option3="System Error")
+
                     if answer.get() == "QUIT":
                         return 1
-                    if answer.get() == "Motors Ready":
+                    if answer.get() == "Temperature Warning":
                         gui.debugger.addtoscreen("Attempting to compile...")
                         gui.debugger.addtoscreen("Compilation successful", colour="green")
                         progressarray.remove(12)
-                        if len(progressarray) > 0:
+                        if len(progressarray) > 12:
                             progresstracker.set(choice(progressarray))
                             gui.debugger.addtoscreen("Continuing to next error")
                         else:
@@ -752,14 +805,29 @@ class subsystemwindow:
                         progresstracker.set(choice(progressarray))
 
                 elif progresstracker.get() == 13:
-                    print(13)
+                    gui.debugger.addtoscreen("bool power_on = True")
+                    gui.debugger.addtoscreen("bool switch_on = False")
+                    gui.debugger.addtoscreen("bool voice_activation_on = False")
+                    gui.debugger.addtoscreen("bool daylight_sensor = False")
+                    gui.debugger.addtoscreen("bool wake_up_timer = False")
+                    gui.debugger.addtoscreen("if (power_on OR (switch_on OR (voice_activation_on OR (daylight_sensor OR wake_up_timer))))", colour="red")
+                    gui.debugger.addtoscreen("{", colour="red")
+                    gui.debugger.addtoscreen("  return \"Switch On\"", colour="red")
+                    gui.debugger.addtoscreen("}", colour="red")
+                    gui.debugger.addtoscreen("else", colour="red")
+                    gui.debugger.addtoscreen("{", colour="red")
+                    gui.debugger.addtoscreen("  return \"Off\"", colour="red")
+                    gui.debugger.addtoscreen("}", colour="red")
+
+                    BooleanChoiceWindow(gui.debugger.swtl.winfo_width(), gui.debugger.swtl.winfo_height(),"Given the inputs, what will this code output?", "Select From Below", option1="Switch On", option2="Off", option3="System Error")
+
                     if answer.get() == "QUIT":
                         return 1
-                    if answer.get() == "Motors Ready":
+                    if answer.get() == "Switch On":
                         gui.debugger.addtoscreen("Attempting to compile...")
                         gui.debugger.addtoscreen("Compilation successful", colour="green")
                         progressarray.remove(13)
-                        if len(progressarray) > 0:
+                        if len(progressarray) > 12:
                             progresstracker.set(choice(progressarray))
                             gui.debugger.addtoscreen("Continuing to next error")
                         else:
@@ -771,14 +839,31 @@ class subsystemwindow:
                         progresstracker.set(choice(progressarray))
 
                 elif progresstracker.get() == 14:
-                    print(14)
+                    gui.debugger.addtoscreen("int charge_rate_per_hour = 10")
+                    gui.debugger.addtoscreen("int hours_to_charge = 3")
+                    gui.debugger.addtoscreen("bool battery_low = False")
+                    gui.debugger.addtoscreen("if (charge_rate_per_hour * hours_to_charge >= 20 OR battery_low)", colour="red")
+                    gui.debugger.addtoscreen("{", colour="red")
+                    gui.debugger.addtoscreen("  return \"Start Charge\"", colour="red")
+                    gui.debugger.addtoscreen("}", colour="red")
+                    gui.debugger.addtoscreen("else if (charge_rate_per_hour * hours_to_charge >= 20 OR NOT(battery_low))", colour="red")
+                    gui.debugger.addtoscreen("{", colour="red")
+                    gui.debugger.addtoscreen("  return \"Delay Charge\"", colour="red")
+                    gui.debugger.addtoscreen("}", colour="red")
+                    gui.debugger.addtoscreen("else )", colour="red")
+                    gui.debugger.addtoscreen("{", colour="red")
+                    gui.debugger.addtoscreen("  return \"Rapid Charge\"", colour="red")
+                    gui.debugger.addtoscreen("}", colour="red")
+
+                    BooleanChoiceWindow(gui.debugger.swtl.winfo_width(), gui.debugger.swtl.winfo_height(),"Given the inputs, what will this code output?", "Select From Below", option1="Start Charge", option2="Delay Charge", option3="Rapid Charge")
+
                     if answer.get() == "QUIT":
                         return 1
-                    if answer.get() == "Motors Ready":
+                    if answer.get() == "Start Charge":
                         gui.debugger.addtoscreen("Attempting to compile...")
                         gui.debugger.addtoscreen("Compilation successful", colour="green")
                         progressarray.remove(14)
-                        if len(progressarray) > 0:
+                        if len(progressarray) > 12:
                             progresstracker.set(choice(progressarray))
                             gui.debugger.addtoscreen("Continuing to next error")
                         else:
@@ -790,15 +875,29 @@ class subsystemwindow:
                         progresstracker.set(choice(progressarray))
 
                 elif progresstracker.get() == 15:
-                    print(15)
-                    progressarray.remove(15)
+                    gui.debugger.addtoscreen("int battery1_level = 75")
+                    gui.debugger.addtoscreen("int battery2_level = 60")
+                    gui.debugger.addtoscreen("int battery3_level = 20")
+                    gui.debugger.addtoscreen("bool charge_available = True")
+                    gui.debugger.addtoscreen("bool power_error = True")
+                    gui.debugger.addtoscreen("if ((battery1_level + battery2_level + battery3_level)/3 >= 75 AND (charge_available AND NOT(power_error))", colour="red")
+                    gui.debugger.addtoscreen("{", colour="red")
+                    gui.debugger.addtoscreen("  return \"Permit Charging\"", colour="red")
+                    gui.debugger.addtoscreen("}", colour="red")
+                    gui.debugger.addtoscreen("else if (NOT power_error)", colour="red")
+                    gui.debugger.addtoscreen("{", colour="red")
+                    gui.debugger.addtoscreen("  return \"Attempt Charge 2\"", colour="red")
+                    gui.debugger.addtoscreen("}", colour="red")
+
+                    BooleanChoiceWindow(gui.debugger.swtl.winfo_width(), gui.debugger.swtl.winfo_height(),"Given the inputs, what will this code output?", "Select From Below", option1="Permit Charging", option2="Attempt Charge 2", option3="System Error")
+
                     if answer.get() == "QUIT":
                         return 1
-                    if answer.get() == "Motors Ready":
+                    if answer.get() == "System Error":
                         gui.debugger.addtoscreen("Attempting to compile...")
                         gui.debugger.addtoscreen("Compilation successful", colour="green")
                         progressarray.remove(15)
-                        if len(progressarray) > 0:
+                        if len(progressarray) > 12:
                             progresstracker.set(choice(progressarray))
                             gui.debugger.addtoscreen("Continuing to next error")
                         else:
@@ -810,14 +909,30 @@ class subsystemwindow:
                         progresstracker.set(choice(progressarray))
 
                 elif progresstracker.get() == 16:
-                    print(16)
+                    gui.debugger.addtoscreen("bool power_subsystem_online = True")
+                    gui.debugger.addtoscreen("int forward_movement_amount = 50")
+                    gui.debugger.addtoscreen("if (power_subsystem_online AND (forward_movement_amount > 20))", colour="red")
+                    gui.debugger.addtoscreen("{", colour="red")
+                    gui.debugger.addtoscreen("  return \"Move Forward\"", colour="red")
+                    gui.debugger.addtoscreen("}", colour="red")
+                    gui.debugger.addtoscreen("else if (power_subsystem_online AND (forward_movement_amount < 20))", colour="red")
+                    gui.debugger.addtoscreen("{", colour="red")
+                    gui.debugger.addtoscreen("  return \"Move Backward\"", colour="red")
+                    gui.debugger.addtoscreen("}", colour="red")
+                    gui.debugger.addtoscreen("else", colour="red")
+                    gui.debugger.addtoscreen("{", colour="red")
+                    gui.debugger.addtoscreen("  return \"Stay Still\"", colour="red")
+                    gui.debugger.addtoscreen("}", colour="red")
+
+                    BooleanChoiceWindow(gui.debugger.swtl.winfo_width(), gui.debugger.swtl.winfo_height(),"Given the inputs, what will this code output?", "Select From Below", option1="Move Forward", option2="Move Backward", option3="Stay Still")
+
                     if answer.get() == "QUIT":
                         return 1
-                    if answer.get() == "Motors Ready":
+                    if answer.get() == "Move Forward":
                         gui.debugger.addtoscreen("Attempting to compile...")
                         gui.debugger.addtoscreen("Compilation successful", colour="green")
                         progressarray.remove(16)
-                        if len(progressarray) > 0:
+                        if len(progressarray) > 12:
                             progresstracker.set(choice(progressarray))
                             gui.debugger.addtoscreen("Continuing to next error")
                         else:
@@ -829,14 +944,31 @@ class subsystemwindow:
                         progresstracker.set(choice(progressarray))
 
                 elif progresstracker.get() == 17:
-                    print(17)
+                    gui.debugger.addtoscreen("bool breaker = True")
+                    gui.debugger.addtoscreen("bool power_subsystem_online = True")
+                    gui.debugger.addtoscreen("int forward_movement_amount = 50")
+                    gui.debugger.addtoscreen("if (power_subsystem_online AND (forward_movement_amount > 20 AND NOT(breaker))", colour="red")
+                    gui.debugger.addtoscreen("{", colour="red")
+                    gui.debugger.addtoscreen("  return \"Stay Still\"", colour="red")
+                    gui.debugger.addtoscreen("}", colour="red")
+                    gui.debugger.addtoscreen("else if (NOT(breaker))", colour="red")
+                    gui.debugger.addtoscreen("{", colour="red")
+                    gui.debugger.addtoscreen("  return \"Breaker Tripped\"", colour="red")
+                    gui.debugger.addtoscreen("}", colour="red")
+                    gui.debugger.addtoscreen("else", colour="red")
+                    gui.debugger.addtoscreen("{", colour="red")
+                    gui.debugger.addtoscreen("  return \"System Reset\"", colour="red")
+                    gui.debugger.addtoscreen("}", colour="red")
+
+                    BooleanChoiceWindow(gui.debugger.swtl.winfo_width(), gui.debugger.swtl.winfo_height(),"Given the inputs, what will this code output?", "Select From Below", option1="Stay Still", option2="Breaker Tripped", option3="System Reset")
+
                     if answer.get() == "QUIT":
                         return 1
-                    if answer.get() == "Motors Ready":
+                    if answer.get() == "Breaker Tripped":
                         gui.debugger.addtoscreen("Attempting to compile...")
                         gui.debugger.addtoscreen("Compilation successful", colour="green")
                         progressarray.remove(17)
-                        if len(progressarray) > 0:
+                        if len(progressarray) > 12:
                             progresstracker.set(choice(progressarray))
                             gui.debugger.addtoscreen("Continuing to next error")
                         else:
@@ -848,14 +980,29 @@ class subsystemwindow:
                         progresstracker.set(choice(progressarray))
 
                 elif progresstracker.get() == 18:
-                    print(18)
+                    gui.debugger.addtoscreen("bool power_subsystem_online = False")
+                    gui.debugger.addtoscreen("if NOT(power_subsystem_online)", colour="red")
+                    gui.debugger.addtoscreen("{", colour="red")
+                    gui.debugger.addtoscreen("  return \"Systems Offline\"", colour="red")
+                    gui.debugger.addtoscreen("}", colour="red")
+                    gui.debugger.addtoscreen("else if (power_subsystem_online)", colour="red")
+                    gui.debugger.addtoscreen("{", colour="red")
+                    gui.debugger.addtoscreen("  return \"Systems Online\"", colour="red")
+                    gui.debugger.addtoscreen("}", colour="red")
+                    gui.debugger.addtoscreen("else", colour="red")
+                    gui.debugger.addtoscreen("{", colour="red")
+                    gui.debugger.addtoscreen("  return \"Systems Uncertain Status\"", colour="red")
+                    gui.debugger.addtoscreen("}", colour="red")
+
+                    BooleanChoiceWindow(gui.debugger.swtl.winfo_width(), gui.debugger.swtl.winfo_height(),"Given the inputs, what will this code output?", "Select From Below", option1="Systems Offline", option2="Systems Online", option3="Systems Uncertain Status")
+
                     if answer.get() == "QUIT":
                         return 1
-                    if answer.get() == "Motors Ready":
+                    if answer.get() == "Systems Online":
                         gui.debugger.addtoscreen("Attempting to compile...")
                         gui.debugger.addtoscreen("Compilation successful", colour="green")
                         progressarray.remove(18)
-                        if len(progressarray) > 0:
+                        if len(progressarray) > 12:
                             progresstracker.set(choice(progressarray))
                             gui.debugger.addtoscreen("Continuing to next error")
                         else:
@@ -867,14 +1014,30 @@ class subsystemwindow:
                         progresstracker.set(choice(progressarray))
 
                 elif progresstracker.get() == 19:
-                    print(19)
+                    gui.debugger.addtoscreen("int power_levels = 75")
+                    gui.debugger.addtoscreen("int power_requirements = 20")
+                    gui.debugger.addtoscreen("if (power_levels > 50 AND (power_requirements < 50 AND (power_levels > power_requirements))", colour="red")
+                    gui.debugger.addtoscreen("{", colour="red")
+                    gui.debugger.addtoscreen("  return \"Systems Online\"", colour="red")
+                    gui.debugger.addtoscreen("}", colour="red")
+                    gui.debugger.addtoscreen("if (power_levels > 50 AND (power_requirements < 50 AND (power_levels < power_requirements))", colour="red")
+                    gui.debugger.addtoscreen("{", colour="red")
+                    gui.debugger.addtoscreen("  return \"Insufficient Power\"", colour="red")
+                    gui.debugger.addtoscreen("}", colour="red")
+                    gui.debugger.addtoscreen("else", colour="red")
+                    gui.debugger.addtoscreen("{", colour="red")
+                    gui.debugger.addtoscreen("  return \"System Error\"", colour="red")
+                    gui.debugger.addtoscreen("}", colour="red")
+
+                    BooleanChoiceWindow(gui.debugger.swtl.winfo_width(), gui.debugger.swtl.winfo_height(),"Given the inputs, what will this code output?", "Select From Below", option1="Systems Online", option2="Insufficient Power", option3="System Error")
+
                     if answer.get() == "QUIT":
                         return 1
-                    if answer.get() == "Motors Ready":
+                    if answer.get() == "Systems Online":
                         gui.debugger.addtoscreen("Attempting to compile...")
                         gui.debugger.addtoscreen("Compilation successful", colour="green")
                         progressarray.remove(19)
-                        if len(progressarray) > 0:
+                        if len(progressarray) > 12:
                             progresstracker.set(choice(progressarray))
                             gui.debugger.addtoscreen("Continuing to next error")
                         else:
@@ -886,14 +1049,40 @@ class subsystemwindow:
                         progresstracker.set(choice(progressarray))
 
                 elif progresstracker.get() == 20:
-                    print(20)
+                    gui.debugger.addtoscreen("int power_levels = 75")
+                    gui.debugger.addtoscreen("int power_requirements = 20")
+                    gui.debugger.addtoscreen("bool power_switch = True")
+                    gui.debugger.addtoscreen("int capaciator_levels = 50")
+                    gui.debugger.addtoscreen("int power_drain = 47")
+                    gui.debugger.addtoscreen("bool master_switch = False")
+                    gui.debugger.addtoscreen("int port_number = 3")
+                    gui.debugger.addtoscreen("int velocity_estimate = 77")
+                    gui.debugger.addtoscreen("bool CPU_attached = True")
+                    gui.debugger.addtoscreen("int replacement_port = 4")
+                    gui.debugger.addtoscreen("int secondary_batteries = 1")
+                    gui.debugger.addtoscreen("bool firmware_installed = True")
+                    gui.debugger.addtoscreen("if (NOT(TRUE AND FALSE))", colour="red")
+                    gui.debugger.addtoscreen("{", colour="red")
+                    gui.debugger.addtoscreen("  return \"Systems Online\"", colour="red")
+                    gui.debugger.addtoscreen("}", colour="red")
+                    gui.debugger.addtoscreen("else if (TRUE))", colour="red")
+                    gui.debugger.addtoscreen("{", colour="red")
+                    gui.debugger.addtoscreen("  return \"Systems Offline\"", colour="red")
+                    gui.debugger.addtoscreen("}", colour="red")
+                    gui.debugger.addtoscreen("else (TRUE))", colour="red")
+                    gui.debugger.addtoscreen("{", colour="red")
+                    gui.debugger.addtoscreen("  return \"Systems Failure\"", colour="red")
+                    gui.debugger.addtoscreen("}", colour="red")
+
+                    BooleanChoiceWindow(gui.debugger.swtl.winfo_width(), gui.debugger.swtl.winfo_height(),"Given the inputs, what will this code output?", "Select From Below", option1="Systems Online", option2="Systems Offline", option3="Systems Failure")
+
                     if answer.get() == "QUIT":
                         return 1
-                    if answer.get() == "Motors Ready":
+                    if answer.get() == "Systems Online":
                         gui.debugger.addtoscreen("Attempting to compile...")
                         gui.debugger.addtoscreen("Compilation successful", colour="green")
                         progressarray.remove(20)
-                        if len(progressarray) > 0:
+                        if len(progressarray) > 12:
                             progresstracker.set(choice(progressarray))
                             gui.debugger.addtoscreen("Continuing to next error")
                         else:
@@ -904,6 +1093,15 @@ class subsystemwindow:
                         gui.debugger.addtoscreen("Continuing to next error")
                         progresstracker.set(choice(progressarray))
 
+        # If arriving here signal success
+        # update the status of the power box to Error
+        gui.powersubsystem.changestatus(newstatus="Status: Fixed")
+        # update the button so that it creates a problem filling it with a random power puzzle
+        gui.powersubsystem.changebuttontext(newtext="Repaired")
+        # update the button to now open the power problem window
+        gui.powersubsystem.setcommand("powerproblem")
+        # change colour background to green
+        gui.powersubsystem.changebackground("green")
         gui.debugger.addtoscreen("Power Subsystem Debug Complete", colour="green")
 
     def createmotorproblemcore(self):
