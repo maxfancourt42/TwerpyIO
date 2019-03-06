@@ -145,13 +145,13 @@ class MainApplication:
         # create the menu on the left hand side
         self.button1 = ttk.Button(self.controlpanel, text="Activate Debugger", command=lambda: self.debugger.hideunhide(self.button1))
         self.button1.grid(row=0, column=0, sticky=tk.NSEW)
-        self.button2 = ttk.Button(self.controlpanel, text="Touch James", command=lambda: self.debugger.addtoscreen("James Smells James Smells James Smells James Smells James Smells James Smells James Smells James Smells  "))
+        self.button2 = ttk.Button(self.controlpanel, text="Test all subsystems", command=lambda: self.debugger.addtoscreen("Placeholder text"))
         self.button2.grid(row=1, column=0, sticky=tk.NSEW)
-        self.button3 = ttk.Button(self.controlpanel, text="Lick James")
+        self.button3 = ttk.Button(self.controlpanel, text="Reset all progress", command=lambda: self.debugger.addtoscreen("Placeholder text"))
         self.button3.grid(row=2, column=0, sticky=tk.NSEW)
-        self.button4 = ttk.Button(self.controlpanel, text="Blame James")
+        self.button4 = ttk.Button(self.controlpanel, text="Admin Mode", command=lambda: self.debugger.addtoscreen("Placeholder text"))
         self.button4.grid(row=3, column=0, sticky=tk.NSEW)
-        self.button5 = ttk.Button(self.controlpanel, text="Poke James")
+        self.button5 = ttk.Button(self.controlpanel, text="Compress for transfer", command=lambda: self.debugger.addtoscreen("Placeholder text"))
         self.button5.grid(row=4, column=0, sticky=tk.NSEW)
         self.button6 = ttk.Button(self.controlpanel, text="Quit Program", command=lambda: root.quit())
         self.button6.grid(row=5, column=0, sticky=tk.NSEW)
@@ -372,7 +372,7 @@ class subsystemwindow:
             gui.debugger.addtoscreen("The logical operator AND returns True only if both of its inputs are True", colour="green")
             gui.debugger.addtoscreen("Example", colour="green")
             gui.debugger.addtoscreen("ERROR in Line 342: if (power.check == True INSERT OPERATOR HERE battery.check == True)")
-            gui.debugger.addtoscreen("Boolean injection reguired")
+            gui.debugger.addtoscreen("Boolean injection required")
             while answer.get() != "AND":
                 BooleanChoiceWindow(gui.debugger.swtl.winfo_width(), gui.debugger.swtl.winfo_height(), "Both systems are required to continue", "Choose the appropriate boolean operator to match this condition" ,option1="AND", option2="OR", option3="NOT")
                 if answer.get() == "QUIT":
@@ -391,7 +391,7 @@ class subsystemwindow:
             gui.debugger.addtoscreen("The logical operator OR returns True if either of its inputs are True", colour="green")
             gui.debugger.addtoscreen("Example", colour="green")
             gui.debugger.addtoscreen("ERROR in Line 342: if (power.check == False INSERT OPERATOR HERE reserverpower.check == True)")
-            gui.debugger.addtoscreen("Boolean injection reguired")
+            gui.debugger.addtoscreen("Boolean injection required")
             while answer.get() != "OR":
                 BooleanChoiceWindow(gui.debugger.swtl.winfo_width(), gui.debugger.swtl.winfo_height(), "Only one system is required to continue", "Choose the appropriate boolean operator to match this condition" ,option1="OR", option2="AND", option3="NOT")
                 if answer.get() == "QUIT":
@@ -410,7 +410,7 @@ class subsystemwindow:
             gui.debugger.addtoscreen("The logical operator NOT returns True if input if False or False if its input is True", colour="green")
             gui.debugger.addtoscreen("Example", colour="green")
             gui.debugger.addtoscreen("ERROR in Line 342: if (INSERT OPERATOR HERE safetyon.check == True")
-            gui.debugger.addtoscreen("Boolean injection reguired")
+            gui.debugger.addtoscreen("Boolean injection required")
             while answer.get() != "NOT":
                 BooleanChoiceWindow(gui.debugger.swtl.winfo_width(), gui.debugger.swtl.winfo_height(), "Safety systems must be on to continue", "Choose the appropriate boolean operator to match this condition" ,option1="NOT", option2="OR", option3="AND")
                 if answer.get() == "QUIT":
@@ -1129,7 +1129,7 @@ class BooleanChoiceWindow:
         self.choicewindow = Toplevel()
         self.choicewindow.config(background="#FFFFFF")
         # get size and position of the problemcore window
-        self.choicewindow.geometry('%dx%d+%d+%d' % (width/2, height/5, (3*root.winfo_screenwidth()/4 - root.winfo_screenwidth()/8), root.winfo_screenheight()/2 - (height/3)/2))
+        self.choicewindow.geometry('%dx%d+%d+%d' % (root.winfo_screenwidth()/4, root.winfo_screenheight()/5, (3*root.winfo_screenwidth()/4 - root.winfo_screenwidth()/8), root.winfo_screenheight()/2 - (root.winfo_screenheight()/3)/2))
         self.choicewindow.resizable(0, 0)
         # add questions label
         question = ttk.Label(self.choicewindow, text=question, font=(None, 14))
