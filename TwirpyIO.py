@@ -52,6 +52,10 @@ class ScrollingWindow:
         self.swcanvas.create_window((0, 0), window=self.canvasframe, anchor=tk.NW)
 
     def addtoscreen(self, text, colour="black"):
+        # Check if debugger is active, if not then throw an error telling them to open the debugger, else program will error
+        if debuggeractive.get() == 0:
+            messagebox.showerror("Error", "Debugger is not active, unable to test subsystem, please activate the debugger via the main menu before attempting to test subsystem status")
+            return 1
         # create a new label to add to the canvas
         tk.Label(self.canvasframe, text="{} | {}".format(str(self.linecounter).zfill(3), text), font=(None, 18), anchor="w", background="#efefef", foreground=colour).pack(fill=tk.BOTH)
         # update canvas to show the new label being added
