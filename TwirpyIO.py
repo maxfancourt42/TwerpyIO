@@ -51,6 +51,11 @@ class ScrollingWindow:
 
         self.swcanvas.create_window((0, 0), window=self.canvasframe, anchor=tk.NW)
 
+        self.swtl.protocol("WM_DELETE_WINDOW", disable_event)
+
+    def disable_event(self):
+        pass
+
     def addtoscreen(self, text, colour="black"):
         # create a new label to add to the canvas
         tk.Label(self.canvasframe, text="{} | {}".format(str(self.linecounter).zfill(3), text), font=(None, 18), anchor="w", background="#efefef", foreground=colour).pack(fill=tk.BOTH)
@@ -270,6 +275,37 @@ class MainApplication:
         # change colour background to red
         self.powersubsystem.changebackground("red")
 
+    def controlprogram(self):
+        if debuggeractive.get() == 0:
+            messagebox.showerror("Error", "Debugger is not active, unable to test subsystem, please activate the debugger via the main menu before attempting to test subsystem status")
+            return 1
+
+        self.debugger.addtoscreen("Attempting to bring Control subsystems online")
+        self.debugger.addtoscreen("Loading libaries")
+        self.debugger.addtoscreen("Compiling")
+        self.debugger.addtoscreen("Compilation successful")
+        self.debugger.addtoscreen("python run controsubsystemengage")
+        self.debugger.addtoscreen("Progress 10%")
+        self.debugger.addtoscreen("Progress 20%")
+        self.debugger.addtoscreen("Progress 30%")
+        self.debugger.addtoscreen("Progress 40%")
+        self.debugger.addtoscreen("Progress 50%")
+        self.debugger.addtoscreen("Progress 60%")
+        self.debugger.addtoscreen("Progress 70%")
+        self.debugger.addtoscreen("Progress 80%")
+        self.debugger.addtoscreen("Progress 90%")
+        self.debugger.addtoscreen("Progress 100%")
+        self.debugger.addtoscreen("Success", colour="green")
+
+        # update the status of the power box to Error
+        self.controlsubsystem.changestatus(newstatus="Status: System Online")
+        # update the button so that it creates a problem filling it with a random power puzzle
+        self.controlsubsystem.changebuttontext(newtext="Ready")
+        # update the button to now open the power problem window
+        self.controlsubsystem.setcommand("pass")
+        # change colour background to red
+        self.controlsubsystem.changebackground("green")
+
     def motorerrorprogram(self):
         # print error messages to the debugger
         self.debugger.addtoscreen("Attempting to bring motor systems online")
@@ -280,9 +316,9 @@ class MainApplication:
         self.debugger.addtoscreen("Circuitry detected")
         self.debugger.addtoscreen("Circuitry intact and functional")
         self.debugger.addtoscreen("Safety features enabled")
-        self.debugger.addtoscreen("Testing software control of power systems")
+        self.debugger.addtoscreen("Testing software control of motor systems")
         self.debugger.addtoscreen("CRITICAL FAILURE: Core code error 471")
-        self.debugger.addtoscreen("Twirpy OS unable to assume control of Power System, Running Debugger")
+        self.debugger.addtoscreen("Twirpy OS unable to assume control of Motor System, Running Debugger")
         self.debugger.addtoscreen("Activating Debug Mode")
         self.debugger.addtoscreen("Debug Summary")
         self.debugger.addtoscreen("Hardware requirements: PASS", colour="green")
@@ -301,7 +337,7 @@ class MainApplication:
         self.debugger.addtoscreen("Progress 80%")
         self.debugger.addtoscreen("Progress 90%")
         self.debugger.addtoscreen("Progress 100%")
-        self.debugger.addtoscreen("Error Detected: Process exceeds maximum allowed memory usage")
+        self.debugger.addtoscreen("Error Detected: Undefined Functions Used, Include Missing Libraries", colour="red")
 
         # update the status of the power box to Error
         self.motorsubsystem.changestatus(newstatus="Status: Error Detected")
@@ -346,12 +382,19 @@ class subsystemwindow:
             self.subsystemsbutton.configure(command=lambda: gui.powererrorprogram())
         if newcommand == "powerproblem":
             self.subsystemsbutton.configure(command=lambda: self.createproblemcore())
+        if newcommand == "control":
+            self.subsystemsbutton.configure(command=lambda: gui.controlprogram())
         if newcommand == "motor":
             self.subsystemsbutton.configure(command=lambda: gui.motorerrorprogram())
         if newcommand == "motorproblem":
             self.subsystemsbutton.configure(command=lambda: self.createmotorproblemcore())
+        if newcommand == "pass":
+            self.subsystemsbutton.configure(command=lambda: self.donothing())
 
         self.subsystemframe.update()
+
+    def donothing(self):
+        pass
 
     def changestatus(self, newstatus):
         self.subsystemstatus.configure(text=newstatus)
@@ -1105,15 +1148,21 @@ class subsystemwindow:
         gui.debugger.addtoscreen("Power Subsystem Debug Complete", colour="green")
 
     def createmotorproblemcore(self):
-        motorproblemcore = ScrollingWindow()
-        motorproblemcore.settitle("Motor Systems Debug")
-        motorproblemcore.addtoscreen("Testing")
+        # Tutorial explaining what libaries are
+        # Example showing how to source the information
+        # A manual look into dependecies
+        # The game will then be to find the correct libary, and make sure to include the correct dependecies for that libary
+        gui.debugger.addtoscreen("HERE")
 
     def changebackground(self, colour):
         if colour == "red":
             self.subsystemframe.configure(background="#870101")
             self.subsystemframetext.configure(background="#870101")
             self.subsystemstatus.configure(background="#870101")
+        elif colour == "green":
+            self.subsystemframe.configure(background="#256841")
+            self.subsystemframetext.configure(background="#256841")
+            self.subsystemstatus.configure(background="#256841")
         else:
             self.subsystemframe.configure(background="#7a7a7a")
             self.subsystemframetext.configure(background="#7a7a7a")
@@ -1165,6 +1214,8 @@ class BooleanChoiceWindow:
             answer.set(answeroption)
             self.choicewindow.destroy()
 
+def disable_event():
+    pass
 
 if __name__ == '__main__':
     root = tk.Tk()
