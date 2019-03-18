@@ -102,6 +102,7 @@ class MainApplication:
     def __init__(self, master):
         global progresstracker
         global debuggeractive
+        global motorlist
         # create the local root
         self.master = master
         self.master.state('zoomed')
@@ -113,6 +114,9 @@ class MainApplication:
         progresstracker.set(0)
         debuggeractive = IntVar()
         debuggeractive.set(1)
+
+        # define motorlist
+        motorlist = []
 
         # define the GUI name
         master.title("Twirpy IO")
@@ -311,6 +315,9 @@ class MainApplication:
         self.controlsubsystem.changebackground("green")
 
     def motorerrorprogram(self):
+        if debuggeractive.get() == 0:
+            messagebox.showerror("Error", "Debugger is not active, unable to test subsystem, please activate the debugger via the main menu before attempting to test subsystem status")
+            return 1
         # print error messages to the debugger
         self.debugger.addtoscreen("Attempting to bring motor systems online")
         self.debugger.addtoscreen("Hardware: Status - Disconnected")
@@ -351,7 +358,6 @@ class MainApplication:
         self.motorsubsystem.setcommand("motorproblem")
         # change colour background to red
         self.motorsubsystem.changebackground("red")
-
 
 class subsystemwindow:
     def __init__(self, mainframe, row, column):
@@ -404,6 +410,7 @@ class subsystemwindow:
         self.subsystemstatus.configure(text=newstatus)
         self.subsystemframe.update()
 
+    # The power problem core boolean logic puzzle
     def createproblemcore(self):
         global answer
         global progressarray
@@ -1151,12 +1158,351 @@ class subsystemwindow:
         gui.powersubsystem.changebackground("green")
         gui.debugger.addtoscreen("Power Subsystem Debug Complete", colour="green")
 
+    # The motor problem core libary lookup
     def createmotorproblemcore(self):
-        # Tutorial explaining what libaries are
+        # Problem Tutorial
+        gui.debugger.addtoscreen("Problem Tutorial Start", colour="green")
+        gui.debugger.addtoscreen("Functions are sections of code that peform a certain action, such as printing to the screen", colour="green")
+        gui.debugger.addtoscreen("or writing a value to a database, they can be written by yourself, or by another person", colour="green")
+        gui.debugger.addtoscreen("When using someones elses code you have to tell the computer where the function are you using is definied", colour="green")
+        gui.debugger.addtoscreen("Failure to do so will generate a \"Undefinined Function Error\"", colour="red")
+        gui.debugger.addtoscreen("The definitions of other peoples functions are usually bundled together and stored in a structure known as a libary", colour="green")
+        gui.debugger.addtoscreen("Therefore to fix this problem you will have to use the debugger to find out which function definitions are missing", colour="green")
+        gui.debugger.addtoscreen("and then telling the program which libaries are required", colour="green")
+        gui.debugger.addtoscreen("For this problem set you will require the libaries document, request it by putting in request order 4751.1", colour="green")
+        gui.debugger.addtoscreen("Warning, due to limited memory, select only the libaries required, including extra libaries will cause the system failure", colour="green")
+        gui.debugger.addtoscreen("Problem Tutorial End", colour="green")
         # Example showing how to source the information
-        # A manual look into dependecies
-        # The game will then be to find the correct libary, and make sure to include the correct dependecies for that libary
-        gui.debugger.addtoscreen("HERE")
+        gui.debugger.addtoscreen("Problem Tutorial Start", colour="green")
+
+        # set the progressmarker to zero
+        progresstracker.set(1)
+
+        # create an array containing all questions bar the 1st which is an example
+        progressarray = [3,4,5,6,7,8,9,10,11,12,13,14]
+
+
+        # the training example
+        if progresstracker.get() == 1:
+            # Create an example
+            gui.debugger.addtoscreen("Undefined print Function Error", colour="red")
+            gui.debugger.addtoscreen("Undefined input Function Error", colour="red")
+            gui.debugger.addtoscreen("Undefined checkbatterycharge Function Error", colour="red")
+            gui.debugger.addtoscreen("Undefined multiplyarray Function Error", colour="red")
+            gui.debugger.addtoscreen("Checking the documentation, we can see that these missing functions are defined in stdiopy, numpy and twirpystoi select these to continue")
+            while not(self.comparearray(["stdiopy", "twirpytoi", "numpy"], motorlist)):
+                NineChoiceWindow("stdiopy", "GDAL", "twirpytoi", "openlib", "xmlconvert", "csv", "numpy", "powertest", "randbetween")
+                if "QUIT" in motorlist:
+                    return 1
+            progresstracker.set(progresstracker.get() + 1)
+
+        # extra information
+        gui.debugger.addtoscreen("Some libaries themselves make use of functions defined in other libaries, which you will therefore also have to include")
+        gui.debugger.addtoscreen("This is known as dependencies")
+
+        if progresstracker.get() == 2:
+            gui.debugger.addtoscreen("Undefined print Function Error", colour="red")
+            gui.debugger.addtoscreen("Undefined input Function Error", colour="red")
+            gui.debugger.addtoscreen("Undefined genetricalogithm Function Error", colour="red")
+            gui.debugger.addtoscreen("In this example the function \"genetricalogithm\" is defined in a libary called evolve, which itself is dependent on the libary numpy")
+            gui.debugger.addtoscreen("To proceed therefore you will need to include the libaries stdiopy, evolve and numpy")
+            gui.debugger.addtoscreen("Submit these to continue")
+            while not(self.comparearray(["evolve", "stdiopy", "numpy"], motorlist)):
+                NineChoiceWindow("stdiopy", "evolve", "twirpytoi", "openlib", "xmlconvert", "csv", "numpy", "powertest", "randbetween")
+                if "QUIT" in motorlist:
+                    return 1
+            progresstracker.set(progresstracker.get() + 1)
+
+        # teach about conflicting libaries
+        gui.debugger.addtoscreen("Finally, some libaries can conflict with each other meaning that they both have a function with exactly the same name")
+        gui.debugger.addtoscreen("If both libaries are included in the same file. then the computer doesn't know which version of the function to use, and so throws an error")
+        gui.debugger.addtoscreen("To solve this problem you will need to use specialist libaries that have been built to correct this problem")
+
+        # choose a random number to start the actual questions
+        progresstracker.set(choice(progressarray))
+        # variable to store number completed
+
+        while len(progressarray) > 8:
+            if progresstracker.get() == 3:
+                gui.debugger.addtoscreen("Undefined checksafetysettings Function Error", colour="red")
+                gui.debugger.addtoscreen("Undefined cleararray Function Error", colour="red")
+
+                NineChoiceWindow("stdiopy", "numpy", "twirpytoi", "openlib", "xmlconvert", "csv", "numpy", "gtxtest", "numpycafix")
+
+                # check to see if quit in array
+                if "QUIT" in motorlist:
+                    return 1
+                # if correct answer
+                if self.comparearray(["stdiopy", "numpycafix", "twirpystoi"], motorlist):
+                    gui.debugger.addtoscreen("Correct libaries selected", colour="green")
+                    if len(progressarray) > 8:
+                        break
+                    gui.debugger.addtoscreen("Proceeding to next problem", colour="green")
+                    progressarray.remove(3)
+                    progresstracker.set(choice(progressarray))
+                else:
+                    gui.debugger.addtoscreen("Incorrect libaries selected", colour="red")
+                    gui.debugger.addtoscreen("Proceeding to next problem ", colour="red")
+                    progresstracker.set(choice(progressarray))
+
+            if progresstracker.get() == 4:
+                gui.debugger.addtoscreen("Undefined readcsv Function Error", colour="red")
+                gui.debugger.addtoscreen("Undefined writeline Function Error", colour="red")
+                gui.debugger.addtoscreen("Undefined readc Function Error", colour="red")
+
+                NineChoiceWindow("stdiopy", "numpy", "twirpytoi", "openlib", "xmlconvert", "csv", "numpy", "gtxtest", "crypto")
+
+                # check to see if quit in array
+                if "QUIT" in motorlist:
+                    return 1
+                # if correct answer
+                if self.comparearray(["csv"], motorlist):
+                    gui.debugger.addtoscreen("Correct libaries selected", colour="green")
+                    if len(progressarray) > 8:
+                        break
+                    gui.debugger.addtoscreen("Proceeding to next problem", colour="green")
+                    progressarray.remove(4)
+                    progresstracker.set(choice(progressarray))
+                else:
+                    gui.debugger.addtoscreen("Incorrect libaries selected", colour="red")
+                    gui.debugger.addtoscreen("Proceeding to next problem ", colour="red")
+
+            if progresstracker.get() == 5:
+                gui.debugger.addtoscreen("Undefined readcsv Function Error")
+                gui.debugger.addtoscreen("Undefined writecsv Function Error")
+                gui.debugger.addtoscreen("Undefined print Function Error")
+                gui.debugger.addtoscreen("Undefined systemindepentint Function Error")
+                gui.debugger.addtoscreen("Undefined checksafetysettings Function Error")
+
+                NineChoiceWindow("stdiopy", "numpy", "twirpytoi", "openlib", "xmlconvert", "csv", "numpy", "gtxtest", "crypto")
+
+                # check to see if quit in array
+                if "QUIT" in motorlist:
+                    return 1
+                # if correct answer
+                if self.comparearray(["csv", "stdiopy", "openlib", "twirpystoi"], motorlist):
+                    gui.debugger.addtoscreen("Correct libaries selected", colour="green")
+                    if len(progressarray) > 8:
+                        break
+                    gui.debugger.addtoscreen("Proceeding to next problem", colour="green")
+                    progressarray.remove(5)
+                    progresstracker.set(choice(progressarray))
+                else:
+                    gui.debugger.addtoscreen("Incorrect libaries selected", colour="red")
+                    gui.debugger.addtoscreen("Proceeding to next problem ", colour="red")
+
+            if progresstracker.get() == 6:
+                gui.debugger.addtoscreen("Undefined guessnext Function Error")
+                gui.debugger.addtoscreen("Undefined cleararray Function Error")
+
+                NineChoiceWindow("stdiopy", "numpy", "evolve", "openlib", "xmlconvert", "csv", "numpy", "numpycafix", "crypto")
+
+                # check to see if quit in array
+                if "QUIT" in motorlist:
+                    return 1
+                # if correct answer
+                if self.comparearray(["evolve", "stdiopy", "numpycafix", "openlib"], motorlist):
+                    gui.debugger.addtoscreen("Correct libaries selected", colour="green")
+                    if len(progressarray) > 8:
+                        break
+                    gui.debugger.addtoscreen("Proceeding to next problem", colour="green")
+                    progressarray.remove(6)
+                    progresstracker.set(choice(progressarray))
+                else:
+                    gui.debugger.addtoscreen("Incorrect libaries selected", colour="red")
+                    gui.debugger.addtoscreen("Proceeding to next problem ", colour="red")
+
+            if progresstracker.get() == 7:
+                gui.debugger.addtoscreen("Undefined readcsv Function Error")
+                gui.debugger.addtoscreen("Undefined xmlconvert Function Error")
+
+                NineChoiceWindow("stdiopy", "numpy", "twirpytoi", "openlib", "xmlconvert", "csv", "numpy", "xmlconvert", "crypto")
+
+                # check to see if quit in array
+                if "QUIT" in motorlist:
+                    return 1
+                # if correct answer
+                if self.comparearray(["csv", "numpy", "xmlconvert"], motorlist):
+                    gui.debugger.addtoscreen("Correct libaries selected", colour="green")
+                    if len(progressarray) > 8:
+                        break
+                    gui.debugger.addtoscreen("Proceeding to next problem", colour="green")
+                    progressarray.remove(7)
+                    progresstracker.set(choice(progressarray))
+                else:
+                    gui.debugger.addtoscreen("Incorrect libaries selected", colour="red")
+                    gui.debugger.addtoscreen("Proceeding to next problem ", colour="red")
+
+            if progresstracker.get() == 8:
+                gui.debugger.addtoscreen("Undefined calculaterms Function Error")
+                gui.debugger.addtoscreen("Undefined systemindepentint Function Error")
+                gui.debugger.addtoscreen("Undefined readjson Function Error")
+
+                NineChoiceWindow("openlib", "numpy", "twirpytoi", "scrambledOGG", "xmlconvert", "csv", "numpy", "gtxtest", "csv")
+
+                # check to see if quit in array
+                if "QUIT" in motorlist:
+                    return 1
+                # if correct answer
+                if self.comparearray(["scrambledOGG", "numpy", "openlib", "csv"], motorlist):
+                    gui.debugger.addtoscreen("Correct libaries selected", colour="green")
+                    if len(progressarray) > 8:
+                        break
+                    gui.debugger.addtoscreen("Proceeding to next problem", colour="green")
+                    progressarray.remove(8)
+                    progresstracker.set(choice(progressarray))
+                else:
+                    gui.debugger.addtoscreen("Incorrect libaries selected", colour="red")
+                    gui.debugger.addtoscreen("Proceeding to next problem ", colour="red")
+
+            if progresstracker.get() == 9:
+                gui.debugger.addtoscreen("Undefined multiplyarray Function Error")
+                gui.debugger.addtoscreen("Undefined print Function Error")
+                gui.debugger.addtoscreen("Undefined cleararray Function Error")
+                gui.debugger.addtoscreen("Undefined readcsv Function Error")
+                gui.debugger.addtoscreen("Undefined csvconvert Function Error")
+
+
+                NineChoiceWindow("numpycafix", "numpy", "stdiopy", "openlib", "xmlconvert", "csv", "numpy", "gtxtest", "crypto")
+
+                # check to see if quit in array
+                if "QUIT" in motorlist:
+                    return 1
+                # if correct answer
+                if self.comparearray(["numpycafix", "stdiopy", "xmlconvert", "csv"], motorlist):
+                    gui.debugger.addtoscreen("Correct libaries selected", colour="green")
+                    if len(progressarray) > 8:
+                        break
+                    gui.debugger.addtoscreen("Proceeding to next problem", colour="green")
+                    progressarray.remove(9)
+                    progresstracker.set(choice(progressarray))
+                else:
+                    gui.debugger.addtoscreen("Incorrect libaries selected", colour="red")
+                    gui.debugger.addtoscreen("Proceeding to next problem ", colour="red")
+
+            if progresstracker.get() == 10:
+                gui.debugger.addtoscreen("Undefined calculaterms Function Error")
+                gui.debugger.addtoscreen("Undefined writeline Function Error")
+                gui.debugger.addtoscreen("Undefined calculaterms Function Error")
+
+                NineChoiceWindow("scrambledOGG", "numpy", "twirpytoi", "openlib", "xmlconvert", "csv", "numpy", "numpycafix", "crypto")
+
+                # check to see if quit in array
+                if "QUIT" in motorlist:
+                    return 1
+                # if correct answer
+                if self.comparearray(["xmlconvert", "scrambledOGG", "numpycafix"], motorlist):
+                    gui.debugger.addtoscreen("Correct libaries selected", colour="green")
+                    if len(progressarray) > 8:
+                        break
+                    gui.debugger.addtoscreen("Proceeding to next problem", colour="green")
+                    progressarray.remove(10)
+                    progresstracker.set(choice(progressarray))
+                else:
+                    gui.debugger.addtoscreen("Incorrect libaries selected", colour="red")
+                    gui.debugger.addtoscreen("Proceeding to next problem ", colour="red")
+
+            if progresstracker.get() == 11:
+                gui.debugger.addtoscreen("Undefined decodejson Function Error")
+                gui.debugger.addtoscreen("Undefined multiplyarray Function Error")
+                gui.debugger.addtoscreen("Undefined print Function Error")
+                gui.debugger.addtoscreen("Undefined cleararray Function Error")
+
+
+                NineChoiceWindow("json", "numpy", "twirpytoi", "openlib", "xmlconvert", "csv", "numpy", "stdiopy", "numpycafix")
+
+                # check to see if quit in array
+                if "QUIT" in motorlist:
+                    return 1
+                # if correct answer
+                if self.comparearray(["numpycafix", "stdiopy", "json"], motorlist):
+                    gui.debugger.addtoscreen("Correct libaries selected", colour="green")
+                    if len(progressarray) > 8:
+                        break
+                    gui.debugger.addtoscreen("Proceeding to next problem", colour="green")
+                    progressarray.remove(11)
+                    progresstracker.set(choice(progressarray))
+                else:
+                    gui.debugger.addtoscreen("Incorrect libaries selected", colour="red")
+                    gui.debugger.addtoscreen("Proceeding to next problem ", colour="red")
+
+            if progresstracker.get() == 12:
+                gui.debugger.addtoscreen("Undefined windowspatch Function Error")
+                gui.debugger.addtoscreen("Undefined macpatch Function Error")
+                gui.debugger.addtoscreen("Undefined calculaterms Function Error")
+                gui.debugger.addtoscreen("Undefined readjson Function Error")
+                gui.debugger.addtoscreen("Undefined calculaterms Function Error")
+                gui.debugger.addtoscreen("Undefined genetricalogithm Function Error")
+
+                NineChoiceWindow("scrambledOGG", "numpy", "json", "openlib", "xmlconvert", "csv", "numpy", "evolve", "crypto")
+
+                # check to see if quit in array
+                if "QUIT" in motorlist:
+                    return 1
+                # if correct answer
+                if self.comparearray(["openlib", "scrambledOGG", "json", "evolve"], motorlist):
+                    gui.debugger.addtoscreen("Correct libaries selected", colour="green")
+                    if len(progressarray) > 8:
+                        break
+                    gui.debugger.addtoscreen("Proceeding to next problem", colour="green")
+                    progressarray.remove(12)
+                    progresstracker.set(choice(progressarray))
+                else:
+                    gui.debugger.addtoscreen("Incorrect libaries selected", colour="red")
+                    gui.debugger.addtoscreen("Proceeding to next problem ", colour="red")
+
+            if progresstracker.get() == 13:
+                gui.debugger.addtoscreen("Undefined print Function Error")
+                gui.debugger.addtoscreen("Undefined input Function Error")
+                gui.debugger.addtoscreen("Undefined insert Function Error")
+                gui.debugger.addtoscreen("Undefined read Function Error")
+
+                NineChoiceWindow("stdiopy", "numpy", "twirpytoi", "openlib", "xmlconvert", "csv", "numpy", "gtxtest", "crypto")
+
+                # check to see if quit in array
+                if "QUIT" in motorlist:
+                    return 1
+                # if correct answer
+                if self.comparearray(["stdiopy"], motorlist):
+                    gui.debugger.addtoscreen("Correct libaries selected", colour="green")
+                    if len(progressarray) > 8:
+                        break
+                    gui.debugger.addtoscreen("Proceeding to next problem", colour="green")
+                    progressarray.remove(13)
+                    progresstracker.set(choice(progressarray))
+                else:
+                    gui.debugger.addtoscreen("Incorrect libaries selected", colour="red")
+                    gui.debugger.addtoscreen("Proceeding to next problem ", colour="red")
+
+            if progresstracker.get() == 14:
+                gui.debugger.addtoscreen("Undefined evolve Function Error")
+
+                NineChoiceWindow("stdiopy", "numpy", "twirpytoi", "openlib", "scrambledOGG", "csv", "numpy", "gtxtest", "addtoscreen")
+
+                # check to see if quit in array
+                if "QUIT" in motorlist:
+                    return 1
+                # if correct answer
+                if self.comparearray(["evolve", "numpy", "scrambledOGG"], motorlist):
+                    gui.debugger.addtoscreen("Correct libaries selected", colour="green")
+                    if len(progressarray) > 8:
+                        break
+                    gui.debugger.addtoscreen("Proceeding to next problem", colour="green")
+                    progressarray.remove(14)
+                    progresstracker.set(choice(progressarray))
+                else:
+                    gui.debugger.addtoscreen("Incorrect libaries selected", colour="red")
+                    gui.debugger.addtoscreen("Proceeding to next problem ", colour="red")
+
+        # End of questions
+        gui.motorsubsystem.changestatus(newstatus="Status: Fixed")
+        # update the button so that it creates a problem filling it with a random power puzzle
+        gui.motorsubsystem.changebuttontext(newtext="Repaired")
+        # update the button to now open the power problem window
+        gui.motorsubsystem.setcommand("powerproblem")
+        # change colour background to green
+        gui.motorsubsystem.changebackground("green")
+        gui.debugger.addtoscreen("Motor Subsystem Debug Complete", colour="green")
 
     def changebackground(self, colour):
         if colour == "red":
@@ -1173,6 +1519,19 @@ class subsystemwindow:
             self.subsystemstatus.configure(background="#7a7a7a")
 
         self.subsystemframe.update()
+
+    def comparearray(self, array1, array2):
+        # First check if arrays are of the same length
+        if len(array1) != len(array2):
+            return False
+
+        # Then check to see if all members of 1 are in 2
+        for x in array1:
+            if x not in array2:
+                return False
+
+        # If arrrving here then pass
+        return True
 
 
 class BooleanChoiceWindow:
@@ -1217,6 +1576,95 @@ class BooleanChoiceWindow:
             time.sleep(0.25)
             answer.set(answeroption)
             self.choicewindow.destroy()
+
+class NineChoiceWindow:
+    def __init__(self, option1, option2, option3, option4, option5, option6, option7, option8, option9):
+        # create list to store answers
+        global motorlist
+        # Clear out the list
+        motorlist.clear()
+
+        # create stringvars for text
+        option1sv = StringVar()
+        option1sv.set(option1)
+        option2sv = StringVar()
+        option2sv.set(option2)
+        option3sv = StringVar()
+        option3sv.set(option3)
+        option4sv = StringVar()
+        option4sv.set(option4)
+        option5sv = StringVar()
+        option5sv.set(option5)
+        option6sv = StringVar()
+        option6sv.set(option6)
+        option7sv = StringVar()
+        option7sv.set(option7)
+        option8sv = StringVar()
+        option8sv.set(option8)
+        option9sv = StringVar()
+        option9sv.set(option9)
+        # create toplevel to house the choices
+        self.choicewindow = Toplevel()
+        self.choicewindow.config(background="#FFFFFF")
+        # get size and position of the problemcore window
+        self.choicewindow.geometry('%dx%d+%d+%d' % (root.winfo_screenwidth()/4, root.winfo_screenheight()/5, (3*root.winfo_screenwidth()/4 - root.winfo_screenwidth()/8), root.winfo_screenheight()/2 - (root.winfo_screenheight()/3)/2))
+        self.choicewindow.resizable(0, 0)
+        # add questions label
+        question = ttk.Label(self.choicewindow, text="Select the required libaries from the choices below", font=(None, 14))
+        question.config(wraplength=500)
+        question.grid(row=0, column=0, sticky=tk.EW, columnspan=3)
+        # add choices
+        buttonone = ttk.Button(self.choicewindow, text=option1sv.get(), command=lambda: self.addtoreturnandselect(answeroption=option1sv, answerlist=motorlist, button=buttonone))
+        buttonone.grid(row=1, column=0, sticky=tk.NSEW)
+        buttontwo = ttk.Button(self.choicewindow, text=option2sv.get(), command=lambda: self.addtoreturnandselect(answeroption=option2sv, answerlist=motorlist, button=buttontwo))
+        buttontwo.grid(row=1, column=1, sticky=tk.NSEW)
+        buttonthree = ttk.Button(self.choicewindow, text=option3sv.get(), command=lambda: self.addtoreturnandselect(answeroption=option3sv, answerlist=motorlist, button=buttonthree))
+        buttonthree.grid(row=1, column=2, sticky=tk.NSEW)
+        buttonfour = ttk.Button(self.choicewindow, text=option4sv.get(), command=lambda: self.addtoreturnandselect(answeroption=option4sv, answerlist=motorlist, button=buttonfour))
+        buttonfour.grid(row=2, column=0, sticky=tk.NSEW)
+        buttonfive = ttk.Button(self.choicewindow, text=option5sv.get(), command=lambda: self.addtoreturnandselect(answeroption=option5sv, answerlist=motorlist, button=buttonfive))
+        buttonfive.grid(row=2, column=1, sticky=tk.NSEW)
+        buttonsix = ttk.Button(self.choicewindow, text=option6sv.get(), command=lambda: self.addtoreturnandselect(answeroption=option6sv, answerlist=motorlist, button=buttonsix))
+        buttonsix.grid(row=2, column=2, sticky=tk.NSEW)
+        buttonseven = ttk.Button(self.choicewindow, text=option7sv.get(), command=lambda: self.addtoreturnandselect(answeroption=option7sv, answerlist=motorlist, button=buttonseven))
+        buttonseven.grid(row=3, column=0, sticky=tk.NSEW)
+        buttoneight = ttk.Button(self.choicewindow, text=option8sv.get(), command=lambda: self.addtoreturnandselect(answeroption=option8sv, answerlist=motorlist, button=buttoneight))
+        buttoneight.grid(row=3, column=1, sticky=tk.NSEW)
+        buttonnine = ttk.Button(self.choicewindow, text=option9sv.get(), command=lambda: self.addtoreturnandselect(answeroption=option9sv, answerlist=motorlist, button=buttonnine))
+        buttonnine.grid(row=3, column=2, sticky=tk.NSEW)
+        # add submit button
+        ttk.Button(self.choicewindow, text="Submit", command=lambda: self.submitanswer()).grid(row=4, column=0, sticky=tk.NSEW)
+        # add quit button
+        ttk.Button(self.choicewindow, text="Quit", command=lambda: self.quitprogram()).grid(row=4, column=2, sticky=tk.NSEW)
+
+        # give weight to rows and column to permit dynamic redraw
+        self.choicewindow.columnconfigure((0, 1, 2), weight=1)
+        self.choicewindow.rowconfigure((1,2,3,4), weight=1)
+
+        # Buff and pad all children of mainframe
+        for child in self.choicewindow.winfo_children():
+            child.grid_configure(padx=5, pady=5)
+
+        self.choicewindow.wait_window()
+
+    def addtoreturnandselect(self, answeroption, answerlist, button):
+        # if already in the list then remove and update text
+        if answeroption.get() in answerlist:
+            answerlist.remove(answeroption.get())
+            button.config(text=answeroption.get())
+        # if not in list then add and change button
+        else:
+            # add the submitted answer to a list
+            answerlist.append(answeroption.get())
+            # change button to show it has been selected
+            button.config(text="{} Selected".format(answeroption.get()))
+
+    def submitanswer(self):
+        self.choicewindow.destroy()
+
+    def quitprogram(self):
+        motorlist.append("QUIT")
+        self.choicewindow.destroy()
 
 def disable_event():
     pass
