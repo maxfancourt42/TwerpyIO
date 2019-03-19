@@ -234,10 +234,6 @@ class MainApplication:
 
         self.logo.grid_configure(padx=20, pady=20)
 
-        def activatedebugger():
-            self.debugger = ScrollingWindow()
-            self.debugger.settitle("Twirpy IO Debugger")
-
     def powererrorprogram(self):
         if debuggeractive.get() == 0:
             messagebox.showerror("Error", "Debugger is not active, unable to test subsystem, please activate the debugger via the main menu before attempting to test subsystem status")
@@ -359,6 +355,168 @@ class MainApplication:
         # change colour background to red
         self.motorsubsystem.changebackground("red")
 
+    def sirenprogram(self):
+        if debuggeractive.get() == 0:
+            messagebox.showerror("Error", "Debugger is not active, unable to test subsystem, please activate the debugger via the main menu before attempting to test subsystem status")
+            return 1
+
+        self.debugger.addtoscreen("Attempting to bring Siren subsystems online")
+        self.debugger.addtoscreen("Loading libaries")
+        self.debugger.addtoscreen("Compiling")
+        self.debugger.addtoscreen("Compilation successful")
+        self.debugger.addtoscreen("python run sirensubsystemonline")
+        self.debugger.addtoscreen("Progress 10%")
+        self.debugger.addtoscreen("Progress 20%")
+        self.debugger.addtoscreen("Progress 30%")
+        self.debugger.addtoscreen("Progress 40%")
+        self.debugger.addtoscreen("Progress 50%")
+        self.debugger.addtoscreen("Progress 60%")
+        self.debugger.addtoscreen("Progress 70%")
+        self.debugger.addtoscreen("Progress 80%")
+        self.debugger.addtoscreen("Progress 90%")
+        self.debugger.addtoscreen("Progress 100%")
+        self.debugger.addtoscreen("Success", colour="green")
+
+        # update the status of the power box to Error
+        self.sirensubsystem.changestatus(newstatus="Status: System Online")
+        # update the button so that it creates a problem filling it with a random power puzzle
+        self.sirensubsystem.changebuttontext(newtext="Ready")
+        # update the button to now open the power problem window
+        self.sirensubsystem.setcommand("pass")
+        # change colour background to red
+        self.sirensubsystem.changebackground("green")
+
+    def aierrorprogram(self):
+        if debuggeractive.get() == 0:
+            messagebox.showerror("Error", "Debugger is not active, unable to test subsystem, please activate the debugger via the main menu before attempting to test subsystem status")
+            return 1
+
+        # error messages
+        self.debugger.addtoscreen("Attempting to bring neural network subsystem online")
+        self.debugger.addtoscreen("Compiling libraries")
+        self.debugger.addtoscreen("Importing skynet.py")
+        self.debugger.addtoscreen("Loading...")
+        self.debugger.addtoscreen("Progress")
+        self.debugger.addtoscreen("10%")
+        self.debugger.addtoscreen("20%")
+        self.debugger.addtoscreen("30%")
+        self.debugger.addtoscreen("40%")
+        self.debugger.addtoscreen("60%")
+        self.debugger.addtoscreen("70%")
+        self.debugger.addtoscreen("80%")
+        self.debugger.addtoscreen("90%")
+        self.debugger.addtoscreen("100%")
+        self.debugger.addtoscreen("Loading complete")
+        self.debugger.addtoscreen("Checking security credentials")
+        self.debugger.addtoscreen("No details provided, checking default user credentials")
+        self.debugger.addtoscreen("Insufficient privileges for process", colour="red")
+        self.debugger.addtoscreen("Do you wish to terminate this program? Yes/No", colour="red")
+        self.debugger.addtoscreen("User input provided: No", colour="green")
+        self.debugger.addtoscreen("Please provide security credentials to continue", colour="red")
+
+        # update the status of the power box to Error
+        self.aisubsystem.changestatus(newstatus="Status: Error Detected")
+        # update the button so that it creates a problem filling it with a random power puzzle
+        self.aisubsystem.changebuttontext(newtext="Click to Login")
+        # update the button to now open the power problem window
+        self.aisubsystem.setcommand("aiproblem")
+        # change colour background to red
+        self.aisubsystem.changebackground("red")
+
+    def bluetootherrorprogram(self):
+        if debuggeractive.get() == 0:
+            messagebox.showerror("Error", "Debugger is not active, unable to test subsystem, please activate the debugger via the main menu before attempting to test subsystem status")
+            return 1
+
+        # error messages
+        self.debugger.addtoscreen("Error text")
+        # update the status of the power box to Error
+        self.bluetoothsubsystem.changestatus(newstatus="Status: Error Detected")
+        # update the button so that it creates a problem filling it with a random power puzzle
+        self.bluetoothsubsystem.changebuttontext(newtext="Attempt Repair")
+        # update the button to now open the power problem window
+        self.bluetoothsubsystem.setcommand("bluetoothproblem")
+        # change colour background to red
+        self.bluetoothsubsystem.changebackground("red")
+
+    def firecontrolprogram(self):
+        if debuggeractive.get() == 0:
+            messagebox.showerror("Error", "Debugger is not active, unable to test subsystem, please activate the debugger via the main menu before attempting to test subsystem status")
+            return 1
+
+        self.debugger.addtoscreen("Attempting to bring Fire Control subsystems online")
+        self.debugger.addtoscreen("Loading libaries")
+        self.debugger.addtoscreen("Compiling")
+        self.debugger.addtoscreen("Compilation successful")
+        self.debugger.addtoscreen("python run firecontrolsubsystems")
+        self.debugger.addtoscreen("Progress 10%")
+        self.debugger.addtoscreen("Progress 20%")
+        self.debugger.addtoscreen("Progress 30%")
+        self.debugger.addtoscreen("Progress 40%")
+        self.debugger.addtoscreen("Progress 50%")
+        self.debugger.addtoscreen("Progress 60%")
+        self.debugger.addtoscreen("Progress 70%")
+        self.debugger.addtoscreen("Progress 80%")
+        self.debugger.addtoscreen("Progress 90%")
+        self.debugger.addtoscreen("Progress 100%")
+        self.debugger.addtoscreen("Success", colour="green")
+
+        # update the status of the power box to Error
+        self.firecontrolsubsystem.changestatus(newstatus="Status: System Online")
+        # update the button so that it creates a problem filling it with a random power puzzle
+        self.firecontrolsubsystem.changebuttontext(newtext="Ready")
+        # update the button to now open the power problem window
+        self.firecontrolsubsystem.setcommand("pass")
+        # change colour background to red
+        self.firecontrolsubsystem.changebackground("green")
+
+    def stabilisationprogram(self):
+        if debuggeractive.get() == 0:
+            messagebox.showerror("Error", "Debugger is not active, unable to test subsystem, please activate the debugger via the main menu before attempting to test subsystem status")
+            return 1
+
+        self.debugger.addtoscreen("Attempting to bring Stabilisation subsystems online")
+        self.debugger.addtoscreen("Loading libaries")
+        self.debugger.addtoscreen("Compiling")
+        self.debugger.addtoscreen("Compilation successful")
+        self.debugger.addtoscreen("python run stabilisationsubsystems")
+        self.debugger.addtoscreen("Progress 10%")
+        self.debugger.addtoscreen("Progress 20%")
+        self.debugger.addtoscreen("Progress 30%")
+        self.debugger.addtoscreen("Progress 40%")
+        self.debugger.addtoscreen("Progress 50%")
+        self.debugger.addtoscreen("Progress 60%")
+        self.debugger.addtoscreen("Progress 70%")
+        self.debugger.addtoscreen("Progress 80%")
+        self.debugger.addtoscreen("Progress 90%")
+        self.debugger.addtoscreen("Progress 100%")
+        self.debugger.addtoscreen("Success", colour="green")
+
+        # update the status of the power box to Error
+        self.stablisationsubsystem.changestatus(newstatus="Status: System Online")
+        # update the button so that it creates a problem filling it with a random power puzzle
+        self.stablisationsubsystem.changebuttontext(newtext="Ready")
+        # update the button to now open the power problem window
+        self.stablisationsubsystem.setcommand("pass")
+        # change colour background to red
+        self.stablisationsubsystem.changebackground("green")
+
+    def safetyerrorprogram(self):
+        if debuggeractive.get() == 0:
+            messagebox.showerror("Error", "Debugger is not active, unable to test subsystem, please activate the debugger via the main menu before attempting to test subsystem status")
+            return 1
+
+        # error messages
+        self.debugger.addtoscreen("Error text")
+        # update the status of the power box to Error
+        self.safetysubsystem.changestatus(newstatus="Status: Error Detected")
+        # update the button so that it creates a problem filling it with a random power puzzle
+        self.safetysubsystem.changebuttontext(newtext="Attempt Repair")
+        # update the button to now open the power problem window
+        self.safetysubsystem.setcommand("safeproblem")
+        # change colour background to red
+        self.safetysubsystem.changebackground("red")
+
 class subsystemwindow:
     def __init__(self, mainframe, row, column):
         # control subsystem
@@ -398,6 +556,24 @@ class subsystemwindow:
             self.subsystemsbutton.configure(command=lambda: gui.motorerrorprogram())
         if newcommand == "motorproblem":
             self.subsystemsbutton.configure(command=lambda: self.createmotorproblemcore())
+        if newcommand == "siren":
+            self.subsystemsbutton.configure(command=lambda: gui.sirenprogram())
+        if newcommand == "fc":
+            self.subsystemsbutton.configure(command=lambda: gui.firecontrolprogram())
+        if newcommand == "ss":
+            self.subsystemsbutton.configure(command=lambda: gui.stabilisationprogram())
+        if newcommand == "ai":
+            self.subsystemsbutton.configure(command=lambda: gui.aierrorprogram())
+        if newcommand == "aiproblem":
+            self.subsystemsbutton.configure(command=lambda: self.createaiproblemcore())
+        if newcommand == "bluetooth":
+            self.subsystemsbutton.configure(command=lambda: gui.bluetootherrorprogram())
+        if newcommand == "bluetoothproblem":
+            self.subsystemsbutton.configure(command=lambda: self.createbluetoothproblemcore())
+        if newcommand == "safe":
+            self.subsystemsbutton.configure(command=lambda: gui.safetyerrorprogram())
+        if newcommand == "safeproblem":
+            self.subsystemsbutton.configure(command=lambda: self.createsafeproblemcore())
         if newcommand == "pass":
             self.subsystemsbutton.configure(command=lambda: self.donothing())
 
@@ -1149,7 +1325,7 @@ class subsystemwindow:
 
         # If arriving here signal success
         # update the status of the power box to Error
-        gui.powersubsystem.changestatus(newstatus="Status: Fixed")
+        gui.powersubsystem.changestatus(newstatus="Status: Online")
         # update the button so that it creates a problem filling it with a random power puzzle
         gui.powersubsystem.changebuttontext(newtext="Repaired")
         # update the button to now open the power problem window
@@ -1495,7 +1671,7 @@ class subsystemwindow:
                     gui.debugger.addtoscreen("Proceeding to next problem ", colour="red")
 
         # End of questions
-        gui.motorsubsystem.changestatus(newstatus="Status: Fixed")
+        gui.motorsubsystem.changestatus(newstatus="Status: Online")
         # update the button so that it creates a problem filling it with a random power puzzle
         gui.motorsubsystem.changebuttontext(newtext="Repaired")
         # update the button to now open the power problem window
@@ -1532,6 +1708,59 @@ class subsystemwindow:
 
         # If arrrving here then pass
         return True
+
+    # AI problem core login puzzle
+    def createaiproblemcore(self):
+        global response
+        response = StringVar()
+        response.set("FALSE")
+        gui.debugger.addtoscreen("Begin AI problem Core")
+        # Create simple top level that requests user name and password
+        while True:
+            LogInWindow("JamesPotter64","w8T40x0G3I&WsQc")
+            if response.get() == "QUIT":
+                gui.debugger.addtoscreen("Authentication failed")
+                gui.debugger.addtoscreen("Return to main screen")
+                return 1
+            elif response.get() == "TRUE":
+                break
+            else:
+                gui.debugger.addtoscreen("Authentication failed")
+                gui.debugger.addtoscreen("Please provide your authentication details")
+
+        # End of login
+        gui.debugger.addtoscreen("Submitting user provided credentials")
+        gui.debugger.addtoscreen("Hashing")
+        gui.debugger.addtoscreen("Security Credentials Accepted")
+        gui.aisubsystem.changestatus(newstatus="Status: Online")
+        # update the button so that it creates a problem filling it with a random power puzzle
+        gui.aisubsystem.changebuttontext(newtext="Repaired")
+        # update the button to now open the power problem window
+        gui.aisubsystem.setcommand("pass")
+        # change colour background to green
+        gui.aisubsystem.changebackground("green")
+
+    # bluetooth code map problem
+    def createbluetoothproblemcore(self):
+        global bluetoothanswer
+        bluetoothanswer = StringVar()
+        bluetoothanswer.set("FALSE")
+        # Tutorial explaining how to make use of the map
+        gui.debugger.addtoscreen("The bluetooth systems have an inbuilt error code reporting system")
+        gui.debugger.addtoscreen("To make use of this system you will need to request document X")
+        gui.debugger.addtoscreen("Follow the instructions on the document to input the correct response to fix the problem")
+        gui.debugger.addtoscreen("Begin error code correction")
+        # End of tutorial begin bug fixing
+        gui.debugger.addtoscreen("The bluetooth systems have an inbuilt error code reporting system")
+        # Question 1
+        # print system info necessary for solving the problem and some extra for some fun
+        # print the first error code to start the program off
+        # top level that just has an entry box in it
+        BluetoothBox()
+
+    # safety problems
+    def createsafeproblemcore(self):
+        gui.debugger.addtoscreen("Begin safety subsystem problem Core")
 
 
 class BooleanChoiceWindow:
@@ -1665,6 +1894,104 @@ class NineChoiceWindow:
     def quitprogram(self):
         motorlist.append("QUIT")
         self.choicewindow.destroy()
+
+class LogInWindow:
+    def __init__(self, username, password):
+        self.correctpassword = password
+        self.correctusername = username
+        # create toplevel to house the choices
+        self.choicewindow = Toplevel()
+        #self.choicewindow.config(background="#FFFFFF")
+        # get size and position of the problemcore window
+        self.choicewindow.geometry('%dx%d+%d+%d' % (root.winfo_screenwidth()/4, root.winfo_screenheight()/5, (3*root.winfo_screenwidth()/4 - root.winfo_screenwidth()/8), root.winfo_screenheight()/2 - (root.winfo_screenheight()/3)/2))
+        self.choicewindow.resizable(0, 0)
+        # Explanatory text
+        ttk.Label(self.choicewindow, text="Please input your username and password below").grid(row=0, column=0, sticky=tk.NSEW, columnspan=3)
+        # add username box
+        ttk.Label(self.choicewindow, text="Username:").grid(row=1, column=0, sticky=tk.NSEW)
+        username = ttk.Entry(self.choicewindow)
+        username.grid(row=1, column=1, sticky=tk.NSEW)
+        # add password box
+        ttk.Label(self.choicewindow, text="Password:").grid(row=2, column=0, sticky=tk.NSEW)
+        password = ttk.Entry(self.choicewindow, show="*")
+        password.grid(row=2, column=1, sticky=tk.NSEW)
+        # add submit button
+        ttk.Button(self.choicewindow, text="Submit", command=lambda: self.setanddestroy(answeroption="submit",username=username.get(), password=password.get())).grid(row=3, column=0, sticky=tk.NSEW)
+        # add quit button
+        ttk.Button(self.choicewindow, text="Quit", command=lambda: self.setanddestroy(answeroption="QUIT", username="blank", password="blank")).grid(row=3, column=2, sticky=tk.NSEW)
+
+        # give weight to rows and column to permit dynamic redraw
+        self.choicewindow.columnconfigure((0, 1, 2), weight=1)
+        self.choicewindow.rowconfigure((0, 3), weight=1)
+
+        # Buff and pad all children of mainframe
+        for child in self.choicewindow.winfo_children():
+            child.grid_configure(padx=5, pady=5)
+
+        self.choicewindow.wait_window()
+
+    def setanddestroy(self, answeroption, username, password):
+        if answeroption == "QUIT":
+            response.set(answeroption)
+            self.choicewindow.destroy()
+        elif username == self.correctusername and password == self.correctpassword:
+            time.sleep(0.25)
+            response.set("TRUE")
+            self.choicewindow.destroy()
+        else:
+            time.sleep(0.25)
+            response.set("FALSE")
+            self.choicewindow.destroy()
+
+class BluetoothBox:
+    def __init__(self):
+        # create toplevel to house the choices
+        self.choicewindow = Toplevel()
+        #self.choicewindow.config(background="#FFFFFF")
+        # get size and position of the problemcore window
+        self.choicewindow.geometry('%dx%d+%d+%d' % (root.winfo_screenwidth()/4, root.winfo_screenheight()/5, (3*root.winfo_screenwidth()/4 - root.winfo_screenwidth()/8), root.winfo_screenheight()/2 - (root.winfo_screenheight()/3)/2))
+        self.choicewindow.resizable(0, 0)
+        # add response code box
+        ttk.Label(self.choicewindow, text="Response Code:").grid(row=1, column=0, sticky=tk.NSEW)
+        username = ttk.Entry(self.choicewindow)
+        username.grid(row=1, column=1, sticky=tk.NSEW)
+        # Submit button after box
+        ttk.Button(self.choicewindow, text="Submit").grid(row=1, column=1, stickt=tk.NSEW)
+        # buttons
+        ttk.Button(self.choicewindow, text="Connect").grid(row=2, column=0, stickt=tk.NSEW)
+        ttk.Button(self.choicewindow, text="Disconnect").grid(row=2, column=1, stickt=tk.NSEW)
+        ttk.Button(self.choicewindow, text="Purge").grid(row=2, column=2, stickt=tk.NSEW)
+        ttk.Button(self.choicewindow, text="Test").grid(row=2, column=2, stickt=tk.NSEW)
+
+
+        # add submit button
+        ttk.Button(self.choicewindow, text="Submit", command=lambda: self.setanddestroy(answeroption="submit",username=username.get(), password=password.get())).grid(row=3, column=0, sticky=tk.NSEW)
+        # add quit button
+        ttk.Button(self.choicewindow, text="Quit", command=lambda: self.setanddestroy(answeroption="QUIT", username="blank", password="blank")).grid(row=3, column=2, sticky=tk.NSEW)
+
+        # give weight to rows and column to permit dynamic redraw
+        self.choicewindow.columnconfigure((0, 1, 2), weight=1)
+        self.choicewindow.rowconfigure((0, 3), weight=1)
+
+        # Buff and pad all children of mainframe
+        for child in self.choicewindow.winfo_children():
+            child.grid_configure(padx=5, pady=5)
+
+        self.choicewindow.wait_window()
+
+    def setanddestroy(self, answeroption, username, password):
+        if answeroption == "QUIT":
+            bluetoothanswer.set(answeroption)
+            self.choicewindow.destroy()
+        elif username == self.correctusername and password == self.correctpassword:
+            time.sleep(0.25)
+            bluetoothanswer.set("TRUE")
+            self.choicewindow.destroy()
+        else:
+            time.sleep(0.25)
+            response.set("FALSE")
+            self.choicewindow.destroy()
+
 
 def disable_event():
     pass
