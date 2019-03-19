@@ -788,7 +788,7 @@ class subsystemwindow:
                     gui.debugger.addtoscreen("bool circuit_error = False")
                     gui.debugger.addtoscreen("bool blue_tooth_error = False")
                     gui.debugger.addtoscreen("bool battery error = True")
-                    gui.debugger.addtoscreen("if (NOT(circuit_error OR circuit_error) AND (blue_tooth_error OR battery error))", colour="red")
+                    gui.debugger.addtoscreen("if (NOT(power_error OR circuit_error) AND (blue_tooth_error OR battery error))", colour="red")
                     gui.debugger.addtoscreen("{", colour="red")
                     gui.debugger.addtoscreen("  return \"Systems Functional\"", colour="red")
                     gui.debugger.addtoscreen("}", colour="red")
@@ -1018,7 +1018,7 @@ class subsystemwindow:
 
                     if answer.get() == "QUIT":
                         return 1
-                    if answer.get() == "Breaker Tripped":
+                    if answer.get() == "System Reset":
                         gui.debugger.addtoscreen("Attempting to compile...")
                         gui.debugger.addtoscreen("Compilation successful", colour="green")
                         progressarray.remove(17)
