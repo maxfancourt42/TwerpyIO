@@ -101,8 +101,11 @@ class ScrollingWindow:
 class MainApplication:
     def __init__(self, master):
         global progresstracker
+        global progresstrackermotor
+        global progresstrackerblue
         global debuggeractive
         global motorlist
+        global bluetoothprogressarray
         # create the local root
         self.master = master
         self.master.state('zoomed')
@@ -112,8 +115,15 @@ class MainApplication:
         # Create global tracking variables
         progresstracker = IntVar()
         progresstracker.set(0)
+        progresstrackermotor = IntVar()
+        progresstrackermotor.set(1)
+        progresstrackerblue = IntVar()
+        progresstrackerblue.set(0)
         debuggeractive = IntVar()
         debuggeractive.set(1)
+
+        # define global level progress monitors
+        bluetoothprogressarray = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
 
         # define motorlist
         motorlist = []
@@ -1349,17 +1359,14 @@ class subsystemwindow:
         gui.debugger.addtoscreen("Warning, due to limited memory, select only the libaries required, including extra libaries will cause the system failure", colour="green")
         gui.debugger.addtoscreen("Problem Tutorial End", colour="green")
         # Example showing how to source the information
-        gui.debugger.addtoscreen("Problem Tutorial Start", colour="green")
-
-        # set the progressmarker to zero
-        progresstracker.set(1)
+        gui.debugger.addtoscreen("Problem Tutorial Example Start", colour="green")
 
         # create an array containing all questions bar the 1st which is an example
         progressarray = [3,4,5,6,7,8,9,10,11,12,13,14]
 
 
         # the training example
-        if progresstracker.get() == 1:
+        if progresstrackermotor.get() == 1:
             # Create an example
             gui.debugger.addtoscreen("Undefined print Function Error", colour="red")
             gui.debugger.addtoscreen("Undefined input Function Error", colour="red")
@@ -1370,13 +1377,13 @@ class subsystemwindow:
                 NineChoiceWindow("stdiopy", "GDAL", "twirpytoi", "openlib", "xmlconvert", "csv", "numpy", "powertest", "randbetween")
                 if "QUIT" in motorlist:
                     return 1
-            progresstracker.set(progresstracker.get() + 1)
+            progresstrackermotor.set(progresstrackermotor.get() + 1)
 
         # extra information
         gui.debugger.addtoscreen("Some libaries themselves make use of functions defined in other libaries, which you will therefore also have to include")
         gui.debugger.addtoscreen("This is known as dependencies")
 
-        if progresstracker.get() == 2:
+        if progresstrackermotor.get() == 2:
             gui.debugger.addtoscreen("Undefined print Function Error", colour="red")
             gui.debugger.addtoscreen("Undefined input Function Error", colour="red")
             gui.debugger.addtoscreen("Undefined genetricalogithm Function Error", colour="red")
@@ -1387,7 +1394,7 @@ class subsystemwindow:
                 NineChoiceWindow("stdiopy", "evolve", "twirpytoi", "openlib", "xmlconvert", "csv", "numpy", "powertest", "randbetween")
                 if "QUIT" in motorlist:
                     return 1
-            progresstracker.set(progresstracker.get() + 1)
+            progresstrackermotor.set(progresstrackermotor.get() + 1)
 
         # teach about conflicting libaries
         gui.debugger.addtoscreen("Finally, some libaries can conflict with each other meaning that they both have a function with exactly the same name")
@@ -1395,11 +1402,11 @@ class subsystemwindow:
         gui.debugger.addtoscreen("To solve this problem you will need to use specialist libaries that have been built to correct this problem")
 
         # choose a random number to start the actual questions
-        progresstracker.set(choice(progressarray))
+        progresstrackermotor.set(choice(progressarray))
         # variable to store number completed
 
         while len(progressarray) > 8:
-            if progresstracker.get() == 3:
+            if progresstrackermotor.get() == 3:
                 gui.debugger.addtoscreen("Undefined checksafetysettings Function Error", colour="red")
                 gui.debugger.addtoscreen("Undefined cleararray Function Error", colour="red")
 
@@ -1415,13 +1422,13 @@ class subsystemwindow:
                         break
                     gui.debugger.addtoscreen("Proceeding to next problem", colour="green")
                     progressarray.remove(3)
-                    progresstracker.set(choice(progressarray))
+                    progresstrackermotor.set(choice(progressarray))
                 else:
                     gui.debugger.addtoscreen("Incorrect libaries selected", colour="red")
                     gui.debugger.addtoscreen("Proceeding to next problem ", colour="red")
-                    progresstracker.set(choice(progressarray))
+                    progresstrackermotor.set(choice(progressarray))
 
-            if progresstracker.get() == 4:
+            if progresstrackermotor.get() == 4:
                 gui.debugger.addtoscreen("Undefined readcsv Function Error", colour="red")
                 gui.debugger.addtoscreen("Undefined writeline Function Error", colour="red")
                 gui.debugger.addtoscreen("Undefined readc Function Error", colour="red")
@@ -1438,12 +1445,12 @@ class subsystemwindow:
                         break
                     gui.debugger.addtoscreen("Proceeding to next problem", colour="green")
                     progressarray.remove(4)
-                    progresstracker.set(choice(progressarray))
+                    progresstrackermotor.set(choice(progressarray))
                 else:
                     gui.debugger.addtoscreen("Incorrect libaries selected", colour="red")
                     gui.debugger.addtoscreen("Proceeding to next problem ", colour="red")
 
-            if progresstracker.get() == 5:
+            if progresstrackermotor.get() == 5:
                 gui.debugger.addtoscreen("Undefined readcsv Function Error")
                 gui.debugger.addtoscreen("Undefined writecsv Function Error")
                 gui.debugger.addtoscreen("Undefined print Function Error")
@@ -1462,12 +1469,12 @@ class subsystemwindow:
                         break
                     gui.debugger.addtoscreen("Proceeding to next problem", colour="green")
                     progressarray.remove(5)
-                    progresstracker.set(choice(progressarray))
+                    progresstrackermotor.set(choice(progressarray))
                 else:
                     gui.debugger.addtoscreen("Incorrect libaries selected", colour="red")
                     gui.debugger.addtoscreen("Proceeding to next problem ", colour="red")
 
-            if progresstracker.get() == 6:
+            if progresstrackermotor.get() == 6:
                 gui.debugger.addtoscreen("Undefined guessnext Function Error")
                 gui.debugger.addtoscreen("Undefined cleararray Function Error")
 
@@ -1483,12 +1490,12 @@ class subsystemwindow:
                         break
                     gui.debugger.addtoscreen("Proceeding to next problem", colour="green")
                     progressarray.remove(6)
-                    progresstracker.set(choice(progressarray))
+                    progresstrackermotor.set(choice(progressarray))
                 else:
                     gui.debugger.addtoscreen("Incorrect libaries selected", colour="red")
                     gui.debugger.addtoscreen("Proceeding to next problem ", colour="red")
 
-            if progresstracker.get() == 7:
+            if progresstrackermotor.get() == 7:
                 gui.debugger.addtoscreen("Undefined readcsv Function Error")
                 gui.debugger.addtoscreen("Undefined xmlconvert Function Error")
 
@@ -1504,12 +1511,12 @@ class subsystemwindow:
                         break
                     gui.debugger.addtoscreen("Proceeding to next problem", colour="green")
                     progressarray.remove(7)
-                    progresstracker.set(choice(progressarray))
+                    progresstrackermotor.set(choice(progressarray))
                 else:
                     gui.debugger.addtoscreen("Incorrect libaries selected", colour="red")
                     gui.debugger.addtoscreen("Proceeding to next problem ", colour="red")
 
-            if progresstracker.get() == 8:
+            if progresstrackermotor.get() == 8:
                 gui.debugger.addtoscreen("Undefined calculaterms Function Error")
                 gui.debugger.addtoscreen("Undefined systemindepentint Function Error")
                 gui.debugger.addtoscreen("Undefined readjson Function Error")
@@ -1526,12 +1533,12 @@ class subsystemwindow:
                         break
                     gui.debugger.addtoscreen("Proceeding to next problem", colour="green")
                     progressarray.remove(8)
-                    progresstracker.set(choice(progressarray))
+                    progresstrackermotor.set(choice(progressarray))
                 else:
                     gui.debugger.addtoscreen("Incorrect libaries selected", colour="red")
                     gui.debugger.addtoscreen("Proceeding to next problem ", colour="red")
 
-            if progresstracker.get() == 9:
+            if progresstrackermotor.get() == 9:
                 gui.debugger.addtoscreen("Undefined multiplyarray Function Error")
                 gui.debugger.addtoscreen("Undefined print Function Error")
                 gui.debugger.addtoscreen("Undefined cleararray Function Error")
@@ -1551,12 +1558,12 @@ class subsystemwindow:
                         break
                     gui.debugger.addtoscreen("Proceeding to next problem", colour="green")
                     progressarray.remove(9)
-                    progresstracker.set(choice(progressarray))
+                    progresstrackermotor.set(choice(progressarray))
                 else:
                     gui.debugger.addtoscreen("Incorrect libaries selected", colour="red")
                     gui.debugger.addtoscreen("Proceeding to next problem ", colour="red")
 
-            if progresstracker.get() == 10:
+            if progresstrackermotor.get() == 10:
                 gui.debugger.addtoscreen("Undefined calculaterms Function Error")
                 gui.debugger.addtoscreen("Undefined writeline Function Error")
                 gui.debugger.addtoscreen("Undefined calculaterms Function Error")
@@ -1573,12 +1580,12 @@ class subsystemwindow:
                         break
                     gui.debugger.addtoscreen("Proceeding to next problem", colour="green")
                     progressarray.remove(10)
-                    progresstracker.set(choice(progressarray))
+                    progresstrackermotor.set(choice(progressarray))
                 else:
                     gui.debugger.addtoscreen("Incorrect libaries selected", colour="red")
                     gui.debugger.addtoscreen("Proceeding to next problem ", colour="red")
 
-            if progresstracker.get() == 11:
+            if progresstrackermotor.get() == 11:
                 gui.debugger.addtoscreen("Undefined decodejson Function Error")
                 gui.debugger.addtoscreen("Undefined multiplyarray Function Error")
                 gui.debugger.addtoscreen("Undefined print Function Error")
@@ -1597,12 +1604,12 @@ class subsystemwindow:
                         break
                     gui.debugger.addtoscreen("Proceeding to next problem", colour="green")
                     progressarray.remove(11)
-                    progresstracker.set(choice(progressarray))
+                    progresstrackermotor.set(choice(progressarray))
                 else:
                     gui.debugger.addtoscreen("Incorrect libaries selected", colour="red")
                     gui.debugger.addtoscreen("Proceeding to next problem ", colour="red")
 
-            if progresstracker.get() == 12:
+            if progresstrackermotor.get() == 12:
                 gui.debugger.addtoscreen("Undefined windowspatch Function Error")
                 gui.debugger.addtoscreen("Undefined macpatch Function Error")
                 gui.debugger.addtoscreen("Undefined calculaterms Function Error")
@@ -1622,12 +1629,12 @@ class subsystemwindow:
                         break
                     gui.debugger.addtoscreen("Proceeding to next problem", colour="green")
                     progressarray.remove(12)
-                    progresstracker.set(choice(progressarray))
+                    progresstrackermotor.set(choice(progressarray))
                 else:
                     gui.debugger.addtoscreen("Incorrect libaries selected", colour="red")
                     gui.debugger.addtoscreen("Proceeding to next problem ", colour="red")
 
-            if progresstracker.get() == 13:
+            if progresstrackermotor.get() == 13:
                 gui.debugger.addtoscreen("Undefined print Function Error")
                 gui.debugger.addtoscreen("Undefined input Function Error")
                 gui.debugger.addtoscreen("Undefined insert Function Error")
@@ -1645,12 +1652,12 @@ class subsystemwindow:
                         break
                     gui.debugger.addtoscreen("Proceeding to next problem", colour="green")
                     progressarray.remove(13)
-                    progresstracker.set(choice(progressarray))
+                    progresstrackermotor.set(choice(progressarray))
                 else:
                     gui.debugger.addtoscreen("Incorrect libaries selected", colour="red")
                     gui.debugger.addtoscreen("Proceeding to next problem ", colour="red")
 
-            if progresstracker.get() == 14:
+            if progresstrackermotor.get() == 14:
                 gui.debugger.addtoscreen("Undefined evolve Function Error")
 
                 NineChoiceWindow("stdiopy", "numpy", "twirpytoi", "openlib", "scrambledOGG", "csv", "numpy", "gtxtest", "addtoscreen")
@@ -1665,7 +1672,7 @@ class subsystemwindow:
                         break
                     gui.debugger.addtoscreen("Proceeding to next problem", colour="green")
                     progressarray.remove(14)
-                    progresstracker.set(choice(progressarray))
+                    progresstrackermotor.set(choice(progressarray))
                 else:
                     gui.debugger.addtoscreen("Incorrect libaries selected", colour="red")
                     gui.debugger.addtoscreen("Proceeding to next problem ", colour="red")
@@ -1743,20 +1750,276 @@ class subsystemwindow:
     # bluetooth code map problem
     def createbluetoothproblemcore(self):
         global bluetoothanswer
+        global progresstrackerblue
+        global bluetoothprogressarray
         bluetoothanswer = StringVar()
         bluetoothanswer.set("FALSE")
-        # Tutorial explaining how to make use of the map
-        gui.debugger.addtoscreen("The bluetooth systems have an inbuilt error code reporting system")
-        gui.debugger.addtoscreen("To make use of this system you will need to request document X")
-        gui.debugger.addtoscreen("Follow the instructions on the document to input the correct response to fix the problem")
-        gui.debugger.addtoscreen("Begin error code correction")
-        # End of tutorial begin bug fixing
-        gui.debugger.addtoscreen("The bluetooth systems have an inbuilt error code reporting system")
-        # Question 1
-        # print system info necessary for solving the problem and some extra for some fun
-        # print the first error code to start the program off
-        # top level that just has an entry box in it
-        BluetoothBox()
+
+        # While loop to continue asking questions till done
+        while True:
+            # if first time in here then show the tutorial
+            if progresstrackerblue.get() == 0:
+                # choose random question to start on
+                # Tutorial explaining how to make use of the map
+                gui.debugger.addtoscreen("The bluetooth systems have an inbuilt error code reporting system")
+                gui.debugger.addtoscreen("To make use of this system you will need to request document BlueErrorMap version 3.74")
+                gui.debugger.addtoscreen("Follow the instructions on the document to input the correct response to fix the problem")
+                gui.debugger.addtoscreen("Each time you are given an error code, remember to return to the Start")
+                gui.debugger.addtoscreen("Begin error code correction")
+                # End of tutorial begin bug fixing
+                bluetoothprogressarray.remove(0)
+                progresstrackerblue.set(choice(bluetoothprogressarray))
+
+            # Question 1
+            elif progresstrackerblue.get() == 1:
+                # If all questions asked
+                if len(bluetoothprogressarray) < 2:
+                    return 1
+                # Stage 1
+                gui.debugger.addtoscreen("Error Code 8875", colour="red")
+                gui.debugger.addtoscreen("Connection Strength: 74", colour="red")
+                gui.debugger.addtoscreen("System Status: Offline", colour="red")
+                gui.debugger.addtoscreen("Security System Status: Offline", colour="red")
+                BluetoothBox()
+                if bluetoothanswer.get() == "QUIT":
+                    return 1
+                # Correct answer condition
+                elif bluetoothanswer.get() == "PURGE":
+                    gui.debugger.addtoscreen("System Purge accepted, proceeding")
+                else:
+                    gui.debugger.addtoscreen("System Failure, moving to next problem")
+                # stage 2
+                gui.debugger.addtoscreen("Error Code 4875", colour="red")
+                gui.debugger.addtoscreen("Connection Strength: 32", colour="red")
+                gui.debugger.addtoscreen("System Status: Offline", colour="red")
+                gui.debugger.addtoscreen("Security System Status: Online", colour="red")
+                BluetoothBox()
+                if bluetoothanswer.get() == "QUIT":
+                    return 1
+                # Correct answer condition
+                elif bluetoothanswer.get() == "RESET":
+                    gui.debugger.addtoscreen("System Reset accepted, proceeding")
+                else:
+                    gui.debugger.addtoscreen("System Failure, moving to next problem")
+
+                # Stage 3
+                gui.debugger.addtoscreen("Error Code 4815", colour="red")
+                gui.debugger.addtoscreen("Connection Strength: 45", colour="red")
+                gui.debugger.addtoscreen("System Status: Online", colour="red")
+                gui.debugger.addtoscreen("Security System Status: Online", colour="red")
+                BluetoothBox()
+                if bluetoothanswer.get() == "QUIT":
+                    return 1
+                # Correct answer condition
+                elif bluetoothanswer.get() == "1756":
+                    gui.debugger.addtoscreen("Code accepted, proceeding")
+                else:
+                    gui.debugger.addtoscreen("System Failure, moving to next problem")
+
+                # if reaching here success
+                gui.debugger.addtoscreen("Problem Corrected System Online", colour="green")
+                bluetoothprogressarray.remove(1)
+                progresstrackerblue.set(choice(bluetoothprogressarray))
+
+            # Question 2
+            elif progresstrackerblue.get() == 2:
+                if len(bluetoothprogressarray) < 2:
+                    return 1
+                # Stage 1
+                gui.debugger.addtoscreen("Error Code 1111", colour="red")
+                gui.debugger.addtoscreen("Connection Strength: 0", colour="red")
+                gui.debugger.addtoscreen("System Status: Offline", colour="red")
+                gui.debugger.addtoscreen("Security System Status: Offline", colour="red")
+                BluetoothBox()
+                if bluetoothanswer.get() == "QUIT":
+                    return 1
+                # Correct answer condition
+                elif bluetoothanswer.get() == "3712":
+                    gui.debugger.addtoscreen("Code accepted, proceeding")
+                else:
+                    gui.debugger.addtoscreen("System Failure, moving to next problem")
+                # Stage 2
+                gui.debugger.addtoscreen("Error Code 8111", colour="red")
+                gui.debugger.addtoscreen("Connection Strength: 3", colour="red")
+                gui.debugger.addtoscreen("System Status: Online", colour="red")
+                gui.debugger.addtoscreen("Security System Status: Offline", colour="red")
+                BluetoothBox()
+                if bluetoothanswer.get() == "QUIT":
+                    return 1
+                # Correct answer condition
+                elif bluetoothanswer.get() == "PURGE":
+                    gui.debugger.addtoscreen("System Purge Accepted, proceeding")
+                else:
+                    gui.debugger.addtoscreen("System Failure, moving to next problem")
+                # Stage 3
+                gui.debugger.addtoscreen("Error Code 8733", colour="red")
+                gui.debugger.addtoscreen("Connection Strength: 0", colour="red")
+                gui.debugger.addtoscreen("System Status: Online", colour="red")
+                gui.debugger.addtoscreen("Security System Status: Online", colour="red")
+                BluetoothBox()
+                if bluetoothanswer.get() == "QUIT":
+                    return 1
+                # Correct answer condition
+                elif bluetoothanswer.get() == "PURGE":
+                    gui.debugger.addtoscreen("System Purge accepted, proceeding")
+                else:
+                    gui.debugger.addtoscreen("System Failure, moving to next problem")
+                # Stage 4
+                gui.debugger.addtoscreen("Error Code 4803", colour="red")
+                gui.debugger.addtoscreen("Connection Strength: 50", colour="red")
+                gui.debugger.addtoscreen("System Status: Online", colour="red")
+                gui.debugger.addtoscreen("Security System Status: Online", colour="red")
+                BluetoothBox()
+                if bluetoothanswer.get() == "QUIT":
+                    return 1
+                # Correct answer condition
+                elif bluetoothanswer.get() == "RESET":
+                    gui.debugger.addtoscreen("Code accepted, proceeding")
+                else:
+                    gui.debugger.addtoscreen("System Failure, moving to next problem")
+                # Stage 5
+                gui.debugger.addtoscreen("Error Code 5803", colour="red")
+                gui.debugger.addtoscreen("Connection Strength: 50", colour="red")
+                gui.debugger.addtoscreen("System Status: Online", colour="red")
+                gui.debugger.addtoscreen("Security System Status: Online", colour="red")
+                BluetoothBox()
+                if bluetoothanswer.get() == "QUIT":
+                    return 1
+                # Correct answer condition
+                elif bluetoothanswer.get() == "7666":
+                    gui.debugger.addtoscreen("Code accepted, proceeding")
+                else:
+                    gui.debugger.addtoscreen("System Failure, moving to next problem")
+
+                gui.debugger.addtoscreen("Problem Corrected System Online", colour="green")
+                bluetoothprogressarray.remove(2)
+                progresstrackerblue.set(choice(bluetoothprogressarray))
+            # Question 3
+            elif progresstrackerblue.get() == 3:
+                if len(bluetoothprogressarray) < 2:
+                    return 1
+                # Stage 1
+                gui.debugger.addtoscreen("Error Code 7006", colour="red")
+                gui.debugger.addtoscreen("Connection Strength: 0", colour="red")
+                gui.debugger.addtoscreen("System Status: Offline", colour="red")
+                gui.debugger.addtoscreen("Security System Status: Offline", colour="red")
+                BluetoothBox()
+                if bluetoothanswer.get() == "QUIT":
+                    return 1
+                # Correct answer condition
+                elif bluetoothanswer.get() == "4544":
+                    gui.debugger.addtoscreen("Code accepted, proceeding")
+                else:
+                    gui.debugger.addtoscreen("System Failure, moving to next problem")
+                # Stage 2
+                gui.debugger.addtoscreen("Error Code 7511", colour="red")
+                gui.debugger.addtoscreen("Connection Strength: 0", colour="red")
+                gui.debugger.addtoscreen("System Status: Online", colour="red")
+                gui.debugger.addtoscreen("Security System Status: Offline", colour="red")
+                BluetoothBox()
+                if bluetoothanswer.get() == "QUIT":
+                    return 1
+                # Correct answer condition
+                elif bluetoothanswer.get() == "7666":
+                    gui.debugger.addtoscreen("Code accepted, proceeding")
+                else:
+                    gui.debugger.addtoscreen("System Failure, moving to next problem")
+                # Stage 3
+                gui.debugger.addtoscreen("Error Code 7061", colour="red")
+                gui.debugger.addtoscreen("Connection Strength: 0", colour="red")
+                gui.debugger.addtoscreen("System Status: Online", colour="red")
+                gui.debugger.addtoscreen("Security System Status: Online", colour="red")
+                BluetoothBox()
+                if bluetoothanswer.get() == "QUIT":
+                    return 1
+                # Correct answer condition
+                elif bluetoothanswer.get() == "PURGE":
+                    gui.debugger.addtoscreen("System Purged, proceeding")
+                else:
+                    gui.debugger.addtoscreen("System Failure, moving to next problem")
+                # Stage 4
+                gui.debugger.addtoscreen("Error Code 4411", colour="red")
+                gui.debugger.addtoscreen("Connection Strength: 34", colour="red")
+                gui.debugger.addtoscreen("System Status: Online", colour="red")
+                gui.debugger.addtoscreen("Security System Status: Online", colour="red")
+                BluetoothBox()
+                if bluetoothanswer.get() == "QUIT":
+                    return 1
+                # Correct answer condition
+                elif bluetoothanswer.get() == "RESET":
+                    gui.debugger.addtoscreen("System Purged, proceeding")
+                else:
+                    gui.debugger.addtoscreen("System Failure, moving to next problem")
+                # Stage 5
+                gui.debugger.addtoscreen("Error Code 6104", colour="red")
+                gui.debugger.addtoscreen("Connection Strength: 34", colour="red")
+                gui.debugger.addtoscreen("System Status: Online", colour="red")
+                gui.debugger.addtoscreen("Security System Status: Online", colour="red")
+                BluetoothBox()
+                if bluetoothanswer.get() == "QUIT":
+                    return 1
+                # Correct answer condition
+                elif bluetoothanswer.get() == "7442":
+                    gui.debugger.addtoscreen("Code Accepted, proceeding")
+                else:
+                    gui.debugger.addtoscreen("System Failure, moving to next problem")
+
+                # Success
+                gui.debugger.addtoscreen("Problem Corrected System Online", colour="green")
+                bluetoothprogressarray.remove(3)
+                progresstrackerblue.set(choice(bluetoothprogressarray))
+            # Question 4
+            elif progresstrackerblue.get() == 4:
+                if len(bluetoothprogressarray) < 2:
+                    return 1
+                gui.debugger.addtoscreen("Problem Corrected System Online", colour="green")
+                bluetoothprogressarray.remove(4)
+                progresstrackerblue.set(choice(bluetoothprogressarray))
+                pass
+            # Question 5
+            elif progresstrackerblue.get() == 5:
+                if len(bluetoothprogressarray) < 2:
+                    return 1
+                gui.debugger.addtoscreen("Problem Corrected System Online", colour="green")
+                bluetoothprogressarray.remove(5)
+                progresstrackerblue.set(choice(bluetoothprogressarray))
+                pass
+            # Question 6
+            elif progresstrackerblue.get() == 6:
+                if len(bluetoothprogressarray) < 2:
+                    return 1
+                gui.debugger.addtoscreen("Problem Corrected System Online", colour="green")
+                bluetoothprogressarray.remove(6)
+                progresstrackerblue.set(choice(bluetoothprogressarray))
+                pass
+            # Question 7
+            elif progresstrackerblue.get() == 7:
+                if len(bluetoothprogressarray) < 2:
+                    return 1
+                gui.debugger.addtoscreen("Problem Corrected System Online", colour="green")
+                bluetoothprogressarray.remove(7)
+                progresstrackerblue.set(choice(bluetoothprogressarray))
+                pass
+            # Question 8
+            elif progresstrackerblue.get() == 8:
+                if len(bluetoothprogressarray) < 2:
+                    return 1
+                gui.debugger.addtoscreen("Problem Corrected System Online", colour="green")
+                bluetoothprogressarray.remove(8)
+                progresstrackerblue.set(choice(bluetoothprogressarray))
+                pass
+            # Question 9
+            elif progresstrackerblue.get() == 9:
+                if len(bluetoothprogressarray) < 2:
+                    return 1
+                gui.debugger.addtoscreen("Problem Corrected System Online", colour="green")
+                bluetoothprogressarray.remove(9)
+                progresstrackerblue.set(choice(bluetoothprogressarray))
+                pass
+
+        # If getting here then exercise is finished
+        gui.debugger.addtoscreen("Success")
+
 
     # safety problems
     def createsafeproblemcore(self):
@@ -1951,27 +2214,25 @@ class BluetoothBox:
         # get size and position of the problemcore window
         self.choicewindow.geometry('%dx%d+%d+%d' % (root.winfo_screenwidth()/4, root.winfo_screenheight()/5, (3*root.winfo_screenwidth()/4 - root.winfo_screenwidth()/8), root.winfo_screenheight()/2 - (root.winfo_screenheight()/3)/2))
         self.choicewindow.resizable(0, 0)
+        # add label for the top of the table
+        ttk.Label(self.choicewindow, text="Select the appropriate response from options below").grid(row=0, column=0, sticky=tk.NSEW, columnspan=3)
         # add response code box
         ttk.Label(self.choicewindow, text="Response Code:").grid(row=1, column=0, sticky=tk.NSEW)
-        username = ttk.Entry(self.choicewindow)
-        username.grid(row=1, column=1, sticky=tk.NSEW)
+        responseentry = ttk.Entry(self.choicewindow)
+        responseentry.grid(row=1, column=1, sticky=tk.NSEW)
         # Submit button after box
-        ttk.Button(self.choicewindow, text="Submit").grid(row=1, column=1, stickt=tk.NSEW)
+        ttk.Button(self.choicewindow, text="Submit", command=lambda: self.setanddestroy(answeroption=responseentry.get())).grid(row=1, column=2, sticky=tk.NSEW)
         # buttons
-        ttk.Button(self.choicewindow, text="Connect").grid(row=2, column=0, stickt=tk.NSEW)
-        ttk.Button(self.choicewindow, text="Disconnect").grid(row=2, column=1, stickt=tk.NSEW)
-        ttk.Button(self.choicewindow, text="Purge").grid(row=2, column=2, stickt=tk.NSEW)
-        ttk.Button(self.choicewindow, text="Test").grid(row=2, column=2, stickt=tk.NSEW)
+        ttk.Button(self.choicewindow, text="Connect", command=lambda: self.setanddestroy(answeroption="CONNECT")).grid(row=2, column=0, sticky=tk.NSEW)
+        ttk.Button(self.choicewindow, text="Reset", command=lambda: self.setanddestroy(answeroption="RESET")).grid(row=2, column=1, sticky=tk.NSEW)
+        ttk.Button(self.choicewindow, text="Purge", command=lambda: self.setanddestroy(answeroption="PURGE")).grid(row=2, column=2, sticky=tk.NSEW)
 
-
-        # add submit button
-        ttk.Button(self.choicewindow, text="Submit", command=lambda: self.setanddestroy(answeroption="submit",username=username.get(), password=password.get())).grid(row=3, column=0, sticky=tk.NSEW)
         # add quit button
-        ttk.Button(self.choicewindow, text="Quit", command=lambda: self.setanddestroy(answeroption="QUIT", username="blank", password="blank")).grid(row=3, column=2, sticky=tk.NSEW)
+        ttk.Button(self.choicewindow, text="Quit", command=lambda: self.setanddestroy(answeroption="QUIT")).grid(row=3, column=2, sticky=tk.NSEW)
 
         # give weight to rows and column to permit dynamic redraw
         self.choicewindow.columnconfigure((0, 1, 2), weight=1)
-        self.choicewindow.rowconfigure((0, 3), weight=1)
+        self.choicewindow.rowconfigure((0,1,2,3), weight=1)
 
         # Buff and pad all children of mainframe
         for child in self.choicewindow.winfo_children():
@@ -1979,17 +2240,13 @@ class BluetoothBox:
 
         self.choicewindow.wait_window()
 
-    def setanddestroy(self, answeroption, username, password):
+    def setanddestroy(self, answeroption):
         if answeroption == "QUIT":
             bluetoothanswer.set(answeroption)
             self.choicewindow.destroy()
-        elif username == self.correctusername and password == self.correctpassword:
-            time.sleep(0.25)
-            bluetoothanswer.set("TRUE")
-            self.choicewindow.destroy()
         else:
             time.sleep(0.25)
-            response.set("FALSE")
+            bluetoothanswer.set("{}".format(answeroption))
             self.choicewindow.destroy()
 
 
