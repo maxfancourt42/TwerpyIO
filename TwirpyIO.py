@@ -1968,30 +1968,139 @@ class subsystemwindow:
                 gui.debugger.addtoscreen("Problem Corrected System Online", colour="green")
                 bluetoothprogressarray.remove(3)
                 progresstrackerblue.set(choice(bluetoothprogressarray))
+
             # Question 4
             elif progresstrackerblue.get() == 4:
                 if len(bluetoothprogressarray) < 2:
                     return 1
+                # Stage 1
+                gui.debugger.addtoscreen("Error Code 1999", colour="red")
+                gui.debugger.addtoscreen("Connection Strength: 0", colour="red")
+                gui.debugger.addtoscreen("System Status: Offline", colour="red")
+                gui.debugger.addtoscreen("Security System Status: Online", colour="red")
+                BluetoothBox()
+                if bluetoothanswer.get() == "QUIT":
+                    return 1
+                # Correct answer condition
+                elif bluetoothanswer.get() == "3712":
+                    gui.debugger.addtoscreen("Code Accepted, proceeding")
+                else:
+                    gui.debugger.addtoscreen("System Failure, moving to next problem")
+                # Stage 2
+                gui.debugger.addtoscreen("Error Code 4809", colour="red")
+                gui.debugger.addtoscreen("Connection Strength: 50", colour="red")
+                gui.debugger.addtoscreen("System Status: Offline", colour="red")
+                gui.debugger.addtoscreen("Security System Status: Online", colour="red")
+                BluetoothBox()
+                if bluetoothanswer.get() == "QUIT":
+                    return 1
+                # Correct answer condition
+                elif bluetoothanswer.get() == "RESET":
+                    gui.debugger.addtoscreen("Code Accepted, proceeding")
+                else:
+                    gui.debugger.addtoscreen("System Failure, moving to next problem")
+                # Stage 3
+                gui.debugger.addtoscreen("Error Code 7137", colour="red")
+                gui.debugger.addtoscreen("Connection Strength: 50", colour="red")
+                gui.debugger.addtoscreen("System Status: Offline", colour="red")
+                gui.debugger.addtoscreen("Security System Status: Offline", colour="red")
+                BluetoothBox()
+                if bluetoothanswer.get() == "QUIT":
+                    return 1
+                # Correct answer condition
+                elif bluetoothanswer.get() == "3279":
+                    gui.debugger.addtoscreen("Code Accepted, proceeding")
+                else:
+                    gui.debugger.addtoscreen("System Failure, moving to next problem")
+
                 gui.debugger.addtoscreen("Problem Corrected System Online", colour="green")
                 bluetoothprogressarray.remove(4)
                 progresstrackerblue.set(choice(bluetoothprogressarray))
-                pass
             # Question 5
             elif progresstrackerblue.get() == 5:
                 if len(bluetoothprogressarray) < 2:
                     return 1
+                # Stage 1
+                gui.debugger.addtoscreen("Error Code 5143", colour="red")
+                gui.debugger.addtoscreen("Connection Strength: 0", colour="red")
+                gui.debugger.addtoscreen("System Status: Online", colour="red")
+                gui.debugger.addtoscreen("Security System Status: Online", colour="red")
+                BluetoothBox()
+                if bluetoothanswer.get() == "QUIT":
+                    return 1
+                # Correct answer condition
+                elif bluetoothanswer.get() == "CONNECT":
+                    gui.debugger.addtoscreen("Code Accepted, proceeding")
+                else:
+                    gui.debugger.addtoscreen("System Failure, moving to next problem")
+
                 gui.debugger.addtoscreen("Problem Corrected System Online", colour="green")
                 bluetoothprogressarray.remove(5)
                 progresstrackerblue.set(choice(bluetoothprogressarray))
-                pass
             # Question 6
             elif progresstrackerblue.get() == 6:
                 if len(bluetoothprogressarray) < 2:
                     return 1
+
+                # Stage 1
+                gui.debugger.addtoscreen("Error Code 6095", colour="red")
+                gui.debugger.addtoscreen("Connection Strength: 0", colour="red")
+                gui.debugger.addtoscreen("System Status: Online", colour="red")
+                gui.debugger.addtoscreen("Security System Status: Online", colour="red")
+                BluetoothBox()
+                if bluetoothanswer.get() == "QUIT":
+                    return 1
+                # Correct answer condition
+                elif bluetoothanswer.get() == "3333":
+                    gui.debugger.addtoscreen("Code Accepted, proceeding")
+                else:
+                    gui.debugger.addtoscreen("System Failure, moving to next problem")
+
+                # Stage 2
+                gui.debugger.addtoscreen("Error Code 5311", colour="red")
+                gui.debugger.addtoscreen("Connection Strength: 0", colour="red")
+                gui.debugger.addtoscreen("System Status: Online", colour="red")
+                gui.debugger.addtoscreen("Security System Status: Online", colour="red")
+                BluetoothBox()
+                if bluetoothanswer.get() == "QUIT":
+                    return 1
+                # Correct answer condition
+                elif bluetoothanswer.get() == "7666":
+                    gui.debugger.addtoscreen("Code Accepted, proceeding")
+                else:
+                    gui.debugger.addtoscreen("System Failure, moving to next problem")
+
+                # Stage 3
+                gui.debugger.addtoscreen("Error Code 8112", colour="red")
+                gui.debugger.addtoscreen("Connection Strength: 0", colour="red")
+                gui.debugger.addtoscreen("System Status: Online", colour="red")
+                gui.debugger.addtoscreen("Security System Status: Online", colour="red")
+                BluetoothBox()
+                if bluetoothanswer.get() == "QUIT":
+                    return 1
+                # Correct answer condition
+                elif bluetoothanswer.get() == "PURGE":
+                    gui.debugger.addtoscreen("Code Accepted, proceeding")
+                else:
+                    gui.debugger.addtoscreen("System Failure, moving to next problem")
+
+                # Stage 3
+                gui.debugger.addtoscreen("Error Code 6196", colour="red")
+                gui.debugger.addtoscreen("Connection Strength: 0", colour="red")
+                gui.debugger.addtoscreen("System Status: Online", colour="red")
+                gui.debugger.addtoscreen("Security System Status: Online", colour="red")
+                BluetoothBox()
+                if bluetoothanswer.get() == "QUIT":
+                    return 1
+                # Correct answer condition
+                elif bluetoothanswer.get() == "CONNECT":
+                    gui.debugger.addtoscreen("Code Accepted, proceeding")
+                else:
+                    gui.debugger.addtoscreen("System Failure, moving to next problem")
+
                 gui.debugger.addtoscreen("Problem Corrected System Online", colour="green")
                 bluetoothprogressarray.remove(6)
                 progresstrackerblue.set(choice(bluetoothprogressarray))
-                pass
             # Question 7
             elif progresstrackerblue.get() == 7:
                 if len(bluetoothprogressarray) < 2:
