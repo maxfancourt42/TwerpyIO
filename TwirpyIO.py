@@ -1563,13 +1563,13 @@ class subsystemwindow:
                 gui.debugger.addtoscreen("Undefined systemindepentint Function Error")
                 gui.debugger.addtoscreen("Undefined readjson Function Error")
 
-                NineChoiceWindow("openlib", "evolve", "twirpytoi", "scrambledOGG", "xmlconvert", "csv", "numpy", "gtxtest", "stdiopy")
+                NineChoiceWindow("openlib", "evolve", "twirpytoi", "scrambledOGG", "xmlconvert", "csv", "numpy", "json", "stdiopy")
 
                 # check to see if quit in array
                 if "QUIT" in motorlist:
                     return 1
                 # if correct answer
-                if self.comparearray(["scrambledOGG", "numpy", "openlib", "csv"], motorlist):
+                if self.comparearray(["scrambledOGG", "numpy", "openlib", "csv", "stdiopy", "json"], motorlist):
                     gui.debugger.addtoscreen("Correct libaries selected", colour="green")
                     if len(motorprogressarray) > 4:
                         break
@@ -1609,7 +1609,7 @@ class subsystemwindow:
             if progresstrackermotor.get() == 10:
                 gui.debugger.addtoscreen("Undefined calculaterms Function Error")
                 gui.debugger.addtoscreen("Undefined writeline Function Error")
-                gui.debugger.addtoscreen("Undefined calculaterms Function Error")
+                gui.debugger.addtoscreen("Undefined xmlconvert Function Error")
 
                 NineChoiceWindow("scrambledOGG", "gtxtest", "twirpytoi", "openlib", "xmlconvert", "csv", "numpy", "numpycafix", "crypto")
 
@@ -1617,7 +1617,7 @@ class subsystemwindow:
                 if "QUIT" in motorlist:
                     return 1
                 # if correct answer
-                if self.comparearray(["xmlconvert", "scrambledOGG", "numpycafix"], motorlist):
+                if self.comparearray(["xmlconvert", "scrambledOGG", "numpy"], motorlist):
                     gui.debugger.addtoscreen("Correct libaries selected", colour="green")
                     if len(motorprogressarray) > 4:
                         break
@@ -1633,7 +1633,6 @@ class subsystemwindow:
                 gui.debugger.addtoscreen("Undefined decodejson Function Error")
                 gui.debugger.addtoscreen("Undefined multiplyarray Function Error")
                 gui.debugger.addtoscreen("Undefined print Function Error")
-                gui.debugger.addtoscreen("Undefined cleararray Function Error")
 
 
                 NineChoiceWindow("json", "numpy", "twirpytoi", "openlib", "xmlconvert", "csv", "scrambledOGG", "stdiopy", "numpycafix")
@@ -1642,7 +1641,7 @@ class subsystemwindow:
                 if "QUIT" in motorlist:
                     return 1
                 # if correct answer
-                if self.comparearray(["numpycafix", "stdiopy", "json"], motorlist):
+                if self.comparearray(["numpy", "stdiopy", "json"], motorlist):
                     gui.debugger.addtoscreen("Correct libaries selected", colour="green")
                     if len(motorprogressarray) > 4:
                         break
@@ -1659,7 +1658,6 @@ class subsystemwindow:
                 gui.debugger.addtoscreen("Undefined macpatch Function Error")
                 gui.debugger.addtoscreen("Undefined calculaterms Function Error")
                 gui.debugger.addtoscreen("Undefined readjson Function Error")
-                gui.debugger.addtoscreen("Undefined calculaterms Function Error")
                 gui.debugger.addtoscreen("Undefined genetricalogithm Function Error")
 
                 NineChoiceWindow("scrambledOGG", "gtxtest", "json", "openlib", "xmlconvert", "csv", "numpy", "evolve", "crypto")
@@ -1668,7 +1666,7 @@ class subsystemwindow:
                 if "QUIT" in motorlist:
                     return 1
                 # if correct answer
-                if self.comparearray(["openlib", "scrambledOGG", "json", "evolve"], motorlist):
+                if self.comparearray(["openlib", "scrambledOGG", "json", "evolve", "numpy", "csv"], motorlist):
                     gui.debugger.addtoscreen("Correct libaries selected", colour="green")
                     if len(motorprogressarray) > 4:
                         break
