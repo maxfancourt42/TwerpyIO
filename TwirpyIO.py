@@ -687,7 +687,7 @@ class subsystemwindow:
                 # Beginning of problem set
                 if progresstracker.get() == 3:
                     # Problem set 3
-                    gui.debugger.addtoscreen("int power_level = 84")
+                    gui.debugger.addtoscreen("int power_level = 50")
                     gui.debugger.addtoscreen("int threshold = 60")
                     gui.debugger.addtoscreen("bool safety_systems_active = True")
                     gui.debugger.addtoscreen("if ((power_level < threshold) AND (safety_systems_online))", colour="red")
@@ -811,11 +811,10 @@ class subsystemwindow:
                     gui.debugger.addtoscreen("{", colour="red")
                     gui.debugger.addtoscreen("  return \"Provide Power\"", colour="red")
                     gui.debugger.addtoscreen("}", colour="red")
-                    gui.debugger.addtoscreen("else if (current_power_level + power_requested <= power_requested + emergency_power)", colour="red")
+                    gui.debugger.addtoscreen("else if (current_power_level + power_requested <= total_power_available + emergency_power)", colour="red")
                     gui.debugger.addtoscreen("{", colour="red")
                     gui.debugger.addtoscreen("  return \"Provide Power (emergency)\"", colour="red")
                     gui.debugger.addtoscreen("}", colour="red")
-                    gui.debugger.addtoscreen("if (((current_power_level + power_requested) < threshold) OR (safety_systems_online)))", colour="red")
                     gui.debugger.addtoscreen("else", colour="red")
                     gui.debugger.addtoscreen("{", colour="red")
                     gui.debugger.addtoscreen("  return \"System Error\"", colour="red")
@@ -852,7 +851,7 @@ class subsystemwindow:
                     gui.debugger.addtoscreen("{", colour="red")
                     gui.debugger.addtoscreen("  energy_excess = True", colour="red")
                     gui.debugger.addtoscreen("}", colour="red")
-                    gui.debugger.addtoscreen("if (energy_excess AND emergency_buffer > 0 AND NOT(conserve_energy)", colour="red")
+                    gui.debugger.addtoscreen("if ((energy_excess AND emergency_buffer = 0) AND NOT(conserve_energy))", colour="red")
                     gui.debugger.addtoscreen("{", colour="red")
                     gui.debugger.addtoscreen("  emergency_buffer = total_power_available - circuitary_requirements - motor_requirements - 100", colour="red")
                     gui.debugger.addtoscreen("}", colour="red")
@@ -997,7 +996,7 @@ class subsystemwindow:
                     gui.debugger.addtoscreen("bool circuit_error = False")
                     gui.debugger.addtoscreen("bool blue_tooth_error = False")
                     gui.debugger.addtoscreen("bool battery error = True")
-                    gui.debugger.addtoscreen("if (NOT(power_error OR circuit_error) AND (blue_tooth_error OR battery error))", colour="red")
+                    gui.debugger.addtoscreen("if (NOT(power_error OR circuit_error) AND NOT(blue_tooth_error OR battery error))", colour="red")
                     gui.debugger.addtoscreen("{", colour="red")
                     gui.debugger.addtoscreen("  return \"Systems Functional\"", colour="red")
                     gui.debugger.addtoscreen("}", colour="red")
@@ -1027,7 +1026,7 @@ class subsystemwindow:
                         progresstracker.set(choice(powerprogressarray))
 
                 elif progresstracker.get() == 12:
-                    gui.debugger.addtoscreen("int internal_temp = 32")
+                    gui.debugger.addtoscreen("int internal_temp = 62")
                     gui.debugger.addtoscreen("int temp_threshold  = 60")
                     gui.debugger.addtoscreen("int internal_activity = 87")
                     gui.debugger.addtoscreen("bool priority_level = False")
@@ -1155,6 +1154,10 @@ class subsystemwindow:
                     gui.debugger.addtoscreen("{", colour="red")
                     gui.debugger.addtoscreen("  return \"Attempt Charge 2\"", colour="red")
                     gui.debugger.addtoscreen("}", colour="red")
+                    gui.debugger.addtoscreen("else", colour="red")
+                    gui.debugger.addtoscreen("{", colour="red")
+                    gui.debugger.addtoscreen("  return \"System Error\"", colour="red")
+                    gui.debugger.addtoscreen("}", colour="red")
 
                     BooleanChoiceWindow(gui.debugger.swtl.winfo_width(), gui.debugger.swtl.winfo_height(),"Given the inputs, what will this code output?", "Select From Below", option1="Permit Charging", option2="Attempt Charge 2", option3="System Error")
 
@@ -1250,7 +1253,7 @@ class subsystemwindow:
                         progresstracker.set(choice(powerprogressarray))
 
                 elif progresstracker.get() == 18:
-                    gui.debugger.addtoscreen("bool power_subsystem_online = False")
+                    gui.debugger.addtoscreen("bool power_subsystem_online = True")
                     gui.debugger.addtoscreen("if NOT(power_subsystem_online)", colour="red")
                     gui.debugger.addtoscreen("{", colour="red")
                     gui.debugger.addtoscreen("  return \"Systems Offline\"", colour="red")
@@ -1333,7 +1336,7 @@ class subsystemwindow:
                     gui.debugger.addtoscreen("int replacement_port = 4")
                     gui.debugger.addtoscreen("int secondary_batteries = 1")
                     gui.debugger.addtoscreen("bool firmware_installed = True")
-                    gui.debugger.addtoscreen("if (NOT(TRUE AND FALSE))", colour="red")
+                    gui.debugger.addtoscreen("if (NOT(bool master_switch))", colour="red")
                     gui.debugger.addtoscreen("{", colour="red")
                     gui.debugger.addtoscreen("  return \"Systems Online\"", colour="red")
                     gui.debugger.addtoscreen("}", colour="red")
