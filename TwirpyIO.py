@@ -1925,7 +1925,7 @@ class subsystemwindow:
                                 return 1
                             # Correct answer condition
                             elif bluetoothanswer.get() == "RESET":
-                                gui.debugger.addtoscreen("Code accepted, proceeding")
+                                gui.debugger.addtoscreen("System Reset accepted, proceeding")
                                 # Stage 5
                                 gui.debugger.addtoscreen("Error Code 5803", colour="red")
                                 gui.debugger.addtoscreen("Connection Strength: 50", colour="red")
@@ -1997,7 +1997,7 @@ class subsystemwindow:
                             return 1
                         # Correct answer condition
                         elif bluetoothanswer.get() == "PURGE":
-                            gui.debugger.addtoscreen("System Purged, proceeding")
+                            gui.debugger.addtoscreen("System Purge Accepted, proceeding")
                             # Stage 4
                             gui.debugger.addtoscreen("Error Code 4411", colour="red")
                             gui.debugger.addtoscreen("Connection Strength: 34", colour="red")
@@ -2008,7 +2008,7 @@ class subsystemwindow:
                                 return 1
                             # Correct answer condition
                             elif bluetoothanswer.get() == "RESET":
-                                gui.debugger.addtoscreen("System Purged, proceeding")
+                                gui.debugger.addtoscreen("System Reset Accepted, proceeding")
                                 # Stage 5
                                 gui.debugger.addtoscreen("Error Code 6104", colour="red")
                                 gui.debugger.addtoscreen("Connection Strength: 34", colour="red")
@@ -2066,7 +2066,7 @@ class subsystemwindow:
                         return 1
                     # Correct answer condition
                     elif bluetoothanswer.get() == "RESET":
-                        gui.debugger.addtoscreen("Code Accepted, proceeding")
+                        gui.debugger.addtoscreen("System Reset Accepted, proceeding")
                         # Stage 3
                         gui.debugger.addtoscreen("Error Code 7137", colour="red")
                         gui.debugger.addtoscreen("Connection Strength: 50", colour="red")
@@ -2106,7 +2106,7 @@ class subsystemwindow:
                     return 1
                 # Correct answer condition
                 elif bluetoothanswer.get() == "CONNECT":
-                    gui.debugger.addtoscreen("Code Accepted, proceeding")
+                    gui.debugger.addtoscreen("System Connect Accepted, proceeding")
                     gui.debugger.addtoscreen("Problem Corrected System Online", colour="green")
                     bluetoothprogressarray.remove(5)
                     progresstrackerblue.set(choice(bluetoothprogressarray))
@@ -2151,7 +2151,7 @@ class subsystemwindow:
                             return 1
                         # Correct answer condition
                         elif bluetoothanswer.get() == "PURGE":
-                            gui.debugger.addtoscreen("Code Accepted, proceeding")
+                            gui.debugger.addtoscreen("System Purge Accepted, proceeding")
                             # Stage 4
                             gui.debugger.addtoscreen("Error Code 6196", colour="red")
                             gui.debugger.addtoscreen("Connection Strength: 0", colour="red")
@@ -2162,7 +2162,7 @@ class subsystemwindow:
                                 return 1
                             # Correct answer condition
                             elif bluetoothanswer.get() == "CONNECT":
-                                gui.debugger.addtoscreen("Code Accepted, proceeding")
+                                gui.debugger.addtoscreen("System Connect Accepted, proceeding")
                                 gui.debugger.addtoscreen("Problem Corrected System Online", colour="green")
                                 bluetoothprogressarray.remove(6)
                                 progresstrackerblue.set(choice(bluetoothprogressarray))
@@ -2194,7 +2194,7 @@ class subsystemwindow:
                     return 1
                 # Correct answer condition
                 elif bluetoothanswer.get() == "CONNECT":
-                    gui.debugger.addtoscreen("Code Accepted, proceeding")
+                    gui.debugger.addtoscreen("Systen Connect Accepted, proceeding")
                     # Stage 2
                     gui.debugger.addtoscreen("Error Code 7297", colour="red")
                     gui.debugger.addtoscreen("Connection Strength: 0", colour="red")
@@ -2245,7 +2245,7 @@ class subsystemwindow:
                     return 1
                 # Correct answer condition
                 elif bluetoothanswer.get() == "3712":
-                    gui.debugger.addtoscreen("System Purge Accepted, proceeding")
+                    gui.debugger.addtoscreen("System Code Accepted, proceeding")
                     gui.debugger.addtoscreen("Problem Corrected System Online", colour="green")
                     bluetoothprogressarray.remove(8)
                     progresstrackerblue.set(choice(bluetoothprogressarray))
@@ -2268,7 +2268,7 @@ class subsystemwindow:
                     return 1
                 # Correct answer condition
                 elif bluetoothanswer.get() == "4544":
-                    gui.debugger.addtoscreen("System Purge Accepted, proceeding")
+                    gui.debugger.addtoscreen("System Code Accepted, proceeding")
                     # Stage 2
                     gui.debugger.addtoscreen("Error Code 4643", colour="red")
                     gui.debugger.addtoscreen("Connection Strength: 0", colour="red")
@@ -2279,7 +2279,7 @@ class subsystemwindow:
                         return 1
                     # Correct answer condition
                     elif bluetoothanswer.get() == "RESET":
-                        gui.debugger.addtoscreen("System Purge Accepted, proceeding")
+                        gui.debugger.addtoscreen("System Reset Accepted, proceeding")
                         # Stage 3
                         gui.debugger.addtoscreen("Error Code 4413", colour="red")
                         gui.debugger.addtoscreen("Connection Strength: 0", colour="red")
@@ -2289,8 +2289,8 @@ class subsystemwindow:
                         if bluetoothanswer.get() == "QUIT":
                             return 1
                         # Correct answer condition
-                        elif bluetoothanswer.get() == "1756":
-                            gui.debugger.addtoscreen("System Purge Accepted, proceeding")
+                        elif bluetoothanswer.get() == "RESET":
+                            gui.debugger.addtoscreen("System Reset Accepted, proceeding")
                             gui.debugger.addtoscreen("Problem Corrected System Online", colour="green")
                             bluetoothprogressarray.remove(9)
                             progresstrackerblue.set(choice(bluetoothprogressarray))
