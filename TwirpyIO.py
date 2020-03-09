@@ -129,8 +129,8 @@ class MainApplication:
 
         # define global level progress monitors
         bluetoothprogressarray = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
-        powerprogressarray = [3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]
-        motorprogressarray = [3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]
+        powerprogressarray = [3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25]
+        motorprogressarray = [3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18]
 
         # define motorlist
         motorlist = []
@@ -1369,6 +1369,217 @@ class subsystemwindow:
                         gui.debugger.addtoscreen("Continuing to next error")
                         progresstracker.set(choice(powerprogressarray))
 
+                elif progresstracker.get() == 21:
+                    gui.debugger.addtoscreen("Additional logic required")
+                    gui.debugger.addtoscreen("Exclusive OR = XOR")
+                    gui.debugger.addtoscreen("Test Case:")
+                    gui.debugger.addtoscreen("X1 XOR X2")
+                    gui.debugger.addtoscreen("Will return TRUE only if one of X1 or X2 = TRUE")
+                    gui.debugger.addtoscreen("IF both X1 and X2 = TRUE will return FALSE")
+                    gui.debugger.addtoscreen("BOOL power_on = TRUE")
+                    gui.debugger.addtoscreen("BOOL secondary_power = TRUE")
+                    gui.debugger.addtoscreen("FLOAT power_level = 0.7")
+                    gui.debugger.addtoscreen("FLOAT reserve_power = 1.0")
+                    gui.debugger.addtoscreen("if ((power_on XOR secondary_power) XOR (power_level <= reserve_power))", colour="red")
+                    gui.debugger.addtoscreen("{", colour="red")
+                    gui.debugger.addtoscreen("  return \"Systems Online\"", colour="red")
+                    gui.debugger.addtoscreen("}", colour="red")
+                    gui.debugger.addtoscreen("else if ((power_level + reserve_power) <= 0.3))", colour="red")
+                    gui.debugger.addtoscreen("{", colour="red")
+                    gui.debugger.addtoscreen("  return \"Systems Offline\"", colour="red")
+                    gui.debugger.addtoscreen("}", colour="red")
+                    gui.debugger.addtoscreen("else:", colour="red")
+                    gui.debugger.addtoscreen("{", colour="red")
+                    gui.debugger.addtoscreen("  return \"Systems Failure\"", colour="red")
+                    gui.debugger.addtoscreen("}", colour="red")
+
+                    BooleanChoiceWindow(gui.debugger.swtl.winfo_width(), gui.debugger.swtl.winfo_height(),"Given the inputs, what will this code output?", "Select From Below", option1="Systems Online", option2="Systems Offline", option3="Systems Failure")
+
+                    if answer.get() == "QUIT":
+                        return 1
+                    if answer.get() == "Systems Online":
+                        gui.debugger.addtoscreen("Attempting to compile...")
+                        gui.debugger.addtoscreen("Compilation successful", colour="green")
+                        overallscore = overallscore + 1
+                        powerprogressarray.remove(21)
+                        if len(powerprogressarray) > 7:
+                            progresstracker.set(choice(powerprogressarray))
+                            gui.debugger.addtoscreen("Continuing to next error")
+                        else:
+                            break
+                    else:
+                        gui.debugger.addtoscreen("Attempting to compile...")
+                        gui.debugger.addtoscreen("Compilation failure...", colour="red")
+                        gui.debugger.addtoscreen("Continuing to next error")
+                        progresstracker.set(choice(powerprogressarray))
+
+                elif progresstracker.get() == 22:
+                    gui.debugger.addtoscreen("INT time_since_last_charged = 24")
+                    gui.debugger.addtoscreen("INT starting_power_level = 100")
+                    gui.debugger.addtoscreen("INT power_use_per_minute = 2")
+                    gui.debugger.addtoscreen("if ((time_since_last_charged * power_use_per_minute < (starting_power_level/2))", colour="red")
+                    gui.debugger.addtoscreen("{", colour="red")
+                    gui.debugger.addtoscreen("  return \"More Than Half Power Remaining\"", colour="red")
+                    gui.debugger.addtoscreen("}", colour="red")
+                    gui.debugger.addtoscreen("else if ((time_since_last_charged * power_use_per_minute > (starting_power_level/2))", colour="red")
+                    gui.debugger.addtoscreen("{", colour="red")
+                    gui.debugger.addtoscreen("  return \"Less Than Half Power Remaining\"", colour="red")
+                    gui.debugger.addtoscreen("}", colour="red")
+                    gui.debugger.addtoscreen("else:", colour="red")
+                    gui.debugger.addtoscreen("{", colour="red")
+                    gui.debugger.addtoscreen("  return \"Battery Error\"", colour="red")
+                    gui.debugger.addtoscreen("}", colour="red")
+
+                    BooleanChoiceWindow(gui.debugger.swtl.winfo_width(), gui.debugger.swtl.winfo_height(),"Given the inputs, what will this code output?", "Select From Below", option1="More Than Half Power Remaining", option2="Less Than Half Power Remaining", option3="Battery Error")
+
+                    if answer.get() == "QUIT":
+                        return 1
+                    if answer.get() == "More Than Half Power Remaining":
+                        gui.debugger.addtoscreen("Attempting to compile...")
+                        gui.debugger.addtoscreen("Compilation successful", colour="green")
+                        overallscore = overallscore + 1
+                        powerprogressarray.remove(22)
+                        if len(powerprogressarray) > 7:
+                            progresstracker.set(choice(powerprogressarray))
+                            gui.debugger.addtoscreen("Continuing to next error")
+                        else:
+                            break
+                    else:
+                        gui.debugger.addtoscreen("Attempting to compile...")
+                        gui.debugger.addtoscreen("Compilation failure...", colour="red")
+                        gui.debugger.addtoscreen("Continuing to next error")
+                        progresstracker.set(choice(powerprogressarray))
+
+                elif progresstracker.get() == 23:
+                    gui.debugger.addtoscreen("Additional logic required")
+                    gui.debugger.addtoscreen("Exclusive OR = XOR")
+                    gui.debugger.addtoscreen("Test Case:")
+                    gui.debugger.addtoscreen("X1 XOR X2")
+                    gui.debugger.addtoscreen("Will return TRUE only if one of X1 or X2 = TRUE")
+                    gui.debugger.addtoscreen("IF both X1 and X2 = TRUE will return FALSE")
+                    gui.debugger.addtoscreen("BOOL power_on = TRUE")
+                    gui.debugger.addtoscreen("BOOL secondary_power = TRUE")
+                    gui.debugger.addtoscreen("if (power_on XOR secondary_power)", colour="red")
+                    gui.debugger.addtoscreen("{", colour="red")
+                    gui.debugger.addtoscreen("  return \"Duel Power Input\"", colour="red")
+                    gui.debugger.addtoscreen("}", colour="red")
+                    gui.debugger.addtoscreen("else if ((power_on OR secondary_power)))", colour="red")
+                    gui.debugger.addtoscreen("{", colour="red")
+                    gui.debugger.addtoscreen("  return \"Single Power Input\"", colour="red")
+                    gui.debugger.addtoscreen("}", colour="red")
+                    gui.debugger.addtoscreen("else:", colour="red")
+                    gui.debugger.addtoscreen("{", colour="red")
+                    gui.debugger.addtoscreen("  return \"Systems Failure\"", colour="red")
+                    gui.debugger.addtoscreen("}", colour="red")
+
+                    BooleanChoiceWindow(gui.debugger.swtl.winfo_width(), gui.debugger.swtl.winfo_height(),"Given the inputs, what will this code output?", "Select From Below", option1="Duel Power Input", option2="Single Power Input", option3="Systems Failure")
+
+                    if answer.get() == "QUIT":
+                        return 1
+                    if answer.get() == "Single Power Input":
+                        gui.debugger.addtoscreen("Attempting to compile...")
+                        gui.debugger.addtoscreen("Compilation successful", colour="green")
+                        overallscore = overallscore + 1
+                        powerprogressarray.remove(23)
+                        if len(powerprogressarray) > 7:
+                            progresstracker.set(choice(powerprogressarray))
+                            gui.debugger.addtoscreen("Continuing to next error")
+                        else:
+                            break
+                    else:
+                        gui.debugger.addtoscreen("Attempting to compile...")
+                        gui.debugger.addtoscreen("Compilation failure...", colour="red")
+                        gui.debugger.addtoscreen("Continuing to next error")
+                        progresstracker.set(choice(powerprogressarray))
+
+                elif progresstracker.get() == 24:
+                    gui.debugger.addtoscreen("Additional logic required")
+                    gui.debugger.addtoscreen("Exclusive OR = XOR")
+                    gui.debugger.addtoscreen("Test Case:")
+                    gui.debugger.addtoscreen("X1 XOR X2")
+                    gui.debugger.addtoscreen("Will return TRUE only if one of X1 or X2 = TRUE")
+                    gui.debugger.addtoscreen("IF both X1 and X2 = TRUE will return FALSE")
+                    gui.debugger.addtoscreen("INT remaining_power = 3")
+                    gui.debugger.addtoscreen("INT initial_power = 98")
+                    gui.debugger.addtoscreen("BOOL is_system_charging = TRUE")
+                    gui.debugger.addtoscreen("INT power_usage_per_minute = 2")
+                    gui.debugger.addtoscreen("if ((((remaining_power/initial_power)*100 < 5) OR remaining_power < 10) XOR is_system_charging)", colour="red")
+                    gui.debugger.addtoscreen("{", colour="red")
+                    gui.debugger.addtoscreen("  return \"Insufficient Power\"", colour="red")
+                    gui.debugger.addtoscreen("}", colour="red")
+                    gui.debugger.addtoscreen("else if (is_system_charging)", colour="red")
+                    gui.debugger.addtoscreen("{", colour="red")
+                    gui.debugger.addtoscreen("  return \"Sufficient Power\"", colour="red")
+                    gui.debugger.addtoscreen("}", colour="red")
+                    gui.debugger.addtoscreen("else:", colour="red")
+                    gui.debugger.addtoscreen("{", colour="red")
+                    gui.debugger.addtoscreen("  return \"Please Charge System\"", colour="red")
+                    gui.debugger.addtoscreen("}", colour="red")
+
+                    BooleanChoiceWindow(gui.debugger.swtl.winfo_width(), gui.debugger.swtl.winfo_height(),"Given the inputs, what will this code output?", "Select From Below", option1="Insufficient Power", option2="Sufficient Power", option3="Please Charge System")
+
+                    if answer.get() == "QUIT":
+                        return 1
+                    if answer.get() == "Sufficient Power":
+                        gui.debugger.addtoscreen("Attempting to compile...")
+                        gui.debugger.addtoscreen("Compilation successful", colour="green")
+                        overallscore = overallscore + 1
+                        powerprogressarray.remove(24)
+                        if len(powerprogressarray) > 7:
+                            progresstracker.set(choice(powerprogressarray))
+                            gui.debugger.addtoscreen("Continuing to next error")
+                        else:
+                            break
+                    else:
+                        gui.debugger.addtoscreen("Attempting to compile...")
+                        gui.debugger.addtoscreen("Compilation failure...", colour="red")
+                        gui.debugger.addtoscreen("Continuing to next error")
+                        progresstracker.set(choice(powerprogressarray))
+
+                elif progresstracker.get() == 25:
+                    gui.debugger.addtoscreen("Additional logic required")
+                    gui.debugger.addtoscreen("Exclusive OR = XOR")
+                    gui.debugger.addtoscreen("Test Case:")
+                    gui.debugger.addtoscreen("X1 XOR X2")
+                    gui.debugger.addtoscreen("Will return TRUE only if one of X1 or X2 = TRUE")
+                    gui.debugger.addtoscreen("IF both X1 and X2 = TRUE will return FALSE")
+                    gui.debugger.addtoscreen("BOOL system_online = TRUE")
+                    gui.debugger.addtoscreen("BOOL power_usage_acceptable = TRUE")
+                    gui.debugger.addtoscreen("BOOL is_system_charging = TRUE")
+                    gui.debugger.addtoscreen("BOOL reserve_batteries_charged? = FALSE")
+                    gui.debugger.addtoscreen("if (((system_online XOR power_usage_acceptable) XOR reserve_batteries_charged?) XOR is_system_charging)", colour="red")
+                    gui.debugger.addtoscreen("{", colour="red")
+                    gui.debugger.addtoscreen("  return \"System At Full Charge\"", colour="red")
+                    gui.debugger.addtoscreen("}", colour="red")
+                    gui.debugger.addtoscreen("else if (system_online XOR reserve_batteries_charged?)", colour="red")
+                    gui.debugger.addtoscreen("{", colour="red")
+                    gui.debugger.addtoscreen("  return \"System Can Be Charged\"", colour="red")
+                    gui.debugger.addtoscreen("}", colour="red")
+                    gui.debugger.addtoscreen("else:", colour="red")
+                    gui.debugger.addtoscreen("{", colour="red")
+                    gui.debugger.addtoscreen("  return \"System Fault\"", colour="red")
+                    gui.debugger.addtoscreen("}", colour="red")
+
+                    BooleanChoiceWindow(gui.debugger.swtl.winfo_width(), gui.debugger.swtl.winfo_height(),"Given the inputs, what will this code output?", "Select From Below", option1="System At Full Charge", option2="System Can Be Charged", option3="System Fault")
+
+                    if answer.get() == "QUIT":
+                        return 1
+                    if answer.get() == "System Can Be Charged":
+                        gui.debugger.addtoscreen("Attempting to compile...")
+                        gui.debugger.addtoscreen("Compilation successful", colour="green")
+                        overallscore = overallscore + 1
+                        powerprogressarray.remove(25)
+                        if len(powerprogressarray) > 7:
+                            progresstracker.set(choice(powerprogressarray))
+                            gui.debugger.addtoscreen("Continuing to next error")
+                        else:
+                            break
+                    else:
+                        gui.debugger.addtoscreen("Attempting to compile...")
+                        gui.debugger.addtoscreen("Compilation failure...", colour="red")
+                        gui.debugger.addtoscreen("Continuing to next error")
+                        progresstracker.set(choice(powerprogressarray))
+
         # If arriving here signal success
         # update the status of the power box to Error
         gui.powersubsystem.changestatus(newstatus="Status: Online")
@@ -1722,6 +1933,102 @@ class subsystemwindow:
                 else:
                     gui.debugger.addtoscreen("Incorrect libaries selected", colour="red")
                     gui.debugger.addtoscreen("Proceeding to next problem ", colour="red")
+
+            if progresstrackermotor.get() == 15:
+                gui.debugger.addtoscreen("Undefined writecsv Function Error")
+                gui.debugger.addtoscreen("Undefined writeline Function Error")
+                gui.debugger.addtoscreen("Undefined writec Function Error")
+                gui.debugger.addtoscreen("Undefined systemindepentint Function Error")
+
+                NineChoiceWindow("stdiopy", "numpy", "twirpytoi", "openlib", "scrambledOGG", "csv", "numpy", "gtxtest", "xmlconvert")
+
+                # check to see if quit in array
+                if "QUIT" in motorlist:
+                    return 1
+                # if correct answer
+                if self.comparearray(["csv", "openlib", "numpy", "stdiopy"], motorlist):
+                    gui.debugger.addtoscreen("Correct libaries selected", colour="green")
+                    if len(motorprogressarray) > 4:
+                        break
+                    gui.debugger.addtoscreen("Proceeding to next problem", colour="green")
+                    motorprogressarray.remove(15)
+                    progresstrackermotor.set(choice(motorprogressarray))
+                    overallscore = overallscore + 1
+                else:
+                    gui.debugger.addtoscreen("Incorrect libaries selected", colour="red")
+                    gui.debugger.addtoscreen("Proceeding to next problem ", colour="red")
+
+            if progresstrackermotor.get() == 16:
+                gui.debugger.addtoscreen("Undefined checkbatterycharge Function Error")
+                gui.debugger.addtoscreen("Undefined checksafetysettings Function Error")
+                gui.debugger.addtoscreen("Undefined genetricalogithm Function Error")
+                gui.debugger.addtoscreen("Undefined transform Function Error")
+
+                NineChoiceWindow("stdiopy", "numpy", "twirpytoi", "openlib", "scrambledOGG", "csv", "numpy", "gtxtest", "xmlconvert")
+
+                # check to see if quit in array
+                if "QUIT" in motorlist:
+                    return 1
+                # if correct answer
+                if self.comparearray(["twirpystoi", "numpy", "stdiopy", "xmlconvert"], motorlist):
+                    gui.debugger.addtoscreen("Correct libaries selected", colour="green")
+                    if len(motorprogressarray) > 4:
+                        break
+                    gui.debugger.addtoscreen("Proceeding to next problem", colour="green")
+                    motorprogressarray.remove(16)
+                    progresstrackermotor.set(choice(motorprogressarray))
+                    overallscore = overallscore + 1
+                else:
+                    gui.debugger.addtoscreen("Incorrect libaries selected", colour="red")
+                    gui.debugger.addtoscreen("Proceeding to next problem ", colour="red")
+
+            if progresstrackermotor.get() == 17:
+                gui.debugger.addtoscreen("Undefined calculaterms Function Error")
+                gui.debugger.addtoscreen("Undefined converttothreephrase Function Error")
+                gui.debugger.addtoscreen("Undefined decodejson Function Error")
+                gui.debugger.addtoscreen("Undefined transform Function Error")
+
+                NineChoiceWindow("json", "numpy", "numpycafix", "openlib", "scrambledOGG", "csv", "numpy", "gtxtest", "xmlconvert")
+
+                # check to see if quit in array
+                if "QUIT" in motorlist:
+                    return 1
+                # if correct answer
+                if self.comparearray(["scrambledOGG", "json", "numpycafix", "xmlconvert"], motorlist):
+                    gui.debugger.addtoscreen("Correct libaries selected", colour="green")
+                    if len(motorprogressarray) > 4:
+                        break
+                    gui.debugger.addtoscreen("Proceeding to next problem", colour="green")
+                    motorprogressarray.remove(17)
+                    progresstrackermotor.set(choice(motorprogressarray))
+                    overallscore = overallscore + 1
+                else:
+                    gui.debugger.addtoscreen("Incorrect libaries selected", colour="red")
+                    gui.debugger.addtoscreen("Proceeding to next problem ", colour="red")
+
+            if progresstrackermotor.get() == 18:
+                gui.debugger.addtoscreen("Undefined print Function Error")
+                gui.debugger.addtoscreen("Undefined input Function Error")
+                gui.debugger.addtoscreen("Undefined cleararray Function Error")
+
+                NineChoiceWindow("json", "numpy", "numpycafix", "openlib", "scrambledOGG", "csv", "numpy", "gtxtest", "stdiopy")
+
+                # check to see if quit in array
+                if "QUIT" in motorlist:
+                    return 1
+                # if correct answer
+                if self.comparearray(["stdiopy"], motorlist):
+                    gui.debugger.addtoscreen("Correct libaries selected", colour="green")
+                    if len(motorprogressarray) > 4:
+                        break
+                    gui.debugger.addtoscreen("Proceeding to next problem", colour="green")
+                    motorprogressarray.remove(18)
+                    progresstrackermotor.set(choice(motorprogressarray))
+                    overallscore = overallscore + 1
+                else:
+                    gui.debugger.addtoscreen("Incorrect libaries selected", colour="red")
+                    gui.debugger.addtoscreen("Proceeding to next problem ", colour="red")
+
 
         # End of questions
         gui.motorsubsystem.changestatus(newstatus="Status: Online")
@@ -2193,8 +2500,8 @@ class subsystemwindow:
                 if bluetoothanswer.get() == "QUIT":
                     return 1
                 # Correct answer condition
-                elif bluetoothanswer.get() == "CONNECT":
-                    gui.debugger.addtoscreen("Systen Connect Accepted, proceeding")
+                elif bluetoothanswer.get() == "4544":
+                    gui.debugger.addtoscreen("Code Accepted, proceeding")
                     # Stage 2
                     gui.debugger.addtoscreen("Error Code 7297", colour="red")
                     gui.debugger.addtoscreen("Connection Strength: 0", colour="red")
