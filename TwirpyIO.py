@@ -2720,68 +2720,175 @@ class subsystemwindow:
         stabilisationAnswer = StringVar()
 
         # Problem Tutorial
-        # Teaching basic select
-        if progresstrackerstable.get() == 0:
-            gui.debugger.addtoscreen("Stabilisation Problem Tutorial Start", colour="green")
-            gui.debugger.addtoscreen("Please note to solve these problems you will need to request the SQL_Tables document from stores", colour="green")
-            gui.debugger.addtoscreen("The Control and Stabilisation Subsystems are held within relational databases controlled through Structured Query Language", colour="green")
-            gui.debugger.addtoscreen("Commonly referred to as SQL", colour="green")
-            gui.debugger.addtoscreen("This training will provide you with a basic understanding of key SQL commands and will ask you to retrieve data and build queries", colour="green")
-            gui.debugger.addtoscreen("Training Start", colour="green")
-            gui.debugger.addtoscreen("Part One Select Queries", colour="green")
-            gui.debugger.addtoscreen("Data is retrieved from TABLES using the SELECT command", colour="green")
-            gui.debugger.addtoscreen("A generalised example is: ", colour="green")
-            gui.debugger.addtoscreen("SELECT column, another column FROM table", colour="green")
-            gui.debugger.addtoscreen("Therefore to select colours from the Training Table you would use", colour="green")
-            gui.debugger.addtoscreen("SELECT colours FROM TrainingTable", colour="green")
-            while stabilisationAnswer.get() != "SELECT numbers FROM TrainingTable":
-                stabilisationProblemCoreWindow("SQL Training - Select Statements", "Choose the appropriate SQL command to retrieve the requested information",
-                                               option1="SELECT numbers FROM TrainingTable",
-                                               option2="SELECT id FROM TrainingTable",
-                                               option3="SELECT colours FROM TrainingTable")
-                if stabilisationAnswer.get() == "QUIT":
-                    gui.debugger.addtoscreen("Training Quit", colour="red")
-                    return 1
-                elif stabilisationAnswer.get() != "SELECT numbers FROM TrainingTable":
-                    gui.debugger.addtoscreen("Incorrect answer please try again", colour="red")
-                else:
-                    gui.debugger.addtoscreen("Correct SQL statement chosen ", colour="green")
-                    gui.debugger.addtoscreen("... ", colour="green")
-                    gui.debugger.addtoscreen("Compiling Successful", colour="green")
-                    gui.debugger.addtoscreen("Continuing training", colour="green")
-                    progresstrackerstable.set(progresstrackerstable.get() + 1)
-
-
-            if progresstrackerstable.get() == 1:
-                # selecting rows
+        # While loop to continue asking questions till done
+        while True:
+            # Teaching basic select
+            if progresstrackerstable.get() == 0:
                 gui.debugger.addtoscreen("Stabilisation Problem Tutorial Start", colour="green")
-                progresstrackerstable.set(progresstrackerstable.get() + 1)
-                pass
+                gui.debugger.addtoscreen("Please note to solve these problems you will need to request the SQL_Tables document from stores", colour="green")
+                gui.debugger.addtoscreen("The Control and Stabilisation Subsystems are held within relational databases which can be queried using Structured Query Language", colour="green")
+                gui.debugger.addtoscreen("Commonly referred to as SQL", colour="green")
+                gui.debugger.addtoscreen("This training will provide you with a basic understanding of key SQL commands and will ask you to retrieve data and build queries", colour="green")
+                gui.debugger.addtoscreen("Training Start", colour="green")
+                gui.debugger.addtoscreen("Part One Select Queries", colour="green")
+                gui.debugger.addtoscreen("Data is retrieved from TABLES using the SELECT command", colour="green")
+                gui.debugger.addtoscreen("A generalised example is: ", colour="green")
+                gui.debugger.addtoscreen("SELECT column, another column FROM table", colour="green")
+                gui.debugger.addtoscreen("Therefore to select colours from the Training Table you would use", colour="green")
+                gui.debugger.addtoscreen("SELECT colours FROM TrainingTable", colour="green")
+                gui.debugger.addtoscreen("To continue select the command that would retrieve the numbers column from the TrainingTable")
+                while stabilisationAnswer.get() != "SELECT numbers FROM TrainingTable":
+                    stabilisationProblemCoreWindow("SQL Training - Select Statements", "Choose the appropriate SQL command to retrieve the requested information",
+                                                   option1="SELECT numbers FROM TrainingTable",
+                                                   option2="SELECT id FROM TrainingTable",
+                                                   option3="SELECT colours FROM TrainingTable")
+                    if stabilisationAnswer.get() == "QUIT":
+                        gui.debugger.addtoscreen("Training Quit", colour="red")
+                        return 1
+                    elif stabilisationAnswer.get() != "SELECT numbers FROM TrainingTable":
+                        gui.debugger.addtoscreen("Incorrect answer please try again", colour="red")
+                    else:
+                        gui.debugger.addtoscreen("Correct SQL statement chosen ", colour="green")
+                        gui.debugger.addtoscreen("... ", colour="green")
+                        gui.debugger.addtoscreen("Data Retrieval Successful", colour="green")
+                        gui.debugger.addtoscreen("Continuing training", colour="green")
+                        progresstrackerstable.set(progresstrackerstable.get() + 1)
 
-            if progresstrackerstable.get() == 2:
-                # complicated selecting rows and sorting
-                gui.debugger.addtoscreen("2", colour="green")
-                progresstrackerstable.set(progresstrackerstable.get() + 1)
-                pass
+                if progresstrackerstable.get() == 1:
+                    # selecting rows
+                    gui.debugger.addtoscreen("Particular rows can be selected by making use of the WHERE keyword to filter the columns", colour="green")
+                    gui.debugger.addtoscreen("A generalised example of this is: ", colour="green")
+                    gui.debugger.addtoscreen("SELECT column, another column FROM Table WHERE condition", colour="green")
+                    gui.debugger.addtoscreen("For example to select all people called Max in TrainingTableOne", colour="green")
+                    gui.debugger.addtoscreen("SELECT name FROM TrainingTableOne WHERE name == 'MAX'", colour="green")
+                    gui.debugger.addtoscreen("To continue select the command that would retrieve all people from TrainingTableOne who are less than or equal to fifty years old")
+                    while stabilisationAnswer.get() != "SELECT name FROM TrainingTableOne WHERE age <= 50":
+                        stabilisationProblemCoreWindow("SQL Training - Select Statements", "Choose the appropriate SQL command to retrieve the requested information",
+                                                       option1="SELECT name FROM TrainingTableOne",
+                                                       option2="SELECT name FROM TrainingTableOne WHERE age < 50",
+                                                       option3="SELECT name FROM TrainingTableOne WHERE age <= 50")
+                        if stabilisationAnswer.get() == "QUIT":
+                            gui.debugger.addtoscreen("Training Quit", colour="red")
+                            return 1
+                        elif stabilisationAnswer.get() != "SELECT name FROM TrainingTableOne WHERE age <= 50":
+                            gui.debugger.addtoscreen("Incorrect answer please try again", colour="red")
+                        else:
+                            gui.debugger.addtoscreen("Correct SQL statement chosen ", colour="green")
+                            gui.debugger.addtoscreen("... ", colour="green")
+                            gui.debugger.addtoscreen("Data Retrieval Successful", colour="green")
+                            gui.debugger.addtoscreen("Continuing training", colour="green")
+                            progresstrackerstable.set(progresstrackerstable.get() + 1)
 
-            if progresstrackerstable.get() == 3:
-                # Limiting results to a subset using WHERE
-                gui.debugger.addtoscreen("3", colour="green")
-                progresstrackerstable.set(progresstrackerstable.get() + 1)
-                pass
+                if progresstrackerstable.get() == 2:
+                    # multiple SQL where conditions
+                    gui.debugger.addtoscreen("Multiple rows and multiple conditions can be used to narrow down search results", colour="green")
+                    gui.debugger.addtoscreen("Boolean operators AND OR NOT can be used to create more complicated searches", colour="green")
+                    gui.debugger.addtoscreen("The generalised form is then", colour="green")
+                    gui.debugger.addtoscreen("SELECT column(s) FROM Table WHERE condition(s)", colour="green")
+                    gui.debugger.addtoscreen("For example to select all movies that were released after 2010, that had a rating greater that 4.5 you would use", colour="green")
+                    gui.debugger.addtoscreen("SELECT movie_title FROM TrainingTableTwo WHERE year_released > 2010 AND audience_rating > 4.5", colour="green")
+                    gui.debugger.addtoscreen("To continue select the command that would retrieve all movies from TrainingTableTwo which have an audience rating of less than 4.5")
+                    gui.debugger.addtoscreen("or which were produced in 2010")
+                    while stabilisationAnswer.get() != "SELECT movie_title FROM TrainingTableTwo WHERE audience_rating < 4.5 OR year_released == 2010":
+                        stabilisationProblemCoreWindow("SQL Training - Select Statements", "Choose the appropriate SQL command to retrieve the requested information",
+                                                       option1="SELECT movie_title FROM TrainingTableTwo WHERE audience_rating < 4.5 OR year_released != 2010",
+                                                       option2="SELECT movie_title FROM TrainingTableTwo WHERE audience_rating > 4.5 OR year_released == 2010",
+                                                       option3="SELECT movie_title FROM TrainingTableTwo WHERE audience_rating < 4.5 OR year_released == 2010")
+                        if stabilisationAnswer.get() == "QUIT":
+                            gui.debugger.addtoscreen("Training Quit", colour="red")
+                            return 1
+                        elif stabilisationAnswer.get() != "SELECT movie_title FROM TrainingTableTwo WHERE audience_rating < 4.5 OR year_released == 2010":
+                            gui.debugger.addtoscreen("Incorrect answer please try again", colour="red")
+                        else:
+                            gui.debugger.addtoscreen("Correct SQL statement chosen ", colour="green")
+                            gui.debugger.addtoscreen("... ", colour="green")
+                            gui.debugger.addtoscreen("Data Retrieval Successful", colour="green")
+                            gui.debugger.addtoscreen("Continuing training", colour="green")
+                            progresstrackerstable.set(progresstrackerstable.get() + 1)
 
-            if progresstrackerstable.get() == 4:
-                # joins
-                gui.debugger.addtoscreen("4", colour="green")
-                # begin random choice of questions
-                progresstrackerstable.set(choice(stabilisationprogressarray))
-                pass
+                if progresstrackerstable.get() == 3:
+                    # simple joins
+                    gui.debugger.addtoscreen("As you can see in TrainingTableTwo when you have multiple directors per film, the table quickly gets very long", colour="green")
+                    gui.debugger.addtoscreen("If we were to add a new column which was audience rating another source then the table size would double", colour="green")
+                    gui.debugger.addtoscreen("Therefore to stop tables becoming huge information is often split into mulitple tables and then joined together when needed to save space and increase performance", colour="green")
+                    gui.debugger.addtoscreen("A JOIN clause is used to combine rows from two or more tables, based on a related column between them", colour="green")
+                    gui.debugger.addtoscreen("This takes the general form of:", colour="green")
+                    gui.debugger.addtoscreen("SELECT columns FROM TABLE INNER JOIN Table1Column=Table2Column WHERE constraints", colour="green")
+                    gui.debugger.addtoscreen("If for instance we want to get all the customer name attached to OrderID 10308 then we would use:", colour="green")
+                    gui.debugger.addtoscreen("SELECT ORDERID, CustomerID, CustomerName FROM TrainingTableThree INNER JOIN TrainingTableThree.CustomerID=TrainingTableFour.CustomerID WHERE OrderID == 10308", colour="green")
+                    gui.debugger.addtoscreen("To continue select the command that would retrieve all orderIDs and the country that the customer is from")
+                    while stabilisationAnswer.get() != "SELECT ORDERID, Country FROM TrainingTableThree INNER JOIN TrainingTableThree.CustomerID=TrainingTableFour.CustomerID":
+                        stabilisationProblemCoreWindow("SQL Training - Select Statements", "Choose the appropriate SQL command to retrieve the requested information",
+                                                       option1="SELECT ORDERID FROM TrainingTableThree INNER JOIN TrainingTableThree.CustomerID=TrainingTableFour.CustomerID",
+                                                       option2="SELECT ORDERID, Country FROM TrainingTableThree INNER JOIN TrainingTableThree.CustomerID=TrainingTableFour.ContactName",
+                                                       option3="SELECT ORDERID, Country FROM TrainingTableThree INNER JOIN TrainingTableThree.CustomerID=TrainingTableFour.CustomerID")
+                        if stabilisationAnswer.get() == "QUIT":
+                            gui.debugger.addtoscreen("Training Quit", colour="red")
+                            return 1
+                        elif stabilisationAnswer.get() != "SELECT ORDERID, Country FROM TrainingTableThree INNER JOIN TrainingTableThree.CustomerID=TrainingTableFour.CustomerID":
+                            gui.debugger.addtoscreen("Incorrect answer please try again", colour="red")
+                        else:
+                            gui.debugger.addtoscreen("Correct SQL statement chosen ", colour="green")
+                            gui.debugger.addtoscreen("... ", colour="green")
+                            gui.debugger.addtoscreen("Data Retrieval Successful", colour="green")
+                            gui.debugger.addtoscreen("Continuing training", colour="green")
+                            progresstrackerstable.set(progresstrackerstable.get() + 1)
 
-            # problems begin
-            if progresstrackerstable.get() == 5:
-                gui.debugger.addtoscreen("Correct SQL statement chosen ", colour="green")
-                stabilisationprogressarray.remove(1)
-                pass
+                if progresstrackerstable.get() == 4:
+                    # SQL security concerns
+                    gui.debugger.addtoscreen("SQL queries are powerful tools, but care needs to be taken to ensure that only the queries you intend are used", colour="green")
+                    gui.debugger.addtoscreen("SQL Injection is one of the many ways in which hackers, criminal or otherwise may try to access databases held within your system", colour="green")
+                    gui.debugger.addtoscreen("SQL injection involves passing additional arguments into a text form that when submitted as an SQL query runs commands additionally to what was intended by the developer", colour="green")
+                    gui.debugger.addtoscreen("For example, in a login screen with a username and password box, where the typed in text is then used as part of an SQL query to check if the password and username are correct", colour="green")
+                    gui.debugger.addtoscreen("Where the SQL query that checks if the username and password are correct is: ", colour="green")
+                    gui.debugger.addtoscreen("SELECT username FROM userinfotable WHERE password==passwordsubmittedbyuser", colour="green")
+                    gui.debugger.addtoscreen("inserting ' or '1'='1' would, when submitted into this SQL query create", colour="green")
+                    gui.debugger.addtoscreen("SELECT username FROM userinfotable WHERE password==passwordsubmittedbyuser' or '1'='1' ", colour="green")
+                    gui.debugger.addtoscreen("as 1=1 always evaluates to TRUE, this would result in the SQL database returning all rows of the underlying userinfotable database which could then be exploited by the hacker", colour="green")
+                    gui.debugger.addtoscreen("To prevent this, all user input should be sanatised, with characers such as ', !, \" etc escaped out to the symbol rather than the control character that they represent in SQL", colour="green")
+                    gui.debugger.addtoscreen("To continue select the command that would retrieve all orderIDs and the country that the customer is from")
+                    while stabilisationAnswer.get() != "' or '1'='1'":
+                        stabilisationProblemCoreWindow("SQL Training - Select Statements", "Choose the appropriate SQL command to retrieve the requested information",
+                                                       option1="' or '1'AND'1'",
+                                                       option2="' or '1'!='1'",
+                                                       option3="' or '1'='1'")
+                        if stabilisationAnswer.get() == "QUIT":
+                            gui.debugger.addtoscreen("Training Quit", colour="red")
+                            return 1
+                        elif stabilisationAnswer.get() != "' or '1'='1'":
+                            gui.debugger.addtoscreen("Incorrect answer please try again", colour="red")
+                        else:
+                            gui.debugger.addtoscreen("Correct SQL statement chosen ", colour="green")
+                            gui.debugger.addtoscreen("... ", colour="green")
+                            gui.debugger.addtoscreen("Data Retrieval Successful", colour="green")
+                            gui.debugger.addtoscreen("End of training reached, please complete the following SQL based queries to bring the stabililisation system back online", colour="green")
+                            progresstrackerstable.set(choice(stabilisationprogressarray))
+
+                # problems begin
+                # problem 1
+                if progresstrackerstable.get() == 5:
+                    # if completed enough questions
+                    if len(stabilisationprogressarray) < 5:
+                        break
+                    gui.debugger.addtoscreen("Correct SQL statement chosen ", colour="green")
+                    while stabilisationAnswer.get() != "' or '1'='1'":
+                        stabilisationProblemCoreWindow("SQL Training - Select Statements", "Choose the appropriate SQL command to retrieve the requested information",
+                                                       option1="' or '1'AND'1'",
+                                                       option2="' or '1'!='1'",
+                                                       option3="' or '1'='1'")
+                        if stabilisationAnswer.get() == "QUIT":
+                            gui.debugger.addtoscreen("Training Quit", colour="red")
+                            return 1
+                        elif stabilisationAnswer.get() != "' or '1'='1'":
+                            gui.debugger.addtoscreen("Incorrect answer please try again", colour="red")
+                        else:
+                            gui.debugger.addtoscreen("Correct SQL statement chosen ", colour="green")
+                            gui.debugger.addtoscreen("... ", colour="green")
+                            gui.debugger.addtoscreen("Data Retrieval Successful", colour="green")
+                            gui.debugger.addtoscreen("End of training reached, please complete the following SQL based queries to bring the stabililisation system back online", colour="green")
+                            progresstrackerstable.set(choice(stabilisationprogressarray))
+                            stabilisationprogressarray.remove(5)
+
 
             # If arriving here signal success for stabilisation problemcore
             # update the status of the power box to Error
